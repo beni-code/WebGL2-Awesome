@@ -1659,7 +1659,10 @@
           specular lighting. Below you can see what these lighting components look
           like on their own and combined:
         </p>
-
+        <p>
+          现实世界中的照明极其复杂，取决于太多因素，我们无法以有限的处理能力进行计算。 因此，OpenGL 中的照明是基于使用更容易处理且看起来相对相似的简化模型的现实近似值。 这些照明模型基于我们所理解的光的物理特性。
+          其中一个模型称为 <def>Phong 光照模型</def>。 Phong 照明模型的主要构建块由 3 个组件组成：环境照明、漫射照明和镜面照明。 您可以在下面看到这些照明组件单独使用和组合使用时的样子：
+        </p>
         <img src="LearnOpenGL%20-%20Basic%20Lighting_files/basic_lighting_phong.png">
 
         <p>
@@ -1671,17 +1674,26 @@
             light) so objects are almost never completely dark. To simulate this we
             use an ambient lighting constant that always gives the object some
             color.
+            <br>
+            <def>环境光</def>：即使天黑了，世界上的某个地方通常仍然有一些光（月亮，远处的光）所以物体几乎永远不会完全黑暗。 为了模拟这一点，我们使用了一个环境照明常数，它总是给物体一些颜色。
           </li>
           <li>
             <def>Diffuse lighting</def>: simulates the directional impact a
             light object has on an object. This is the most visually significant
             component of the lighting model. The more a part of an object faces the
             light source, the brighter it becomes.
+
+            <br>
+            <def>漫射照明</def>：模拟光对象对对象的定向影响。 这是光照模型中视觉上最重要的组成部分。 物体的一部分越朝向光源，它变得越亮。
           </li>
           <li>
             <def>Specular lighting</def>: simulates the bright spot of a
             light that appears on shiny objects. Specular highlights are more
             inclined to the color of the light than the color of the object.
+
+            <br>
+
+            <def>镜面照明</def>：模拟出现在发光物体上的光的亮点。 镜面高光更倾向于光的颜色而不是物体的颜色。
           </li>
         </ul>
         <p></p>
@@ -1691,7 +1703,11 @@
           these 3 lighting components. We'll start with the simplest one: <em>ambient lighting</em>.
         </p>
 
-        <h1>Ambient lighting</h1>
+        <p>
+          为了创建视觉上有趣的场景，我们希望至少模拟这 3 个照明组件。 我们将从最简单的开始：<em>环境照明</em>。
+        </p>
+
+        <h1>Ambient lighting 环境照明</h1>
         <p>
           Light usually does not come from a single light source, but from many
           light sources scattered all around us, even when they're not immediately
@@ -1704,6 +1720,11 @@
         </p>
 
         <p>
+          光通常不是来自单一光源，而是来自散布在我们周围的许多光源，即使它们不是立即可见的。 光的特性之一是它可以向多个方向散射和反弹，到达不直接可见的点； 因此，光可以在其他表面上反射并对物体的照明产生间接影响。
+          考虑到这一点的算法称为<def>全局光照</def>算法，但这些算法计算起来复杂且昂贵。
+        </p>
+
+        <p>
           Since we're not big fans of complicated and expensive algorithms we'll
           start by using a very simplistic model of global illumination, namely <def>ambient lighting</def>.
           As you've seen in the previous section we use a small constant (light)
@@ -1713,10 +1734,18 @@
         </p>
 
         <p>
+          由于我们不是复杂和昂贵算法的忠实拥护者，我们将从使用非常简单的全局照明模型开始，即<def>环境照明</def>。
+          正如您在上一节中看到的那样，我们使用了一种小的常量（浅色）颜色，我们将其添加到对象片段的最终结果颜色中，因此即使没有直接光源，它看起来也总是有一些散射光 .
+        </p>
+
+        <p>
           Adding ambient lighting to the scene is really easy. We take the
           light's color, multiply it with a small constant ambient factor,
           multiply this with the object's color, and use that as the fragment's
           color in the cube object's shader:
+        </p>
+        <p>
+          向场景添加环境照明非常容易。 我们采用光的颜色，将它乘以一个小的常量环境因子，将其乘以对象的颜色，并将其用作立方体对象着色器中的片段颜色：
         </p>
 
         <pre><code class=" hljs cpp">
@@ -1738,9 +1767,13 @@
           should look something like this:
         </p>
 
+        <p>
+          如果您现在运行该程序，您会注意到第一阶段的光照现在已成功应用于该对象。 对象很暗，但由于应用了环境光，所以不完全暗（请注意，光立方不受影响，因为我们使用了不同的着色器）。 它应该看起来像这样：
+        </p>
+
         <img src="LearnOpenGL%20-%20Basic%20Lighting_files/ambient_lighting.png" class="clean">
 
-        <h1>Diffuse lighting</h1>
+        <h1>Diffuse lighting 漫射照明</h1>
         <p>
           Ambient lighting by itself doesn't produce the most interesting
           results, but diffuse lighting however will start to give a significant
@@ -1748,6 +1781,10 @@
           brightness the closer its fragments are aligned to the light rays from a
           light source. To give you a better understanding of diffuse lighting
           take a look at the following image:
+        </p>
+
+        <p>
+          环境光本身不会产生最有趣的结果，但是漫射光会开始对物体产生显着的视觉影响。 其 fragments 越接近光源发出的光线，漫射照明为物体提供更多亮度。 为了让您更好地了解漫射照明，请看下图：
         </p>
 
         <img src="LearnOpenGL%20-%20Basic%20Lighting_files/diffuse_light.png" class="clean">
@@ -1763,6 +1800,10 @@
           the two vectors can then easily be calculated with the dot product.
         </p>
 
+        <p>
+          在左侧，我们发现一个光源，其光线瞄准了我们物体的单个片段。 我们需要测量光线以什么角度接触片段。 如果光线垂直于物体表面，则光线的影响最大。
+          为了测量光线和片段之间的角度，我们使用了一种叫做法向量的东西，它是垂直于片段表面的向量（这里用黄色箭头表示）； 我们稍后再谈。 然后可以使用点积轻松计算两个向量之间的角度。
+        </p>
         <p>
           You may remember from the <a href="https://learnopengl.com/Getting-started/Transformations"
             target="_blank">transformations</a>
@@ -1810,11 +1851,21 @@
           the fragment's color.
         </p>
 
+        <p>
+          你可能还记得在变换章节中，两个单位向量之间的角度越小，点积越倾向于值 1。当两个向量之间的角度为 90 度时，点积变为 0。同样适用于 θ ：θ 越大，光线对片段颜色的影响就越小。
+        </p>
+
         <note>
           Note that to get (only) the cosine of the angle between both vectors we will work with <em>unit vectors</em>
           (vectors of length <code>1</code>) so we need to make sure all the vectors are normalized, otherwise the dot
           product returns more than just the cosine (see <a
             href="https://learnopengl.com/Getting-started/Transformations" target="_blank">Transformations</a>).
+
+          <br>
+          <br>
+
+          请注意，为了（仅）获得两个向量之间角度的余弦值，我们将使用单位向量（长度为 1 的向量），因此我们需要确保所有向量都已归一化，否则点积返回的不仅仅是余弦值（ 参见转换）。
+
         </note>
 
         <p>
@@ -1824,18 +1875,33 @@
         </p>
 
         <p>
+          由此产生的点积返回一个标量，我们可以使用它来计算光对片段颜色的影响，从而根据它们对光的方向产生不同的光照片段。
+        </p>
+
+        <p>
           So, what do we need to calculate diffuse lighting:
         </p>
+        <p>
+          那么，我们需要计算漫反射照明的什么：
+        </p>
         <ul>
-          <li>Normal vector: a vector that is perpendicular to the vertex' surface.</li>
+          <li>Normal vector: a vector that is perpendicular to the vertex' surface.
+
+            <br>
+            法向量：垂直于顶点表面的向量。
+          </li>
           <li>The directed light ray: a direction vector that is the
             difference vector between the light's position and the fragment's
             position. To calculate this light ray we need the light's position
-            vector and the fragment's position vector.</li>
+            vector and the fragment's position vector.
+
+            <br>
+            定向光线：一个方向向量，它是光的位置和片段的位置之间的差值向量。 要计算这条光线，我们需要光线的位置向量和片段的位置向量。
+          </li>
         </ul>
         <p></p>
 
-        <h2>Normal vectors</h2>
+        <h2>Normal vectors 法向量</h2>
         <p>
           A normal vector is a (unit) vector that is perpendicular to the
           surface of a vertex. Since a vertex by itself has no surface (it's just a
@@ -1851,7 +1917,16 @@
         </p>
 
         <p>
+
+          法向量是垂直于顶点表面的（单位）向量。 由于顶点本身没有表面（它只是空间中的一个点），我们通过使用其周围的顶点来计算出顶点的表面来检索法向量。 我们可以使用一个小技巧，通过叉积计算立方体所有顶点的法向量，但由于 3D
+          立方体不是复杂的形状，我们可以简单地手动将它们添加到顶点数据中。 可以在此处找到更新的顶点数据数组。 尝试想象法线确实是垂直于每个平面表面的向量（一个立方体由 6 个平面组成）。
+        </p>
+
+        <p>
           Since we added extra data to the vertex array we should update the cube's vertex shader:
+        </p>
+        <p>
+          因为我们向顶点数组添加了额外的数据，所以我们应该更新立方体的顶点着色器：
         </p>
 
         <pre><code class=" hljs cpp">
@@ -1871,6 +1946,11 @@
           pointers to reflect the new vertex array's size:
         </p>
 
+        <p>
+          现在我们为每个顶点添加了一个法线向量并更新了顶点着色器，我们也应该更新vertex attribute pointers。 请注意，光源的立方体为其顶点数据使用相同的顶点数组，但灯着色器没有使用新添加的法向量。
+          我们不必更新灯的着色器或属性配置，但我们至少必须修改vertex attribute pointers以反映新顶点数组的大小：
+        </p>
+
         <pre><code class=" hljs cpp">
 <function id="30">glVertexAttribPointer</function>(<span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-built_in">GL_FLOAT</span>, <span class="hljs-built_in">GL_FALSE</span>, <span class="hljs-number">6</span> * <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">float</span>), (<span class="hljs-keyword">void</span>*)<span class="hljs-number">0</span>);
 <function id="29"><function id="60">glEnable</function>VertexAttribArray</function>(<span class="hljs-number">0</span>);
@@ -1882,18 +1962,30 @@
           <code>float</code> and we're done.
         </p>
 
+        <p>
+          我们只想使用每个顶点的前 3 个浮点数并忽略最后 3 个浮点数，因此我们只需要将步幅参数更新为浮点数的 6 倍，就完成了。
+        </p>
+
         <note>
           It may look inefficient using vertex data that is not completely used
           by the lamp shader, but the vertex data is already stored in the GPU's
           memory from the container object so we don't have to store new data into
           the GPU's memory. This actually makes it more efficient compared to
           allocating a new VBO specifically for the lamp.
+
+          <br>
+
+          使用灯着色器未完全使用的顶点数据可能看起来效率低下，但顶点数据已经从容器对象存储在 GPU 内存中，因此我们不必将新数据存储到 GPU 内存中。 这实际上比专门为灯分配一个新的 VBO 更有效。
         </note>
 
         <p>
           All the lighting calculations are done in the fragment shader so we
           need to forward the normal vectors from the vertex shader to the
           fragment shader. Let's do that:
+        </p>
+
+        <p>
+          所有光照计算都在片段着色器中完成，因此我们需要将法向量从顶点着色器转发到片段着色器。 让我们这样做：
         </p>
 
         <pre><code class=" hljs cpp">
@@ -1910,16 +2002,24 @@
           What's left to do is declare the corresponding input variable in the fragment shader:
         </p>
 
+        <p>
+          剩下要做的就是在片段着色器中声明相应的输入变量：
+        </p>
+
         <pre><code class=" hljs cpp">
 <span class="hljs-keyword">in</span> <span class="hljs-built_in">vec3</span> Normal;  
 </code></pre>
 
-        <h2>Calculating the diffuse color</h2>
+        <h2>Calculating the diffuse color 计算漫反射颜色</h2>
         <p>
           We now have the normal vector for each vertex, but we still need the
           light's position vector and the fragment's position vector. Since the
           light's position is a single static variable we can declare it as a
           uniform in the fragment shader:
+        </p>
+
+        <p>
+          我们现在有了每个顶点的法线向量，但我们仍然需要光的位置向量和片段的位置向量。 由于光的位置是一个单一的静态变量，我们可以在片段着色器中将其声明为统一变量：
         </p>
 
         <pre><code class=" hljs cpp">
@@ -1929,6 +2029,10 @@
         <p>
           And then update the uniform in the render loop (or outside since it doesn't change per frame). We use the
           <var>lightPos</var> vector declared in the previous chapter as the location of the diffuse light source:
+        </p>
+
+        <p>
+          然后在渲染循环中更新uniform（或外部，因为它不会每帧更改）。 我们使用上一章声明的 <var>lightPos</var> 向量作为漫射光源的位置：
         </p>
 
         <pre><code class=" hljs cpp">
@@ -1944,6 +2048,11 @@ lightingShader.setVec3(<span class="hljs-string">"lightPos"</span>, lightPos);
           coordinates. This can easily be accomplished in the vertex shader so
           let's declare an output variable and calculate its world space
           coordinates:
+        </p>
+
+        <p>
+
+          然后我们需要的最后一件事是实际片段的位置。 我们将在世界空间中进行所有光照计算，因此我们首先需要一个在世界空间中的顶点位置。 我们可以通过仅将顶点位置属性与模型矩阵（而不是视图和投影矩阵）相乘以将其转换为世界空间坐标来实现这一点。 这可以在顶点着色器中轻松完成，所以让我们声明一个输出变量并计算其世界空间坐标：
         </p>
 
         <pre><code class=" hljs cpp">
@@ -1962,6 +2071,10 @@ lightingShader.setVec3(<span class="hljs-string">"lightPos"</span>, lightPos);
           And lastly add the corresponding input variable to the fragment shader:
         </p>
 
+        <p>
+          最后将相应的输入变量添加到片段着色器：
+        </p>
+
         <pre><code class=" hljs cpp">
 <span class="hljs-keyword">in</span> <span class="hljs-built_in">vec3</span> FragPos;  
 </code></pre>
@@ -1971,6 +2084,10 @@ lightingShader.setVec3(<span class="hljs-string">"lightPos"</span>, lightPos);
           the <var>FragPos</var>
           vector that is the per-fragment world position. Now that all the
           required variables are set we can start the lighting calculations.
+        </p>
+
+        <p>
+          这个 <code>in</code> 变量将从三角形的 3 个世界位置向量进行插值，以形成 <var>FragPos</var> 向量，即每个片段的世界位置。 现在所有必需的变量都已设置，我们可以开始照明计算了。
         </p>
 
 
@@ -1987,6 +2104,10 @@ lightingShader.setVec3(<span class="hljs-string">"lightPos"</span>, lightPos);
           resulting direction vector:
         </p>
 
+        <p>
+          我们需要计算的第一件事是光源和片段位置之间的方向向量。 从上一节我们知道，光的方向向量是光的位置向量和片段的位置向量之间的差值向量。 你可能还记得在转换章节中，我们可以通过将两个向量彼此相减来轻松计算出这种差异。 我们还想确保所有相关向量最终都成为单位向量，因此我们对法线向量和生成的方向向量进行归一化：
+        </p>
+
         <pre><code class=" hljs cpp">
 <span class="hljs-built_in">vec3</span> norm = normalize(Normal);
 <span class="hljs-built_in">vec3</span> lightDir = normalize(lightPos - FragPos);  
@@ -2000,6 +2121,10 @@ lightingShader.setVec3(<span class="hljs-string">"lightPos"</span>, lightPos);
           the dot product). So when doing lighting calculations, make sure you
           always normalize the relevant vectors to ensure they're actual unit
           vectors. Forgetting to normalize a vector is a popular mistake.
+
+          <br>
+
+          在计算光照时，我们通常不关心矢量的大小或它们的位置； 我们只关心他们的方向。 因为我们只关心它们的方向几乎所有的计算都是用单位向量完成的，因为它简化了大多数计算（比如点积）。 因此，在进行光照计算时，请确保始终对相关向量进行归一化，以确保它们是实际的单位向量。 忘记对向量进行归一化是一个常见的错误。
         </note>
 
         <p>
@@ -2008,6 +2133,10 @@ lightingShader.setVec3(<span class="hljs-string">"lightPos"</span>, lightPos);
           vectors. The resulting value is then multiplied with the light's color
           to get the diffuse component, resulting in a darker diffuse component
           the greater the angle between both vectors:
+        </p>
+
+        <p>
+          接下来我们需要通过计算 norm 和 lightDir 向量之间的点积来计算光对当前片段的漫反射影响。 然后将所得值与光的颜色相乘以获得漫反射分量，从而导致两个向量之间的角度越大，漫反射分量越暗：
         </p>
 
         <pre><code class=" hljs cpp">
@@ -2026,9 +2155,17 @@ lightingShader.setVec3(<span class="hljs-string">"lightPos"</span>, lightPos);
         </p>
 
         <p>
+          如果两个向量之间的角度大于 90 度，则点积的结果实际上将变为负值，我们最终会得到一个负的漫反射分量。 出于这个原因，我们使用返回其两个参数中最高值的 max 函数来确保漫反射分量（以及颜色）永远不会变为负数。 负色的照明并没有真正定义，所以最好远离它，除非你是那些古怪的艺术家之一。
+        </p>
+
+        <p>
           Now that we have both an ambient and a diffuse component we add both
           colors to each other and then multiply the result with the color of the
           object to get the resulting fragment's output color:
+        </p>
+
+        <p>
+          现在我们有了环境光和漫反射组件，我们将两种颜色相互相加，然后将结果与对象的颜色相乘以获得最终片段的输出颜色：
         </p>
 
         <pre><code class=" hljs cpp">
@@ -2040,6 +2177,10 @@ FragColor = <span class="hljs-built_in">vec4</span>(result, <span class="hljs-nu
           If your application (and shaders) compiled successfully you should see something like this:
         </p>
 
+        <p>
+          如果您的应用程序（和着色器）编译成功，您应该看到如下内容：
+        </p>
+
         <img src="LearnOpenGL%20-%20Basic%20Lighting_files/basic_lighting_diffuse.png" class="clean">
 
         <p>
@@ -2048,6 +2189,10 @@ FragColor = <span class="hljs-built_in">vec4</span>(result, <span class="hljs-nu
           move the camera around the cube to see that the larger the angle between
           the normal vector and the light's direction vector, the darker the
           fragment becomes.
+        </p>
+
+        <p>
+          您可以看到，在漫射照明下，立方体再次开始看起来像一个真正的立方体。 尝试在脑海中想象法向量，并围绕立方体移动相机，以查看法向量与光的方向向量之间的角度越大，片段变得越暗。
         </p>
 
         <p>
@@ -2066,6 +2211,10 @@ FragColor = <span class="hljs-built_in">vec4</span>(result, <span class="hljs-nu
         </p>
 
         <p>
+          在上一节中，我们将法线向量直接从顶点着色器传递到片段着色器。 但是，片段着色器中的计算都是在世界空间中进行的，难道我们不应该将法向量也转换为世界空间坐标吗？ 基本上是的，但它不像简单地将它与模型矩阵相乘那么简单。
+        </p>
+
+        <p>
           First of all, normal vectors are only direction vectors and do not
           represent a specific position in space. Second, normal vectors do not
           have a homogeneous coordinate (the <code>w</code> component of a vertex
@@ -2077,11 +2226,18 @@ FragColor = <span class="hljs-built_in">vec4</span>(result, <span class="hljs-nu
         </p>
 
         <p>
+          首先，法向量只是方向向量，并不代表空间中的具体位置。 其次，法向量没有齐次坐标（顶点位置的 w 分量）。 这意味着平移不应该对法向量有任何影响。 因此，如果我们想将法向量与模型矩阵相乘，我们希望通过采用模型矩阵的左上角 3x3 矩阵来移除矩阵的平移部分（请注意，我们还可以将法向量的 w 分量设置为 0 并乘以 4x4 矩阵）。
+        </p>
+        <p>
           Second, if the model matrix would perform a non-uniform scale, the
           vertices would be changed in such a way that the normal vector is not
           perpendicular to the surface anymore. The following image shows the
           effect such a model matrix (with non-uniform scaling) has on a normal
           vector:
+        </p>
+
+        <p>
+          其次，如果模型矩阵执行非均匀缩放，顶点将以法向量不再垂直于表面的方式改变。 下图显示了这种模型矩阵（具有非均匀缩放）对法向量的影响：
         </p>
 
         <img src="LearnOpenGL%20-%20Basic%20Lighting_files/basic_lighting_normal_transformation.png" class="clean">
@@ -2094,6 +2250,10 @@ FragColor = <span class="hljs-built_in">vec4</span>(result, <span class="hljs-nu
         </p>
 
         <p>
+          每当我们应用非均匀比例（注意：均匀比例只改变法线的大小，而不是它的方向，这很容易通过归一化它来固定）法向量不再垂直于相应的表面，这会扭曲光照。
+        </p>
+
+        <p>
           The trick of fixing this behavior is to use a different model matrix
           specifically tailored for normal vectors. This matrix is called the <def>normal matrix</def>
           and uses a few linear algebraic operations to remove the effect of
@@ -2102,6 +2262,10 @@ FragColor = <span class="hljs-built_in">vec4</span>(result, <span class="hljs-nu
             href="http://www.lighthouse3d.com/tutorials/glsl-tutorial/the-normal-matrix/" target="_blank">article</a>.
         </p>
 
+        <p>
+          修复此行为的技巧是使用专门为法向量量身定制的不同模型矩阵。 该矩阵称为法线矩阵，并使用一些线性代数运算来消除错误缩放法线向量的影响。 如果你想知道这个矩阵是如何计算的，我建议阅读下面的<a
+          href="http://www.lighthouse3d.com/tutorials/glsl-tutorial/the-normal-matrix/" target="_blank">文章</a>。
+        </p>
         <p>
           The normal matrix is defined as 'the transpose of the inverse of the
           upper-left 3x3 part of the model matrix'. Phew, that's a mouthful and if
@@ -2113,11 +2277,19 @@ FragColor = <span class="hljs-built_in">vec4</span>(result, <span class="hljs-nu
         </p>
 
         <p>
+          法线矩阵定义为“模型矩阵左上 3x3 部分的逆矩阵的转置”。 呸，那是一口话，如果你真的不明白那是什么意思，别担心； 我们还没有讨论逆矩阵和转置矩阵。 请注意，大多数资源将法线矩阵定义为从模型-视图矩阵导出，但由于我们在世界空间（而不是视图空间）中工作，我们将从模型矩阵导出它。
+        </p>
+
+        <p>
           In the vertex shader we can generate the normal matrix by using the <fun>inverse</fun> and <fun>transpose
           </fun>
           functions in the vertex shader that work on any matrix type. Note that
           we cast the matrix to a 3x3 matrix to ensure it loses its translation
           properties and that it can multiply with the <code>vec3</code> normal vector:
+        </p>
+
+        <p>
+          在顶点着色器中，我们可以通过使用顶点着色器中适用于任何矩阵类型的逆函数和转置函数来生成法线矩阵。 请注意，我们将矩阵转换为 3x3 矩阵以确保它失去其平移属性并且它可以与 vec3 法向量相乘：
         </p>
 
         <pre><code class=" hljs cpp">
@@ -2131,6 +2303,10 @@ Normal = <span class="hljs-built_in">mat3</span>(transpose(inverse(model))) * aN
           but for an efficient application you'll likely want to calculate the
           normal matrix on the CPU and send it to the shaders via a uniform before
           drawing (just like the model matrix).
+
+          <br>
+
+          逆向矩阵对于着色器来说是一项代价高昂的操作，因此尽可能避免进行逆向操作，因为它们必须在场景的每个顶点上完成。 出于学习目的，这很好，但对于高效的应用程序，您可能希望在 CPU 上计算法线矩阵，并在绘制之前通过统一将其发送到着色器（就像模型矩阵一样）。
         </warning>
 
         <p>
@@ -2141,11 +2317,19 @@ Normal = <span class="hljs-built_in">mat3</span>(transpose(inverse(model))) * aN
           essential that you multiply your normal vectors with the normal matrix.
         </p>
 
+        <p>
+          在漫反射照明部分，照明很好，因为我们没有对物体进行任何缩放，所以实际上不需要使用法线矩阵，我们可以将法线与模型矩阵相乘。 但是，如果您正在进行非均匀缩放，则必须将法线向量与法线矩阵相乘。
+        </p>
 
-        <h1>Specular Lighting</h1>
+
+        <h1>Specular Lighting 镜面照明</h1>
         <p>
           If you're not exhausted already by all the lighting talk we can start
           finishing the Phong lighting model by adding specular highlights.
+        </p>
+
+        <p>
+          如果您还没有被所有的光照谈话弄得筋疲力尽，我们可以通过添加镜面高光来开始完成 Phong 光照模型。
         </p>
 
         <p>
@@ -2157,6 +2341,10 @@ Normal = <span class="hljs-built_in">mat3</span>(transpose(inverse(model))) * aN
           the specular lighting is the strongest wherever we would see the light
           reflected on the surface. You can see this effect in the following
           image:
+        </p>
+
+        <p>
+          与漫反射照明类似，镜面反射照明基于光的方向向量和对象的法线向量，但这次它也基于视图方向，例如 玩家从哪个方向看片段。 镜面照明基于表面的反射特性。 如果我们把物体的表面想象成一面镜子，那么只要我们能看到表面反射的光，镜面照明就是最强的。 您可以在下图中看到此效果：
         </p>
 
         <img src="LearnOpenGL%20-%20Basic%20Lighting_files/basic_lighting_specular_theory.png" class="clean">
