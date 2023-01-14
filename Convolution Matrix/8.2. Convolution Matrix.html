@@ -45,21 +45,45 @@
             </div>
           </div>
         </div>
+
+<!-- 
+
+  
+
+
+
+
+
+
+
+
+ -->
+
         <p>
       Here is a mathematician's domain. Most of filters are using convolution
       matrix. With the Convolution Matrix filter, if the fancy takes you, you
       can build a custom filter.
     </p>
+
+<p>
+  这里是数学家的领域。 大多数过滤器都使用卷积矩阵。 使用卷积矩阵过滤器，如果您喜欢的话，您可以构建自定义过滤器。
+</p>
+
         <p>
       What is a convolution matrix? It's possible to get a rough idea of it
       without using mathematical tools that only a few ones know. Convolution
       is the treatment of a matrix by another one which is called
       <span class="quote">“<span class="quote">kernel</span>”</span>.
     </p>
+
+    <p>什么是卷积矩阵？ 不使用只有少数人知道的数学工具，也可以粗略地了解它。 卷积是由另一个称为“<span class="quote">kernel</span>”的矩阵处理矩阵。</p>
         <p>
       The Convolution Matrix filter uses a first matrix which is the Image to
       be treated. The image is a bi-dimensional collection of pixels in
       rectangular coordinates. The used kernel depends on the effect you want.
+    </p>
+    <p>
+      卷积矩阵过滤器使用第一个矩阵，它是要处理的图像。 该图像是直角坐标中像素的二维集合。 使用的kernel取决于您想要的效果。
     </p>
         <p>
       GIMP uses 5x5 or 3x3 matrices. We will consider only 3x3 matrices, they
@@ -67,6 +91,7 @@
       border values of a kernel are set to zero, then system will consider it
       as a 3x3 matrix.
     </p>
+    <p>GIMP 使用 5x5 或 3x3 矩阵。 我们将只考虑 3x3 矩阵，它们是最常用的并且足以满足您想要的所有效果。 如果kernel的所有边界值都设置为零，则系统会将其视为 3x3 矩阵。</p>
         <p>
       The filter studies successively every pixel of the image. For each of
       them, which we will call the <span class="quote">“<span class="quote">initial pixel</span>”</span>, it
@@ -74,18 +99,24 @@
       pixels by the kernel corresponding value. Then it adds the results,
       and the initial pixel is set to this final result value.
     </p>
+    <p>过滤器连续研究图像的每个像素。 对于它们中的每一个，我们将称之为“初始像素”，它将这个像素的值和周围 8 个像素的值乘以内核对应值。 然后它添加结果，并将初始像素设置为这个最终结果值。</p>
         <p>
       A simple example:
     </p>
         <div class="mediaobject">
           <img src="./8.2. Convolution Matrix_files/convolution-calculate.png">
         </div>
+
+        <!-- 
+
+ -->
         <p>
       On the left is the image matrix: each pixel is marked with its value.
       The initial pixel has a red border. The kernel action area has a green
       border. In the middle is the kernel and, on the right is the convolution
       result.
     </p>
+    <p>左边是图像矩阵：每个像素都标有它的值。 初始像素具有红色边框。 内核操作区域有绿色边框。 中间是内核，右边是卷积结果。</p>
         <p>
       Here is what happened: the filter read successively, from left to right
       and from top to bottom, all the pixels of the kernel action area. It
@@ -95,6 +126,7 @@
       (the filter doesn't work on the image but on a copy). As a graphical
       result, the initial pixel moved a pixel downwards.
     </p>
+    <p>事情是这样的：过滤器从左到右，从上到下依次读取内核操作区域的所有像素。 它将每个值乘以内核对应值并将结果相加。 初始像素变成了42：(40*0)+(42*1)+(46*0)+(46*0)+(50*0)+(55*0)+(52*0)+( 56*0)+(58*0) = 42。（filter对图像不起作用，但对副本起作用）。 作为图形结果，初始像素向下移动了一个像素。</p>
       </div>
       <div class="sect3">
         <div class="titlepage">
@@ -106,7 +138,10 @@
         </div>
         <p>
       This filter is found in the image window menu under
+      
       <span class="guimenu">Filters</span> → <span class="guisubmenu">Generic</span> → <span class="guimenuitem">Convolution Matrix</span>.
+
+      <p>此过滤器位于<span class="guimenu">Filters</span> → <span class="guisubmenu">Generic</span> → <span class="guimenuitem">Convolution Matrix</span>下的图像窗口菜单中。</p>
     </p>
       </div>
       <div class="sect3">
@@ -139,6 +174,7 @@
             This is the 5x5 kernel matrix: you enter wanted values directly
             into boxes.
           </p>
+          <p>这是 5x5 内核矩阵：您可以直接在框中输入想要的值。</p>
               <div class="variablelist">
                 <dl class="variablelist">
                   <dt>
@@ -153,6 +189,9 @@
                   and 9 or 25 according to matrix size, which gives the
                   average of pixel values.
                 </p>
+                <p>
+                  先前计算的结果将除以该除数。 你几乎不会使用 1，它让结果不变，并且根据矩阵大小使用 9 或 25，这给出了像素值的平均值。
+                </p>
                   </dd>
                   <dt>
                     <span class="term">
@@ -163,6 +202,9 @@
                     <p>
                   This value is added to the division result. This is useful
                   if result may be negative. This offset may be negative.
+                </p>
+                <p>
+                  该值被添加到除法结果中。 如果结果可能为负，这很有用。 这个偏移量可能是负的。
                 </p>
                   </dd>
                 </dl>
@@ -176,6 +218,7 @@
             When the initial pixel is on a border, a part of kernel is out of
             image. You have to decide what filter must do:
           </p>
+          <p>当初始像素在边界上时，内核的一部分在图像之外。 您必须决定过滤器必须执行的操作：</p>
               <p>
             <span class="inlinemediaobject"><img src="./8.2. Convolution Matrix_files/convolution-milord.png"></span>
             <span class="inlinemediaobject"><img src="./8.2. Convolution Matrix_files/convolution-extend.png"></span>
@@ -186,6 +229,8 @@
             From left: source image, <span class="guilabel">Extend</span> border,
             <span class="guilabel">Wrap</span> border, <span class="guilabel">Crop</span> border
           </p>
+
+          <p>从左起：源图像、扩展边框、环绕边框、裁剪边框</p>
               <div class="variablelist">
                 <dl class="variablelist">
                   <dt>
@@ -195,6 +240,7 @@
                   </dt>
                   <dd>
                     <p>This part of kernel is not taken into account.</p>
+                    <p>不考虑这部分内核。</p>
                   </dd>
                   <dt>
                     <span class="term">
@@ -207,6 +253,7 @@
                   border, so pixels disappearing from one side reappear on the
                   other side.
                 </p>
+                <p>这部分内核将研究相反边界的像素，因此从一侧消失的像素会重新出现在另一侧。</p>
                   </dd>
                   <dt>
                     <span class="term">
@@ -216,7 +263,7 @@
                   <dd>
                     <p>
                   Pixels on borders are not modified, but they are cropped.
-                </p>
+                </p><p>边框上的像素不会被修改，但会被裁剪。</p>
                   </dd>
                 </dl>
               </div>
@@ -228,7 +275,7 @@
               <p>
             You can select there one or several channels the filter will work
             with.
-          </p>
+          </p><p>您可以在那里选择过滤器将使用的一个或多个通道。</p>
             </dd>
             <dt>
               <span class="term">Normalise</span>
@@ -240,7 +287,7 @@
             to divide by zero), then a 128 offset is applied. If it is
             negative (a negative color is not possible), a 255 offset is
             applied (inverts result).
-          </p>
+          </p><p>如果选中此选项，则除数取卷积的结果值。 如果此结果等于零（不可能除以零），则应用 128 偏移量。 如果它是负数（负数颜色是不可能的），则应用 255 偏移量（反转结果）。</p>
             </dd>
             <dt>
               <span class="term">Alpha-weighting</span>
@@ -250,7 +297,7 @@
             If this option is not checked, the filter doesn't take in account
             transparency and this may be cause of some artefacts when
             blurring.
-          </p>
+          </p><p>如果未选中此选项，则过滤器不会考虑透明度，这可能是模糊时出现某些伪像的原因。</p>
             </dd>
           </dl>
         </div>
@@ -266,7 +313,7 @@
         <p>
       Design of kernels is based on high levels mathematics. You can find
       ready-made kernels on the Web. Here are a few examples:
-    </p>
+    </p><p>内核的设计基于高级数学。 您可以在 Web 上找到现成的内核。 这里有一些例子：</p>
         <div class="figure">
           <a id="idm273571659376"></a>
           <p class="title">
