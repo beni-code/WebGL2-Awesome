@@ -298,7 +298,7 @@
                 this.page.url = page_url;
               }
             });
-            $('#disqus_thread').show();
+            // $('#disqus_thread').show();
           }
           // Refresh callbacks on <function> tags
           SetFunctionTagCallbacks();
@@ -1413,6 +1413,11 @@
         </p>
 
         <p>
+          在现实世界中，每个物体对光都有不同的反应。 例如，钢制物品通常比粘土花瓶更闪亮，而木制容器对光的反应与钢制容器不同。 一些物体反射光而没有太多散射，导致镜面高光较小，而其他物体散射很多，使高光半径更大。 如果我们想在
+          OpenGL 中模拟多种类型的对象，我们必须定义每个表面特定的材料属性。
+        </p>
+
+        <p>
           In the previous chapter we defined an object and light color to define
           the visual output of the object, combined with an ambient and specular
           intensity component. When describing a surface we can define a material
@@ -1421,6 +1426,11 @@
           have fine-grained control over the color output of the surface. Now add a
           shininess component to those 3 colors and we have all the material
           properties we need:
+        </p>
+
+        <p>
+          在上一章中，我们定义了一个物体和光色来定义物体的视觉输出，并结合了环境和镜面反射强度分量。 在描述表面时，我们可以为 3 种照明组件中的每一种定义材质颜色：环境光、漫射光和镜面光。
+          通过为每个组件指定颜色，我们可以对表面的颜色输出进行细粒度控制。 现在为这 3 种颜色添加一个光泽度组件，我们就拥有了我们需要的所有材料属性：
         </p>
 
         <pre><code class=" hljs cpp">
@@ -1444,6 +1454,10 @@
         </p>
 
         <p>
+          在片段着色器中，我们创建一个结构来存储表面的材质属性。 我们也可以将它们存储为单独的统一值，但将它们存储为结构使其更有条理。 我们首先定义结构的布局，然后简单地声明一个统一变量，并将新创建的结构作为其类型。
+        </p>
+
+        <p>
           As you can see, we define a color vector for each of the Phong lighting's components. The <var>ambient</var>
           material vector defines what color the surface reflects under ambient
           lighting; this is usually the same as the surface's color. The <var>diffuse</var>
@@ -1456,11 +1470,20 @@
         </p>
 
         <p>
+          如您所见，我们为每个 Phong 照明组件定义了一个颜色向量。 环境材质向量定义了表面在环境光照下反射的颜色； 这通常与表面的颜色相同。 漫反射材质向量定义漫反射照明下表面的颜色。
+          漫反射颜色（就像环境照明一样）设置为所需表面的颜色。 镜面反射材质向量设置表面镜面反射高光的颜色（或者甚至可能反映特定于表面的颜色）。 最后，反光度会影响镜面高光的散射/半径。
+        </p>
+
+        <p>
           With these 4 components that define an object's material we can simulate many real-world materials. A table as
           found at <a href="http://devernay.free.fr/cours/opengl/materials.html" target="_blank">devernay.free.fr</a>
           shows a list of material properties that simulate real materials found
           in the outside world. The following image shows the effect several of
           these real world material values have on our cube:
+        </p>
+
+        <p>
+          通过这 4 个定义对象材质的组件，我们可以模拟许多真实世界的材质。 devernay.free.fr 上的一张表格显示了模拟外部世界真实材料的材料属性列表。 下图显示了其中几个真实世界材质值对我们的立方体的影响：
         </p>
 
         <img src="LearnOpenGL%20-%20Materials_files/materials_real_world.png">
@@ -1473,6 +1496,9 @@
             href="https://learnopengl.com/Model-Loading/Assimp" target="_blank">Model Loading</a> chapters we'll discuss
           more complicated shapes.
         </p>
+        <p>
+          如您所见，通过正确指定表面的材料属性，它似乎改变了我们对物体的感知。 效果非常明显，但为了获得更逼真的效果，我们需要用更复杂的东西替换立方体。 在模型加载章节中，我们将讨论更复杂的形状。
+        </p>
 
         <p>
           Figuring out the right material settings for an object is a difficult
@@ -1482,7 +1508,15 @@
         </p>
 
         <p>
+          为一个物体找出正确的材质设置是一项艰巨的任务，主要需要实验和大量经验。 错位的材料完全破坏物体的视觉质量并不少见。
+        </p>
+
+        <p>
           Let's try implementing such a material system in the shaders.
+        </p>
+
+        <p>
+          让我们尝试在着色器中实现这样一个材质系统。
         </p>
 
         <h1>Setting materials</h1>
@@ -1491,6 +1525,10 @@
           want to change the lighting calculations to comply with the new
           material properties. Since all the material variables are stored in a
           struct we can access them from the <var>material</var> uniform:
+        </p>
+
+        <p>
+          我们在片段着色器中创建了一个统一的材质结构，因此接下来我们要更改光照计算以符合新的材质属性。 由于所有材质变量都存储在一个结构中，我们可以从材质uniform中访问它们：
         </p>
 
         <pre><code class=" hljs cpp">
@@ -1524,11 +1562,20 @@
         </p>
 
         <p>
+          如您所见，我们现在可以在任何需要的地方访问所有材质结构的属性，这次在材质颜色的帮助下计算生成的输出颜色。 每个对象的材质属性都与它们各自的照明组件相乘。
+        </p>
+
+        <p>
           We can set the material of the object in the application by setting
           the appropriate uniforms. A struct in GLSL however is not special in any
           regard when setting uniforms; a struct only really acts as a namespace
           of uniform variables. If we want to fill the struct we will have to set
           the individual uniforms, but prefixed with the struct's name:
+        </p>
+
+        <p>
+          我们可以通过设置合适的uniforms来设置应用中物体的材质。 然而，在设置uniforms时，GLSL 中的结构在任何方面都不是特别的； 结构仅真正充当统一变量的命名空间。
+          如果我们想要填充结构，我们将不得不设置单独的uniforms，但以结构的名称为前缀：
         </p>
 
         <pre><code class=" hljs cpp">
@@ -1546,8 +1593,16 @@ lightingShader.setFloat(<span class="hljs-string">"material.shininess"</span>, <
         </p>
 
         <p>
+          我们将环境和漫反射分量设置为我们希望对象具有的颜色，并将对象的镜面反射分量设置为中等亮度的颜色； 我们不希望镜面反射分量太强。 我们还将光泽度保持在 32。
+        </p>
+
+        <p>
           We can now easily influence the object's material from the application. Running the program gives you
           something like this:
+        </p>
+
+        <p>
+          我们现在可以轻松地从应用程序中影响对象的材质。 运行程序会给你这样的东西：
         </p>
 
         <img src="LearnOpenGL%20-%20Materials_files/materials_with_material.png" class="clean">
@@ -1556,6 +1611,10 @@ lightingShader.setFloat(<span class="hljs-string">"material.shininess"</span>, <
           It doesn't really look right though?
         </p>
 
+        <p>
+
+          虽然看起来不太对？
+        </p>
         <h2>Light properties</h2>
         <p>
           The object is way too bright. The reason for the object being too
@@ -1567,6 +1626,11 @@ lightingShader.setFloat(<span class="hljs-string">"material.shininess"</span>, <
           something similar, but this time by specifying intensity vectors for
           each of the lighting components. If we'd visualize <var>lightColor</var> as <code>vec3(1.0)</code> the code
           would look like this:
+        </p>
+
+        <p>
+          物体太亮了。 物体太亮的原因是环境色、漫反射色和镜面反射色被任何光源全力反射。 光源的环境光、漫反射和镜面反射分量也分别具有不同的强度。 在上一章中，我们通过使用强度值改变环境和镜面反射强度来解决这个问题。
+          我们想做类似的事情，但这次是通过为每个照明组件指定强度向量。 如果我们将 lightColor 可视化为 vec3(1.0)，代码将如下所示：
         </p>
 
         <pre><code class=" hljs cpp">
@@ -1586,6 +1650,11 @@ lightingShader.setFloat(<span class="hljs-string">"material.shininess"</span>, <
           lower value:
         </p>
 
+        <p>
+          因此，对象的每个材质属性都以每个光分量的完整强度返回。 对于每个光源，这些 vec3(1.0) 值也可以单独受到影响，这通常是我们想要的。 现在，物体的环境成分完全影响了立方体的颜色。
+          环境分量不应该对最终颜色产生如此大的影响，因此我们可以通过将光的环境强度设置为较低的值来限制环境颜色：
+        </p>
+
         <pre><code class=" hljs cpp">
 <span class="hljs-built_in">vec3</span> ambient = <span class="hljs-built_in">vec3</span>(<span class="hljs-number">0.1</span>) * material.ambient;  
 </code></pre>
@@ -1597,6 +1666,10 @@ lightingShader.setFloat(<span class="hljs-string">"material.shininess"</span>, <
           chapter; you could say we already created some light properties to
           influence each lighting component individually. We'll want to create
           something similar to the material struct for the light properties:
+        </p>
+
+        <p>
+          我们可以用同样的方式影响光源的漫反射和镜面反射强度。 这与我们在上一章中所做的非常相似； 你可以说我们已经创建了一些灯光属性来单独影响每个照明组件。 我们要为光属性创建类似于材质结构的东西：
         </p>
 
         <pre><code class=" hljs cpp">
@@ -1622,8 +1695,17 @@ lightingShader.setFloat(<span class="hljs-string">"material.shininess"</span>, <
           vector to the struct.
 
         </p>
+
+        <p>
+          光源的环境光、漫反射和镜面反射分量具有不同的强度。 环境光通常设置为低强度，因为我们不希望环境颜色太显眼。 光源的漫反射分量通常设置为我们希望光线具有的确切颜色； 通常是明亮的白色。 镜面反射分量通常保持在
+          vec3(1.0) 以全强度发光。 请注意，我们还将光的位置向量添加到结构中。
+        </p>
         <p>
           Just like with the material uniform we need to update the fragment shader:
+        </p>
+
+        <p>
+          就像材质uniform一样，我们需要更新片段着色器：
         </p>
 
         <pre><code class=" hljs cpp">
@@ -1634,6 +1716,10 @@ lightingShader.setFloat(<span class="hljs-string">"material.shininess"</span>, <
 
         <p>
           We then want to set the light intensities in the application:
+        </p>
+
+        <p>
+          然后我们要在应用程序中设置光强度：
         </p>
 
         <pre><code class=" hljs cpp"> 
@@ -1649,10 +1735,18 @@ lightingShader.setVec3(<span class="hljs-string">"light.specular"</span>, <span 
           the material of the object:
         </p>
 
+        <p>
+          现在我们调整了光线如何影响物体的材质，我们得到了一个看起来很像上一章输出的视觉输出。 然而这一次我们完全控制了物体的光照和材质：
+        </p>
+
         <img src="LearnOpenGL%20-%20Materials_files/materials_light.png" class="clean">
 
         <p>
           Changing the visual aspects of objects is relatively easy right now. Let's spice things up a bit!
+        </p>
+
+        <p>
+          现在更改对象的视觉方面相对容易。 让我们来点有趣的东西！
         </p>
 
         <h2>Different light colors</h2>
@@ -1665,6 +1759,11 @@ lightingShader.setVec3(<span class="hljs-string">"light.specular"</span>, <span 
           effects. Since everything is already set up in the fragment shader,
           changing the light's colors is easy and immediately creates some funky
           effects:
+        </p>
+
+        <p>
+          到目前为止，我们使用浅色仅通过选择从白色到灰色再到黑色的颜色来改变其各个组件的强度，而不影响对象的实际颜色（仅影响其强度）。 由于我们现在可以轻松访问光的属性，因此我们可以随时间改变它们的颜色以获得一些非常有趣的效果。
+          因为一切都已经在片段着色器中设置好，改变光的颜色很容易，并立即产生一些时髦的效果：
         </p>
 
         <div class="video" onclick="ClickVideo(this)">
@@ -1683,10 +1782,18 @@ lightingShader.setVec3(<span class="hljs-string">"light.specular"</span>, <span 
         </p>
 
         <p>
+          如您所见，不同的光色会极大地影响对象的颜色输出。 由于光的颜色直接影响物体可以反射的颜色（你可能还记得颜色一章），它对视觉输出有重大影响。
+        </p>
+
+        <p>
           We can easily change the light's colors over time by changing the light's ambient and diffuse colors via <fun>
             sin</fun> and <fun>
             <function id="47">glfwGetTime</function>
           </fun>:
+        </p>
+
+        <p>
+          通过 sin 和 glfwGetTime 更改灯光的环境颜色和漫反射颜色，我们可以随时间轻松更改灯光的颜色：
         </p>
 
         <pre><code class=" hljs cpp">
@@ -1710,11 +1817,20 @@ lightingShader.setVec3(<span class="hljs-string">"light.diffuse"</span>, diffuse
             target="_blank">here</a>.
         </p>
 
+        <p>
+          尝试并试验几种光照和材质值，看看它们如何影响视觉输出。 您可以在此处找到应用程序的源代码。
+        </p>
+
         <h2>Exercises</h2>
         <p>
         </p>
         <ul>
-          <li>Can you make it so that changing the light color changes the color of the light's cube object?</li>
+          <li>Can you make it so that changing the light color changes the color of the light's cube object?
+
+            <br>
+            你能做到改变光的颜色来改变光的立方体对象的颜色吗？
+          </li>
+          <br>
           <li>Can you simulate some of the real-world objects by defining
             their respective materials like we've seen at the start of this chapter?
             Note that the <a href="http://devernay.free.fr/cours/opengl/materials.html" target="_blank">table</a>'s
@@ -1722,7 +1838,12 @@ lightingShader.setVec3(<span class="hljs-string">"light.diffuse"</span>, diffuse
             light intensities into account. To correctly set their values you'd
             have to set all the light intensities to <code>vec3(1.0)</code> to get the same output: <a
               href="https://learnopengl.com/code_viewer_gh.php?code=src/2.lighting/3.2.materials_exercise1/materials_exercise1.cpp"
-              target="_blank">solution</a> of cyan plastic container.</li>
+              target="_blank">solution</a> of cyan plastic container.
+
+            <br>
+            你能像我们在本章开头看到的那样，通过定义它们各自的材料来模拟一些真实世界的物体吗？ 请注意，表格的环境值与漫反射值不同； 他们没有考虑光强度。 要正确设置它们的值，您必须将所有光强度设置为 vec3(1.0)
+            以获得相同的输出：青色塑料容器溶液。
+          </li>
         </ul>
         <p></p>
 
