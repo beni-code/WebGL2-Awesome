@@ -1,0 +1,1831 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <script src="LearnOpenGL%20-%20Colors_files/rules-p-fTfJtcPmQDwZG.js" async=""></script>
+  <script type="text/javascript" async="" src="LearnOpenGL%20-%20Colors_files/localstore.js"></script>
+  <meta charset="utf-8">
+  <title>LearnOpenGL - Colors</title>
+  <!--<title>Learn OpenGL, extensive tutorial resource for learning Modern OpenGL</title>-->
+  <link rel="shortcut icon" type="image/ico" href="https://learnopengl.com/favicon.ico">
+  <meta name="description"
+    content="Learn OpenGL . com provides good and clear modern 3.3+ OpenGL tutorials with clear examples. A great resource to learn modern OpenGL aimed at beginners.">
+  <meta name="fragment" content="!">
+  <script async="" src="LearnOpenGL%20-%20Colors_files/wrap.js"></script>
+  <script src="LearnOpenGL%20-%20Colors_files/quant.js" async="" type="text/javascript"></script>
+  <script async="" type="text/javascript" src="LearnOpenGL%20-%20Colors_files/cmp2.js"></script>
+  <script type="text/javascript" src="LearnOpenGL%20-%20Colors_files/config.js"></script>
+  <script async="" type="text/javascript" src="LearnOpenGL%20-%20Colors_files/gpt_002.js"></script>
+  <script async="" type="text/javascript" src="LearnOpenGL%20-%20Colors_files/pwt.js"></script>
+  <script async="" type="text/javascript" src="LearnOpenGL%20-%20Colors_files/choice.js"></script>
+  <script async="" src="LearnOpenGL%20-%20Colors_files/analytics.js"></script>
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-51879160-1', 'learnopengl.com');
+    ga('send', 'pageview');
+
+  </script>
+  <!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-7855791439695850",
+      enable_page_level_ads: true
+    });
+  </script>
+  <script async="async" src="LearnOpenGL%20-%20Colors_files/gpt.js"></script>
+  <script>
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+  </script>
+  <script>
+    googletag.cmd.push(function () {
+      googletag.defineSlot('/8491498/learnopengl_video', [300, 225], 'div-gpt-ad-1540574378241-0').addService(googletag.pubads());
+      googletag.pubads().enableSingleRequest();
+      googletag.pubads().collapseEmptyDivs();
+      googletag.enableServices();
+    });
+  </script>
+  <script type="text/javascript" src="LearnOpenGL%20-%20Colors_files/1681.js"></script>
+  <style type="text/css">
+    #waldo-sticky-footer-wrapper {
+      position: fixed;
+      width: 100%;
+      bottom: 0px;
+      left: 0px;
+      text-align: center;
+      z-index: 9999;
+      margin-bottom: 0 !important;
+    }
+
+    #waldo-sticky-footer-wrapper>div {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 0 !important;
+    }
+
+    #waldo-sticky-footer-wrapper iframe,
+    #waldo-sticky-footer-wrapper div {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .waldo-sticky-sidebar {
+      position: fixed;
+      top: 10px;
+      z-index: 90
+    }
+
+    .waldo-bfleft {
+      position: fixed;
+      left: 0;
+      top: 10px;
+      z-index: 101;
+    }
+
+    .waldo-bfright {
+      position: fixed;
+      right: 0;
+      top: 10px;
+      z-index: 101;
+    }
+
+    #nm-ccpa-widget {
+      width: 400px;
+    }
+
+    #nm-ccpa-widget {
+      position: fixed;
+      right: 20px;
+      z-index: 9999;
+      margin-bottom: 15px;
+      box-shadow: 0 3px 36px 0 rgba(0, 0, 0, 0.3);
+      background-color: #fff;
+      border-radius: 10px;
+      bottom: 20px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .nm-ccpa-widget-header {
+      background: #179f84;
+      color: #fff;
+      padding: 20px;
+    }
+
+    .nm-ccpa-widget-header .nm-ccpa-widget-main-title {
+      margin-bottom: 0;
+      margin-top: 0;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .nm-ccpa-widget-body {
+      padding: 20px;
+      background: #fff;
+    }
+
+    .nm-ccpa-widget-body label {
+      font-size: 16px;
+    }
+
+    .nm-ccpa-widget-submit-btn {
+      margin-top: 15px;
+      padding-left: 25px;
+    }
+
+    .nm-ccpa-widget-submit-btn input {
+      background: #179f84;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: 0;
+      outline: 0;
+    }
+
+    .nm-ccpa-widget-submit-btn input:hover,
+    .nm-ccpa-widget-submit-btn input:focus {
+      cursor: pointer;
+    }
+
+    .nm-ccpa-widget-checkbox-label {
+      font-size: 20px;
+    }
+
+    .nm-ccpa-widget-header {
+      position: relative;
+    }
+
+    .nm-ccpa-widget-close-btn {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
+
+    .nm-ccpa-widget-close-btn a {
+      color: #fff;
+      font-size: 20px;
+      text-decoration: none;
+    }
+
+    .nm-ccpa-widget-message {
+      padding-left: 25px;
+    }
+
+    #waldo-tag-6038 {
+      clear: both !important;
+    }
+
+    div[class^="app_gdpr-"] a {
+      color: #41afbb !important;
+      text-decoration: underline !important
+    }
+
+    #waldo-close-button {
+      position: absolute;
+      right: 0;
+      top: -24px;
+      line-height: normal !important;
+    }
+
+    #waldo-close-button a {
+      border: 1px solid rgba(0, 0, 0, .35) !important;
+      padding: 3px !important;
+      font-size: 12px !important;
+      color: #fff !important;
+      font-weight: bold !important;
+      background-color: #777 !important;
+      line-height: normal !important;
+    }
+
+    .waldo-display-unit {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      flex-wrap: wrap !important;
+    }
+  </style>
+  <script type="text/javascript" async="" src="LearnOpenGL%20-%20Colors_files/tag"></script>
+  <script type="text/javascript" async="" src="LearnOpenGL%20-%20Colors_files/tag.js"></script>
+  <script src="LearnOpenGL%20-%20Colors_files/jquery-1.11.0.min.js"></script>
+  <script src="LearnOpenGL%20-%20Colors_files/hoverintent.js"></script>
+  <link rel="stylesheet" type="text/css" href="LearnOpenGL%20-%20Colors_files/layout.css">
+  <link rel="stylesheet" type="text/css" href="LearnOpenGL%20-%20Colors_files/obsidian.css">
+  <script src="LearnOpenGL%20-%20Colors_files/highlight.pack.js"></script>
+  <style type="text/css">
+    .qc-cmp-button.qc-cmp-secondary-button:hover {
+      background-color: #368bd6 !important;
+      border-color: transparent !important;
+    }
+
+    .qc-cmp-button.qc-cmp-secondary-button:hover {
+      color: #ffffff !important;
+    }
+
+    .qc-cmp-button.qc-cmp-secondary-button {
+      color: #368bd6 !important;
+    }
+
+    .qc-cmp-button.qc-cmp-secondary-button {
+      background-color: #eee !important;
+      border-color: transparent !important;
+    }
+  </style>
+  <script src="LearnOpenGL%20-%20Colors_files/functions.js"></script>
+  <script type="text/javascript" src="LearnOpenGL%20-%20Colors_files/MathJax.js"></script>
+  <script>
+    // Has to be loaded last due to content bug 
+    MathJax.Hub.Config({
+      TeX: { equationNumbers: { autoNumber: "AMS" } }
+    });
+  </script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script>
+    $(document).ready(function () {
+      // check if user visited from the old # based urls, re-direct to ?p= form
+      if (window.location.hash) {
+        var name = window.location.hash.substring(2);
+        // name = name.replace(/-/g," ");
+        var index = name.indexOf('#'); // Remove any hash fragments from the url (Disquss adds hash fragments for comments, but results in 404 pages)
+        if (index >= 0)
+          name = name.substring(0, index);
+
+        window.location.href = "https://learnopengl.com/" + name;
+      } else {
+        // Check if data has been succesfully loaded, if so: change title bar as ajax hash fragment
+        var title = $('#content-url').text();
+
+        // Refresh syntax highlighting
+        // $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+
+        // Reset DISQUS
+        // if(title == '/dev/')
+        // title = '';
+        // alert('hoi');
+
+        // place video tag 
+        if (title != '') {
+          //var videoad = "%3Cdiv id=\'waldo-tag-14070\'%3E %3Cscript%3Egoogletag.cmd.push(function() {googletag.display(\'waldo-tag-14070\'); }); %3C/script%3E%3C/div%3E";
+          //$('#content p:nth-of-type(3)').after(unescape(videoad));
+        }
+
+        // Adjust ads for correct bottom positioning based on content size
+        window.setTimeout(function () {
+          AdPositioning();
+        }, 3000);
+
+
+        // set API resets after time-out (once content is properly loaded)
+        window.setTimeout(function () {
+          MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+          // if (MathJax.InputJax.TeX.resetEquationNumbers)
+          // {						
+          // MathJax.Hub.Queue(["resetEquationNumbers", MathJax.InputJax.TeX]);
+          // }
+
+          var page_url = title == "" ? "http://www.learnopengl.com/" : "http://www.learnopengl.com/" + title;
+          if (typeof DISQUS !== 'undefined') {
+            DISQUS.reset({
+              reload: true,
+              config: function () {
+                this.page.identifier = title;
+                this.page.url = page_url;
+              }
+            });
+            $('#disqus_thread').show();
+          }
+          // Refresh callbacks on <function> tags
+          SetFunctionTagCallbacks();
+        }, 1000);
+
+        // Zet ook de juiste button op 'selected'
+        $('#nav li span, #nav li a').removeClass('selected');
+        if (title != '') {
+          $('#nav li[id=\'' + title + '\']').children('span, a').addClass('selected');
+        }
+        // En open menu waar nodig
+        var parents = $('#nav span.selected, #nav a.selected').parents('li').children('span.closed, a.closed');
+        var index = 0;
+        for (index = parents.length - 1; index >= 0; index--) {
+
+          var id = $(parents[index]).attr("id").replace(/^\D+/g, '');
+          MenuClick(id, false);
+        }
+
+      }
+    });
+    // var initialized = false;
+    // window.onpopstate = function() {
+    // if(initialized)
+    // LoadPage();
+    // else
+    // initialized = true;
+    // };
+
+    // Set up DISQUS
+    // $(document).ready(function() {
+    var disqus_shortname = 'learnopengl';
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+        // });
+  </script>
+  <script type="text/javascript" async="" src="LearnOpenGL%20-%20Colors_files/embed.js"></script>
+  <script
+    type="text/javascript">googletag.cmd.push(function () { googletag.pubads().addEventListener('slotRenderEnded', function (event) { waldoPassbackCheck(event); waldoAddCloseBtn(event); }); googletag.pubads().enableSingleRequest(); googletag.enableServices(); gptAdSlots[1715] = googletag.defineSlot('/124067137,22550200400/learnopengl300x250FL_1', [[300, 250], [300, 600], [160, 600]], 'waldo-tag-1715').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[300, 250], [300, 600], [160, 600]]).addSize([768, 0], [[300, 250], [300, 600], [160, 600]]).addSize([0, 0], [[300, 250], [300, 600], [160, 600]]).build()).addService(googletag.pubads()); googletag.display('waldo-tag-1715'); gptAdSlots[2245] = googletag.defineSlot('/124067137,22550200400/learnopengl300x600FL_1', [[300, 250], [300, 600]], 'waldo-tag-2245').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[300, 250], [300, 600]]).addSize([768, 0], [[300, 250], [300, 600]]).addSize([0, 0], [[300, 250], [300, 600]]).build()).addService(googletag.pubads()); googletag.display('waldo-tag-2245'); gptAdSlots[2246] = googletag.defineSlot('/124067137,22550200400/learnopengl300x600FL_2', [[300, 250], [300, 600]], 'waldo-tag-2246').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[300, 250], [300, 600]]).addSize([768, 0], [[300, 250], [300, 600]]).addSize([0, 0], [[300, 250], [300, 600]]).build()).addService(googletag.pubads()); googletag.display('waldo-tag-2246'); gptAdSlots[2247] = googletag.defineSlot('/124067137,22550200400/learnopengl300x600FL_3', [[300, 250], [300, 600]], 'waldo-tag-2247').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[300, 250], [300, 600]]).addSize([768, 0], [[300, 250], [300, 600]]).addSize([0, 0], [[300, 250], [300, 600]]).build()).addService(googletag.pubads()); googletag.display('waldo-tag-2247'); gptAdSlots[6194] = googletag.defineSlot('/124067137,22550200400/learnopengl728x90FS_2', [[728, 90], [320, 50]], 'waldo-tag-6194').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90]]).addSize([768, 0], [[320, 50]]).addSize([0, 0], [[320, 50]]).build()).addService(googletag.pubads()); googletag.display('waldo-tag-6194'); gptAdSlots[6196] = googletag.defineSlot('/124067137,22550200400/learnopengl728x90FS_1', [[728, 90], [320, 50]], 'waldo-tag-6196').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90]]).addSize([768, 0], [[320, 50]]).addSize([0, 0], [[320, 50]]).build()).addService(googletag.pubads()); googletag.display('waldo-tag-6196'); waldoVideoSlot = googletag.defineSlot('/124067137,22550200400/learnopengl_video_unit2', [1, 1], 'waldo-tag-14070').defineSizeMapping(googletag.sizeMapping().addSize([0, 0], [300, 235]).addSize([320, 700], [300, 235]).addSize([1050, 200], [566, 387]).build()).addService(googletag.pubads()); });</script>
+  <link rel="prefetch" as="style"
+    href="LearnOpenGL%20-%20Colors_files/a_data_005/lounge.973e8258c48717b79b37fecbf85dcea2.css">
+  <link rel="prefetch" as="script"
+    href="LearnOpenGL%20-%20Colors_files/a_data_005/common.bundle.78f08d08ee97a04dc049cbcf3a5ec827.js">
+  <link rel="prefetch" as="script"
+    href="LearnOpenGL%20-%20Colors_files/a_data_005/lounge.bundle.80bb1523f48c6d611d4ba6c652892c20.js">
+  <link rel="prefetch" as="script" href="LearnOpenGL%20-%20Colors_files/a_data_005/config.js">
+  <style type="text/css">
+    .MathJax_Hover_Frame {
+      border-radius: .25em;
+      -webkit-border-radius: .25em;
+      -moz-border-radius: .25em;
+      -khtml-border-radius: .25em;
+      box-shadow: 0px 0px 15px #83A;
+      -webkit-box-shadow: 0px 0px 15px #83A;
+      -moz-box-shadow: 0px 0px 15px #83A;
+      -khtml-box-shadow: 0px 0px 15px #83A;
+      border: 1px solid #A6D ! important;
+      display: inline-block;
+      position: absolute
+    }
+
+    .MathJax_Menu_Button .MathJax_Hover_Arrow {
+      position: absolute;
+      cursor: pointer;
+      display: inline-block;
+      border: 2px solid #AAA;
+      border-radius: 4px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -khtml-border-radius: 4px;
+      font-family: 'Courier New', Courier;
+      font-size: 9px;
+      color: #F0F0F0
+    }
+
+    .MathJax_Menu_Button .MathJax_Hover_Arrow span {
+      display: block;
+      background-color: #AAA;
+      border: 1px solid;
+      border-radius: 3px;
+      line-height: 0;
+      padding: 4px
+    }
+
+    .MathJax_Hover_Arrow:hover {
+      color: white !important;
+      border: 2px solid #CCC !important
+    }
+
+    .MathJax_Hover_Arrow:hover span {
+      background-color: #CCC !important
+    }
+  </style>
+  <style type="text/css">
+    #MathJax_About {
+      position: fixed;
+      left: 50%;
+      width: auto;
+      text-align: center;
+      border: 3px outset;
+      padding: 1em 2em;
+      background-color: #DDDDDD;
+      color: black;
+      cursor: default;
+      font-family: message-box;
+      font-size: 120%;
+      font-style: normal;
+      text-indent: 0;
+      text-transform: none;
+      line-height: normal;
+      letter-spacing: normal;
+      word-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      float: none;
+      z-index: 201;
+      border-radius: 15px;
+      -webkit-border-radius: 15px;
+      -moz-border-radius: 15px;
+      -khtml-border-radius: 15px;
+      box-shadow: 0px 10px 20px #808080;
+      -webkit-box-shadow: 0px 10px 20px #808080;
+      -moz-box-shadow: 0px 10px 20px #808080;
+      -khtml-box-shadow: 0px 10px 20px #808080;
+      filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')
+    }
+
+    #MathJax_About.MathJax_MousePost {
+      outline: none
+    }
+
+    .MathJax_Menu {
+      position: absolute;
+      background-color: white;
+      color: black;
+      width: auto;
+      padding: 2px;
+      border: 1px solid #CCCCCC;
+      margin: 0;
+      cursor: default;
+      font: menu;
+      text-align: left;
+      text-indent: 0;
+      text-transform: none;
+      line-height: normal;
+      letter-spacing: normal;
+      word-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      float: none;
+      z-index: 201;
+      box-shadow: 0px 10px 20px #808080;
+      -webkit-box-shadow: 0px 10px 20px #808080;
+      -moz-box-shadow: 0px 10px 20px #808080;
+      -khtml-box-shadow: 0px 10px 20px #808080;
+      filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')
+    }
+
+    .MathJax_MenuItem {
+      padding: 2px 2em;
+      background: transparent
+    }
+
+    .MathJax_MenuArrow {
+      position: absolute;
+      right: .5em;
+      padding-top: .25em;
+      color: #666666;
+      font-size: .75em
+    }
+
+    .MathJax_MenuActive .MathJax_MenuArrow {
+      color: white
+    }
+
+    .MathJax_MenuArrow.RTL {
+      left: .5em;
+      right: auto
+    }
+
+    .MathJax_MenuCheck {
+      position: absolute;
+      left: .7em
+    }
+
+    .MathJax_MenuCheck.RTL {
+      right: .7em;
+      left: auto
+    }
+
+    .MathJax_MenuRadioCheck {
+      position: absolute;
+      left: 1em
+    }
+
+    .MathJax_MenuRadioCheck.RTL {
+      right: 1em;
+      left: auto
+    }
+
+    .MathJax_MenuLabel {
+      padding: 2px 2em 4px 1.33em;
+      font-style: italic
+    }
+
+    .MathJax_MenuRule {
+      border-top: 1px solid #CCCCCC;
+      margin: 4px 1px 0px
+    }
+
+    .MathJax_MenuDisabled {
+      color: GrayText
+    }
+
+    .MathJax_MenuActive {
+      background-color: Highlight;
+      color: HighlightText
+    }
+
+    .MathJax_MenuDisabled:focus,
+    .MathJax_MenuLabel:focus {
+      background-color: #E8E8E8
+    }
+
+    .MathJax_ContextMenu:focus {
+      outline: none
+    }
+
+    .MathJax_ContextMenu .MathJax_MenuItem:focus {
+      outline: none
+    }
+
+    #MathJax_AboutClose {
+      top: .2em;
+      right: .2em
+    }
+
+    .MathJax_Menu .MathJax_MenuClose {
+      top: -10px;
+      left: -10px
+    }
+
+    .MathJax_MenuClose {
+      position: absolute;
+      cursor: pointer;
+      display: inline-block;
+      border: 2px solid #AAA;
+      border-radius: 18px;
+      -webkit-border-radius: 18px;
+      -moz-border-radius: 18px;
+      -khtml-border-radius: 18px;
+      font-family: 'Courier New', Courier;
+      font-size: 24px;
+      color: #F0F0F0
+    }
+
+    .MathJax_MenuClose span {
+      display: block;
+      background-color: #AAA;
+      border: 1.5px solid;
+      border-radius: 18px;
+      -webkit-border-radius: 18px;
+      -moz-border-radius: 18px;
+      -khtml-border-radius: 18px;
+      line-height: 0;
+      padding: 8px 0 6px
+    }
+
+    .MathJax_MenuClose:hover {
+      color: white !important;
+      border: 2px solid #CCC !important
+    }
+
+    .MathJax_MenuClose:hover span {
+      background-color: #CCC !important
+    }
+
+    .MathJax_MenuClose:hover:focus {
+      outline: none
+    }
+  </style>
+  <style type="text/css">
+    .MathJax_Preview .MJXf-math {
+      color: inherit !important
+    }
+  </style>
+  <style type="text/css">
+    .MJX_Assistive_MathML {
+      position: absolute !important;
+      top: 0;
+      left: 0;
+      clip: rect(1px, 1px, 1px, 1px);
+      padding: 1px 0 0 0 !important;
+      border: 0 !important;
+      height: 1px !important;
+      width: 1px !important;
+      overflow: hidden !important;
+      display: block !important;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none
+    }
+
+    .MJX_Assistive_MathML.MJX_Assistive_MathML_Block {
+      width: 100% !important
+    }
+  </style>
+  <style type="text/css">
+    #MathJax_Zoom {
+      position: absolute;
+      background-color: #F0F0F0;
+      overflow: auto;
+      display: block;
+      z-index: 301;
+      padding: .5em;
+      border: 1px solid black;
+      margin: 0;
+      font-weight: normal;
+      font-style: normal;
+      text-align: left;
+      text-indent: 0;
+      text-transform: none;
+      line-height: normal;
+      letter-spacing: normal;
+      word-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      float: none;
+      -webkit-box-sizing: content-box;
+      -moz-box-sizing: content-box;
+      box-sizing: content-box;
+      box-shadow: 5px 5px 15px #AAAAAA;
+      -webkit-box-shadow: 5px 5px 15px #AAAAAA;
+      -moz-box-shadow: 5px 5px 15px #AAAAAA;
+      -khtml-box-shadow: 5px 5px 15px #AAAAAA;
+      filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')
+    }
+
+    #MathJax_ZoomOverlay {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 300;
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      background-color: white;
+      opacity: 0;
+      filter: alpha(opacity=0)
+    }
+
+    #MathJax_ZoomFrame {
+      position: relative;
+      display: inline-block;
+      height: 0;
+      width: 0
+    }
+
+    #MathJax_ZoomEventTrap {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 302;
+      display: inline-block;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      background-color: white;
+      opacity: 0;
+      filter: alpha(opacity=0)
+    }
+  </style>
+  <style type="text/css">
+    .MathJax_Preview {
+      color: #888
+    }
+
+    #MathJax_Message {
+      position: fixed;
+      left: 1px;
+      bottom: 2px;
+      background-color: #E6E6E6;
+      border: 1px solid #959595;
+      margin: 0px;
+      padding: 2px 8px;
+      z-index: 102;
+      color: black;
+      font-size: 80%;
+      width: auto;
+      white-space: nowrap
+    }
+
+    #MathJax_MSIE_Frame {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0px;
+      z-index: 101;
+      border: 0px;
+      margin: 0px;
+      padding: 0px
+    }
+
+    .MathJax_Error {
+      color: #CC0000;
+      font-style: italic
+    }
+  </style><iframe style="display: none;" name="cnftComm"></iframe>
+  <style type="text/css">
+    .MJXp-script {
+      font-size: .8em
+    }
+
+    .MJXp-right {
+      -webkit-transform-origin: right;
+      -moz-transform-origin: right;
+      -ms-transform-origin: right;
+      -o-transform-origin: right;
+      transform-origin: right
+    }
+
+    .MJXp-bold {
+      font-weight: bold
+    }
+
+    .MJXp-italic {
+      font-style: italic
+    }
+
+    .MJXp-scr {
+      font-family: MathJax_Script, 'Times New Roman', Times, STIXGeneral, serif
+    }
+
+    .MJXp-frak {
+      font-family: MathJax_Fraktur, 'Times New Roman', Times, STIXGeneral, serif
+    }
+
+    .MJXp-sf {
+      font-family: MathJax_SansSerif, 'Times New Roman', Times, STIXGeneral, serif
+    }
+
+    .MJXp-cal {
+      font-family: MathJax_Caligraphic, 'Times New Roman', Times, STIXGeneral, serif
+    }
+
+    .MJXp-mono {
+      font-family: MathJax_Typewriter, 'Times New Roman', Times, STIXGeneral, serif
+    }
+
+    .MJXp-largeop {
+      font-size: 150%
+    }
+
+    .MJXp-largeop.MJXp-int {
+      vertical-align: -.2em
+    }
+
+    .MJXp-math {
+      display: inline-block;
+      line-height: 1.2;
+      text-indent: 0;
+      font-family: 'Times New Roman', Times, STIXGeneral, serif;
+      white-space: nowrap;
+      border-collapse: collapse
+    }
+
+    .MJXp-display {
+      display: block;
+      text-align: center;
+      margin: 1em 0
+    }
+
+    .MJXp-math span {
+      display: inline-block
+    }
+
+    .MJXp-box {
+      display: block !important;
+      text-align: center
+    }
+
+    .MJXp-box:after {
+      content: " "
+    }
+
+    .MJXp-rule {
+      display: block !important;
+      margin-top: .1em
+    }
+
+    .MJXp-char {
+      display: block !important
+    }
+
+    .MJXp-mo {
+      margin: 0 .15em
+    }
+
+    .MJXp-mfrac {
+      margin: 0 .125em;
+      vertical-align: .25em
+    }
+
+    .MJXp-denom {
+      display: inline-table !important;
+      width: 100%
+    }
+
+    .MJXp-denom>* {
+      display: table-row !important
+    }
+
+    .MJXp-surd {
+      vertical-align: top
+    }
+
+    .MJXp-surd>* {
+      display: block !important
+    }
+
+    .MJXp-script-box>* {
+      display: table !important;
+      height: 50%
+    }
+
+    .MJXp-script-box>*>* {
+      display: table-cell !important;
+      vertical-align: top
+    }
+
+    .MJXp-script-box>*:last-child>* {
+      vertical-align: bottom
+    }
+
+    .MJXp-script-box>*>*>* {
+      display: block !important
+    }
+
+    .MJXp-mphantom {
+      visibility: hidden
+    }
+
+    .MJXp-munderover {
+      display: inline-table !important
+    }
+
+    .MJXp-over {
+      display: inline-block !important;
+      text-align: center
+    }
+
+    .MJXp-over>* {
+      display: block !important
+    }
+
+    .MJXp-munderover>* {
+      display: table-row !important
+    }
+
+    .MJXp-mtable {
+      vertical-align: .25em;
+      margin: 0 .125em
+    }
+
+    .MJXp-mtable>* {
+      display: inline-table !important;
+      vertical-align: middle
+    }
+
+    .MJXp-mtr {
+      display: table-row !important
+    }
+
+    .MJXp-mtd {
+      display: table-cell !important;
+      text-align: center;
+      padding: .5em 0 0 .5em
+    }
+
+    .MJXp-mtr>.MJXp-mtd:first-child {
+      padding-left: 0
+    }
+
+    .MJXp-mtr:first-child>.MJXp-mtd {
+      padding-top: 0
+    }
+
+    .MJXp-mlabeledtr {
+      display: table-row !important
+    }
+
+    .MJXp-mlabeledtr>.MJXp-mtd:first-child {
+      padding-left: 0
+    }
+
+    .MJXp-mlabeledtr:first-child>.MJXp-mtd {
+      padding-top: 0
+    }
+
+    .MJXp-merror {
+      background-color: #FFFF88;
+      color: #CC0000;
+      border: 1px solid #CC0000;
+      padding: 1px 3px;
+      font-style: normal;
+      font-size: 90%
+    }
+
+    .MJXp-scale0 {
+      -webkit-transform: scaleX(.0);
+      -moz-transform: scaleX(.0);
+      -ms-transform: scaleX(.0);
+      -o-transform: scaleX(.0);
+      transform: scaleX(.0)
+    }
+
+    .MJXp-scale1 {
+      -webkit-transform: scaleX(.1);
+      -moz-transform: scaleX(.1);
+      -ms-transform: scaleX(.1);
+      -o-transform: scaleX(.1);
+      transform: scaleX(.1)
+    }
+
+    .MJXp-scale2 {
+      -webkit-transform: scaleX(.2);
+      -moz-transform: scaleX(.2);
+      -ms-transform: scaleX(.2);
+      -o-transform: scaleX(.2);
+      transform: scaleX(.2)
+    }
+
+    .MJXp-scale3 {
+      -webkit-transform: scaleX(.3);
+      -moz-transform: scaleX(.3);
+      -ms-transform: scaleX(.3);
+      -o-transform: scaleX(.3);
+      transform: scaleX(.3)
+    }
+
+    .MJXp-scale4 {
+      -webkit-transform: scaleX(.4);
+      -moz-transform: scaleX(.4);
+      -ms-transform: scaleX(.4);
+      -o-transform: scaleX(.4);
+      transform: scaleX(.4)
+    }
+
+    .MJXp-scale5 {
+      -webkit-transform: scaleX(.5);
+      -moz-transform: scaleX(.5);
+      -ms-transform: scaleX(.5);
+      -o-transform: scaleX(.5);
+      transform: scaleX(.5)
+    }
+
+    .MJXp-scale6 {
+      -webkit-transform: scaleX(.6);
+      -moz-transform: scaleX(.6);
+      -ms-transform: scaleX(.6);
+      -o-transform: scaleX(.6);
+      transform: scaleX(.6)
+    }
+
+    .MJXp-scale7 {
+      -webkit-transform: scaleX(.7);
+      -moz-transform: scaleX(.7);
+      -ms-transform: scaleX(.7);
+      -o-transform: scaleX(.7);
+      transform: scaleX(.7)
+    }
+
+    .MJXp-scale8 {
+      -webkit-transform: scaleX(.8);
+      -moz-transform: scaleX(.8);
+      -ms-transform: scaleX(.8);
+      -o-transform: scaleX(.8);
+      transform: scaleX(.8)
+    }
+
+    .MJXp-scale9 {
+      -webkit-transform: scaleX(.9);
+      -moz-transform: scaleX(.9);
+      -ms-transform: scaleX(.9);
+      -o-transform: scaleX(.9);
+      transform: scaleX(.9)
+    }
+
+    .MathJax_PHTML .noError {
+      vertical-align: ;
+      font-size: 90%;
+      text-align: left;
+      color: black;
+      padding: 1px 3px;
+      border: 1px solid
+    }
+  </style>
+  <meta http-equiv="origin-trial"
+    content="Az6AfRvI8mo7yiW5fLfj04W21t0ig6aMsGYpIqMTaX60H+b0DkO1uDr+7BrzMcimWzv/X7SXR8jI+uvbV0IJlwYAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ==">
+  <meta http-equiv="origin-trial"
+    content="A+USTya+tNvDPaxUgJooz+LaVk5hPoAxpLvSxjogX4Mk8awCTQ9iop6zJ9d5ldgU7WmHqBlnQB41LHHRFxoaBwoAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ==">
+  <meta http-equiv="origin-trial"
+    content="A7FovoGr67TUBYbnY+Z0IKoJbbmRmB8fCyirUGHavNDtD91CiGyHHSA2hDG9r9T3NjUKFi6egL3RbgTwhhcVDwUAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ==">
+  <script src="LearnOpenGL%20-%20Colors_files/pubads_impl_2023011205.js" async=""></script>
+  <link rel="preload" href="LearnOpenGL%20-%20Colors_files/f_002.txt" as="script">
+  <script type="text/javascript" src="LearnOpenGL%20-%20Colors_files/f_002.txt"></script>
+  <link rel="preload" href="LearnOpenGL%20-%20Colors_files/f.txt" as="script">
+  <script type="text/javascript" src="LearnOpenGL%20-%20Colors_files/f.txt"></script>
+</head>
+
+<body>
+  <div id="MathJax_Message" style="display: none;"></div>
+  <a href="https://learnopengl.com/">
+    <div id="header">
+    </div>
+  </a>
+
+  <div id="supercontainer">
+    <!-- 728x90/320x50 -->
+    <div id="header_ad">
+      <div id="waldo-tag-6194" class="waldo-display-unit" style="min-width: 728px; min-height: 90px;"
+        data-processed="true" data-google-query-id="CM-42M67xvwCFQVslgodsvwLxg">
+        <div id="google_ads_iframe_/124067137,22550200400/learnopengl728x90FS_2_0__container__"
+          style="border: 0pt none;"><iframe id="google_ads_iframe_/124067137,22550200400/learnopengl728x90FS_2_0"
+            name="google_ads_iframe_/124067137,22550200400/learnopengl728x90FS_2_0" title="3rd party ad content"
+            scrolling="no" marginwidth="0" marginheight="0" style="border: 0px none; vertical-align: bottom;"
+            role="region" aria-label="Advertisement" tabindex="0" data-google-container-id="6" data-load-complete="true"
+            width="728" height="90" frameborder="0"></iframe></div>
+      </div>
+    </div>
+    <div id="rightad_container" style="height: 5281px;">
+      <div id="rightad">
+        <div id="waldo-tag-1715" class="waldo-display-unit" style="min-width: 300px; min-height: 600px;"
+          data-processed="true" data-google-query-id="CLni2s67xvwCFQVslgodsvwLxg">
+          <div id="google_ads_iframe_/124067137,22550200400/learnopengl300x250FL_1_0__container__"
+            style="border: 0pt none;"><iframe id="google_ads_iframe_/124067137,22550200400/learnopengl300x250FL_1_0"
+              name="google_ads_iframe_/124067137,22550200400/learnopengl300x250FL_1_0" title="3rd party ad content"
+              scrolling="no" marginwidth="0" marginheight="0" style="border: 0px none; vertical-align: bottom;"
+              role="region" aria-label="Advertisement" tabindex="0"
+              sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
+              data-google-container-id="2" data-load-complete="true" width="300" height="600" frameborder="0"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div id="admessage">
+        If you're running AdBlock, please consider whitelisting this
+        site if you'd like to support LearnOpenGL; and no worries, I won't be
+        mad if you don't :)
+      </div>
+
+      <div id="rightonethirdad" style="">
+        <div id="waldo-tag-2246" class="waldo-display-unit" style="min-width: 300px; min-height: 600px;"
+          data-processed="true" data-google-query-id="CM242M67xvwCFQVslgodsvwLxg">
+          <div id="google_ads_iframe_/124067137,22550200400/learnopengl300x600FL_2_0__container__"
+            style="border: 0pt none;"><iframe id="google_ads_iframe_/124067137,22550200400/learnopengl300x600FL_2_0"
+              name="google_ads_iframe_/124067137,22550200400/learnopengl300x600FL_2_0" title="3rd party ad content"
+              scrolling="no" marginwidth="0" marginheight="0" style="border: 0px none; vertical-align: bottom;"
+              role="region" aria-label="Advertisement" tabindex="0" data-google-container-id="4"
+              data-load-complete="true" width="300" height="250" frameborder="0"></iframe></div>
+        </div>
+      </div>
+
+      <div id="rightbottomad" style="display: block;">
+        <div id="waldo-tag-2247" class="waldo-display-unit" style="min-width: 300px; min-height: 600px;"
+          data-processed="true" data-google-query-id="CM642M67xvwCFQVslgodsvwLxg">
+          <div id="google_ads_iframe_/124067137,22550200400/learnopengl300x600FL_3_0__container__"
+            style="border: 0pt none;"><iframe id="google_ads_iframe_/124067137,22550200400/learnopengl300x600FL_3_0"
+              name="google_ads_iframe_/124067137,22550200400/learnopengl300x600FL_3_0" title="3rd party ad content"
+              scrolling="no" marginwidth="0" marginheight="0" style="border: 0px none; vertical-align: bottom;"
+              role="region" aria-label="Advertisement" tabindex="0" data-google-container-id="5"
+              data-load-complete="true" width="300" height="600" frameborder="0"></iframe></div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div id="loading"></div>
+      <script>
+        $(document).ready(function () {
+          $('#menu-item4').mousedown(function () { MenuClick(4, true) });
+          $('#menu-item48').mousedown(function () { MenuClick(48, true) });
+          $('#menu-item56').mousedown(function () { MenuClick(56, true) });
+          $('#menu-item63').mousedown(function () { MenuClick(63, true) });
+          $('#menu-item100').mousedown(function () { MenuClick(100, true) });
+          $('#menu-item102').mousedown(function () { MenuClick(102, true) });
+          $('#menu-item113').mousedown(function () { MenuClick(113, true) });
+          $('#menu-item116').mousedown(function () { MenuClick(116, true) });
+          $('#menu-item78').mousedown(function () { MenuClick(78, true) });
+          $('#menu-item81').mousedown(function () { MenuClick(81, true) });
+          $('#menu-item85').mousedown(function () { MenuClick(85, true) });
+          $('#menu-item125').mousedown(function () { MenuClick(125, true) });
+          $('#menu-item128').mousedown(function () { MenuClick(128, true) });
+          $('#menu-item129').mousedown(function () { MenuClick(129, true) });
+          $('#menu-item133').mousedown(function () { MenuClick(133, true) });
+          $('#menu-item134').mousedown(function () { MenuClick(134, true) });
+          $('#menu-item138').mousedown(function () { MenuClick(138, true) });
+          $('#menu-item142').mousedown(function () { MenuClick(142, true) });
+          $('#menu-item143').mousedown(function () { MenuClick(143, true) });
+        }); 
+      </script><iframe src="LearnOpenGL%20-%20Colors_files/container.html"
+        style="visibility: hidden; display: none;"></iframe>
+      <div id="nav" style="height: 5281px;">
+        <div id="social">
+          <a href="https://github.com/JoeyDeVries/LearnOpenGL" target="_blank">
+            <img src="LearnOpenGL%20-%20Colors_files/github.png" class="social_ico">
+          </a>
+          <!-- <a href="https://www.facebook.com/Learnopengl-2199631333595544/" target="_blank">
+                <img src="/img/facebook.png" class="social_ico">
+            </a>-->
+          <a href="https://twitter.com/JoeyDeVriez" target="_blank">
+            <img src="LearnOpenGL%20-%20Colors_files/twitter.png" class="social_ico">
+          </a>
+
+        </div>
+        <img src="LearnOpenGL%20-%20Colors_files/nav-button_bottom-arrow.png" style="display: none">
+        <ol>
+          <li id="Introduction"><a id="menu-item1" href="https://learnopengl.com/Introduction">Introduction </a></li>
+          <li id="Getting-started"><span id="menu-item4" class="closed">Getting started </span>
+            <ol id="menu-items-of4" style="display:none;">
+              <li id="Getting-started/OpenGL"><a id="menu-item49"
+                  href="https://learnopengl.com/Getting-started/OpenGL">OpenGL </a></li>
+              <li id="Getting-started/Creating-a-window"><a id="menu-item5"
+                  href="https://learnopengl.com/Getting-started/Creating-a-window">Creating a window </a></li>
+              <li id="Getting-started/Hello-Window"><a id="menu-item6"
+                  href="https://learnopengl.com/Getting-started/Hello-Window">Hello Window </a></li>
+              <li id="Getting-started/Hello-Triangle"><a id="menu-item38"
+                  href="https://learnopengl.com/Getting-started/Hello-Triangle">Hello Triangle </a></li>
+              <li id="Getting-started/Shaders"><a id="menu-item39"
+                  href="https://learnopengl.com/Getting-started/Shaders">Shaders </a></li>
+              <li id="Getting-started/Textures"><a id="menu-item40"
+                  href="https://learnopengl.com/Getting-started/Textures">Textures </a></li>
+              <li id="Getting-started/Transformations"><a id="menu-item43"
+                  href="https://learnopengl.com/Getting-started/Transformations">Transformations </a></li>
+              <li id="Getting-started/Coordinate-Systems"><a id="menu-item44"
+                  href="https://learnopengl.com/Getting-started/Coordinate-Systems">Coordinate Systems </a></li>
+              <li id="Getting-started/Camera"><a id="menu-item47"
+                  href="https://learnopengl.com/Getting-started/Camera">Camera </a></li>
+              <li id="Getting-started/Review"><a id="menu-item50"
+                  href="https://learnopengl.com/Getting-started/Review">Review </a></li>
+            </ol>
+          </li>
+          <li id="Lighting"><span id="menu-item48" class="open">Lighting </span>
+            <ol id="menu-items-of48" style="">
+              <li id="Lighting/Colors"><a id="menu-item51" href="https://learnopengl.com/Lighting/Colors"
+                  class="selected">Colors </a></li>
+              <li id="Lighting/Basic-Lighting"><a id="menu-item52"
+                  href="https://learnopengl.com/Lighting/Basic-Lighting">Basic Lighting </a></li>
+              <li id="Lighting/Materials"><a id="menu-item53"
+                  href="https://learnopengl.com/Lighting/Materials">Materials </a></li>
+              <li id="Lighting/Lighting-maps"><a id="menu-item54"
+                  href="https://learnopengl.com/Lighting/Lighting-maps">Lighting maps </a></li>
+              <li id="Lighting/Light-casters"><a id="menu-item55"
+                  href="https://learnopengl.com/Lighting/Light-casters">Light casters </a></li>
+              <li id="Lighting/Multiple-lights"><a id="menu-item58"
+                  href="https://learnopengl.com/Lighting/Multiple-lights">Multiple lights </a></li>
+              <li id="Lighting/Review"><a id="menu-item57" href="https://learnopengl.com/Lighting/Review">Review </a>
+              </li>
+            </ol>
+          </li>
+          <li id="Model-Loading"><span id="menu-item56" class="closed">Model Loading </span>
+            <ol id="menu-items-of56" style="display:none;">
+              <li id="Model-Loading/Assimp"><a id="menu-item59"
+                  href="https://learnopengl.com/Model-Loading/Assimp">Assimp </a></li>
+              <li id="Model-Loading/Mesh"><a id="menu-item60" href="https://learnopengl.com/Model-Loading/Mesh">Mesh
+                </a></li>
+              <li id="Model-Loading/Model"><a id="menu-item61" href="https://learnopengl.com/Model-Loading/Model">Model
+                </a></li>
+            </ol>
+          </li>
+          <li id="Advanced-OpenGL"><span id="menu-item63" class="closed">Advanced OpenGL </span>
+            <ol id="menu-items-of63" style="display:none;">
+              <li id="Advanced-OpenGL/Depth-testing"><a id="menu-item72"
+                  href="https://learnopengl.com/Advanced-OpenGL/Depth-testing">Depth testing </a></li>
+              <li id="Advanced-OpenGL/Stencil-testing"><a id="menu-item73"
+                  href="https://learnopengl.com/Advanced-OpenGL/Stencil-testing">Stencil testing </a></li>
+              <li id="Advanced-OpenGL/Blending"><a id="menu-item74"
+                  href="https://learnopengl.com/Advanced-OpenGL/Blending">Blending </a></li>
+              <li id="Advanced-OpenGL/Face-culling"><a id="menu-item77"
+                  href="https://learnopengl.com/Advanced-OpenGL/Face-culling">Face culling </a></li>
+              <li id="Advanced-OpenGL/Framebuffers"><a id="menu-item65"
+                  href="https://learnopengl.com/Advanced-OpenGL/Framebuffers">Framebuffers </a></li>
+              <li id="Advanced-OpenGL/Cubemaps"><a id="menu-item66"
+                  href="https://learnopengl.com/Advanced-OpenGL/Cubemaps">Cubemaps </a></li>
+              <li id="Advanced-OpenGL/Advanced-Data"><a id="menu-item69"
+                  href="https://learnopengl.com/Advanced-OpenGL/Advanced-Data">Advanced Data </a></li>
+              <li id="Advanced-OpenGL/Advanced-GLSL"><a id="menu-item67"
+                  href="https://learnopengl.com/Advanced-OpenGL/Advanced-GLSL">Advanced GLSL </a></li>
+              <li id="Advanced-OpenGL/Geometry-Shader"><a id="menu-item68"
+                  href="https://learnopengl.com/Advanced-OpenGL/Geometry-Shader">Geometry Shader </a></li>
+              <li id="Advanced-OpenGL/Instancing"><a id="menu-item70"
+                  href="https://learnopengl.com/Advanced-OpenGL/Instancing">Instancing </a></li>
+              <li id="Advanced-OpenGL/Anti-Aliasing"><a id="menu-item75"
+                  href="https://learnopengl.com/Advanced-OpenGL/Anti-Aliasing">Anti Aliasing </a></li>
+            </ol>
+          </li>
+          <li id="Advanced-Lighting"><span id="menu-item100" class="closed">Advanced Lighting </span>
+            <ol id="menu-items-of100" style="display:none;">
+              <li id="Advanced-Lighting/Advanced-Lighting"><a id="menu-item101"
+                  href="https://learnopengl.com/Advanced-Lighting/Advanced-Lighting">Advanced Lighting </a></li>
+              <li id="Advanced-Lighting/Gamma-Correction"><a id="menu-item110"
+                  href="https://learnopengl.com/Advanced-Lighting/Gamma-Correction">Gamma Correction </a></li>
+              <li id="Advanced-Lighting/Shadows"><span id="menu-item102" class="closed">Shadows </span>
+                <ol id="menu-items-of102" style="display:none;">
+                  <li id="Advanced-Lighting/Shadows/Shadow-Mapping"><a id="menu-item103"
+                      href="https://learnopengl.com/Advanced-Lighting/Shadows/Shadow-Mapping">Shadow Mapping </a></li>
+                  <li id="Advanced-Lighting/Shadows/Point-Shadows"><a id="menu-item104"
+                      href="https://learnopengl.com/Advanced-Lighting/Shadows/Point-Shadows">Point Shadows </a></li>
+                </ol>
+              </li>
+              <li id="Advanced-Lighting/Normal-Mapping"><a id="menu-item106"
+                  href="https://learnopengl.com/Advanced-Lighting/Normal-Mapping">Normal Mapping </a></li>
+              <li id="Advanced-Lighting/Parallax-Mapping"><a id="menu-item107"
+                  href="https://learnopengl.com/Advanced-Lighting/Parallax-Mapping">Parallax Mapping </a></li>
+              <li id="Advanced-Lighting/HDR"><a id="menu-item111"
+                  href="https://learnopengl.com/Advanced-Lighting/HDR">HDR </a></li>
+              <li id="Advanced-Lighting/Bloom"><a id="menu-item112"
+                  href="https://learnopengl.com/Advanced-Lighting/Bloom">Bloom </a></li>
+              <li id="Advanced-Lighting/Deferred-Shading"><a id="menu-item108"
+                  href="https://learnopengl.com/Advanced-Lighting/Deferred-Shading">Deferred Shading </a></li>
+              <li id="Advanced-Lighting/SSAO"><a id="menu-item109"
+                  href="https://learnopengl.com/Advanced-Lighting/SSAO">SSAO </a></li>
+            </ol>
+          </li>
+          <li id="PBR"><span id="menu-item113" class="closed">PBR </span>
+            <ol id="menu-items-of113" style="display:none;">
+              <li id="PBR/Theory"><a id="menu-item114" href="https://learnopengl.com/PBR/Theory">Theory </a></li>
+              <li id="PBR/Lighting"><a id="menu-item115" href="https://learnopengl.com/PBR/Lighting">Lighting </a></li>
+              <li id="PBR/IBL"><span id="menu-item116" class="closed">IBL </span>
+                <ol id="menu-items-of116" style="display:none;">
+                  <li id="PBR/IBL/Diffuse-irradiance"><a id="menu-item117"
+                      href="https://learnopengl.com/PBR/IBL/Diffuse-irradiance">Diffuse irradiance </a></li>
+                  <li id="PBR/IBL/Specular-IBL"><a id="menu-item118"
+                      href="https://learnopengl.com/PBR/IBL/Specular-IBL">Specular IBL </a></li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li id="In-Practice"><span id="menu-item78" class="closed">In Practice </span>
+            <ol id="menu-items-of78" style="display:none;">
+              <li id="In-Practice/Debugging"><a id="menu-item79"
+                  href="https://learnopengl.com/In-Practice/Debugging">Debugging </a></li>
+              <li id="In-Practice/Text-Rendering"><a id="menu-item80"
+                  href="https://learnopengl.com/In-Practice/Text-Rendering">Text Rendering </a></li>
+              <li id="In-Practice/2D-Game"><span id="menu-item81" class="closed">2D Game </span>
+                <ol id="menu-items-of81" style="display:none;">
+                  <li id="In-Practice/2D-Game/Breakout"><a id="menu-item82"
+                      href="https://learnopengl.com/In-Practice/2D-Game/Breakout">Breakout </a></li>
+                  <li id="In-Practice/2D-Game/Setting-up"><a id="menu-item88"
+                      href="https://learnopengl.com/In-Practice/2D-Game/Setting-up">Setting up </a></li>
+                  <li id="In-Practice/2D-Game/Rendering-Sprites"><a id="menu-item83"
+                      href="https://learnopengl.com/In-Practice/2D-Game/Rendering-Sprites">Rendering Sprites </a></li>
+                  <li id="In-Practice/2D-Game/Levels"><a id="menu-item84"
+                      href="https://learnopengl.com/In-Practice/2D-Game/Levels">Levels </a></li>
+                  <li id="In-Practice/2D-Game/Collisions"><span id="menu-item85" class="closed">Collisions </span>
+                    <ol id="menu-items-of85" style="display:none;">
+                      <li id="In-Practice/2D-Game/Collisions/Ball"><a id="menu-item95"
+                          href="https://learnopengl.com/In-Practice/2D-Game/Collisions/Ball">Ball </a></li>
+                      <li id="In-Practice/2D-Game/Collisions/Collision-detection"><a id="menu-item96"
+                          href="https://learnopengl.com/In-Practice/2D-Game/Collisions/Collision-detection">Collision
+                          detection </a></li>
+                      <li id="In-Practice/2D-Game/Collisions/Collision-resolution"><a id="menu-item97"
+                          href="https://learnopengl.com/In-Practice/2D-Game/Collisions/Collision-resolution">Collision
+                          resolution </a></li>
+                    </ol>
+                  </li>
+                  <li id="In-Practice/2D-Game/Particles"><a id="menu-item89"
+                      href="https://learnopengl.com/In-Practice/2D-Game/Particles">Particles </a></li>
+                  <li id="In-Practice/2D-Game/Postprocessing"><a id="menu-item90"
+                      href="https://learnopengl.com/In-Practice/2D-Game/Postprocessing">Postprocessing </a></li>
+                  <li id="In-Practice/2D-Game/Powerups"><a id="menu-item91"
+                      href="https://learnopengl.com/In-Practice/2D-Game/Powerups">Powerups </a></li>
+                  <li id="In-Practice/2D-Game/Audio"><a id="menu-item94"
+                      href="https://learnopengl.com/In-Practice/2D-Game/Audio">Audio </a></li>
+                  <li id="In-Practice/2D-Game/Render-text"><a id="menu-item92"
+                      href="https://learnopengl.com/In-Practice/2D-Game/Render-text">Render text </a></li>
+                  <li id="In-Practice/2D-Game/Final-thoughts"><a id="menu-item93"
+                      href="https://learnopengl.com/In-Practice/2D-Game/Final-thoughts">Final thoughts </a></li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li id="Guest-Articles"><span id="menu-item125" class="closed">Guest Articles </span>
+            <ol id="menu-items-of125" style="display:none;">
+              <li id="Guest-Articles/How-to-publish"><a id="menu-item126"
+                  href="https://learnopengl.com/Guest-Articles/How-to-publish">How to publish </a></li>
+              <li id="Guest-Articles/2020"><span id="menu-item128" class="closed">2020 </span>
+                <ol id="menu-items-of128" style="display:none;">
+                  <li id="Guest-Articles/2020/OIT"><span id="menu-item129" class="closed">OIT </span>
+                    <ol id="menu-items-of129" style="display:none;">
+                      <li id="Guest-Articles/2020/OIT/Introduction"><a id="menu-item130"
+                          href="https://learnopengl.com/Guest-Articles/2020/OIT/Introduction">Introduction </a></li>
+                      <li id="Guest-Articles/2020/OIT/Weighted-Blended"><a id="menu-item132"
+                          href="https://learnopengl.com/Guest-Articles/2020/OIT/Weighted-Blended">Weighted Blended </a>
+                      </li>
+                    </ol>
+                  </li>
+                  <li id="Guest-Articles/2020/Skeletal-Animation"><a id="menu-item131"
+                      href="https://learnopengl.com/Guest-Articles/2020/Skeletal-Animation">Skeletal Animation </a></li>
+                </ol>
+              </li>
+              <li id="Guest-Articles/2021"><span id="menu-item133" class="closed">2021 </span>
+                <ol id="menu-items-of133" style="display:none;">
+                  <li id="Guest-Articles/2021/CSM"><a id="menu-item137"
+                      href="https://learnopengl.com/Guest-Articles/2021/CSM">CSM </a></li>
+                  <li id="Guest-Articles/2021/Scene"><span id="menu-item134" class="closed">Scene </span>
+                    <ol id="menu-items-of134" style="display:none;">
+                      <li id="Guest-Articles/2021/Scene/Scene-Graph"><a id="menu-item135"
+                          href="https://learnopengl.com/Guest-Articles/2021/Scene/Scene-Graph">Scene Graph </a></li>
+                      <li id="Guest-Articles/2021/Scene/Frustum-Culling"><a id="menu-item136"
+                          href="https://learnopengl.com/Guest-Articles/2021/Scene/Frustum-Culling">Frustum Culling </a>
+                      </li>
+                    </ol>
+                  </li>
+                  <li id="Guest-Articles/2021/Tessellation"><span id="menu-item138" class="closed">Tessellation </span>
+                    <ol id="menu-items-of138" style="display:none;">
+                      <li id="Guest-Articles/2021/Tessellation/Height-map"><a id="menu-item139"
+                          href="https://learnopengl.com/Guest-Articles/2021/Tessellation/Height-map">Height map </a>
+                      </li>
+                      <li id="Guest-Articles/2021/Tessellation/Tessellation"><a id="menu-item140"
+                          href="https://learnopengl.com/Guest-Articles/2021/Tessellation/Tessellation">Tessellation </a>
+                      </li>
+                    </ol>
+                  </li>
+                  <li id="Guest-Articles/2021/DSA"><a id="menu-item141"
+                      href="https://learnopengl.com/Guest-Articles/2021/DSA">DSA </a></li>
+                </ol>
+              </li>
+              <li id="Guest-Articles/2022"><span id="menu-item142" class="closed">2022 </span>
+                <ol id="menu-items-of142" style="display:none;">
+                  <li id="Guest-Articles/2022/Compute-Shaders"><span id="menu-item143" class="closed">Compute Shaders
+                    </span>
+                    <ol id="menu-items-of143" style="display:none;">
+                      <li id="Guest-Articles/2022/Compute-Shaders/Introduction"><a id="menu-item144"
+                          href="https://learnopengl.com/Guest-Articles/2022/Compute-Shaders/Introduction">Introduction
+                        </a></li>
+                    </ol>
+                  </li>
+                  <li id="Guest-Articles/2022/Phys.-Based-Bloom"><a id="menu-item145"
+                      href="https://learnopengl.com/Guest-Articles/2022/Phys.-Based-Bloom">Phys. Based Bloom </a></li>
+                  <li id="Guest-Articles/2022/Area-Lights"><a id="menu-item146"
+                      href="https://learnopengl.com/Guest-Articles/2022/Area-Lights">Area Lights </a></li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li id="Code-repository"><a id="menu-item99" href="https://learnopengl.com/Code-repository">Code repository
+            </a></li>
+          <li id="Translations"><a id="menu-item119" href="https://learnopengl.com/Translations">Translations </a></li>
+          <li id="About"><a id="menu-item2" href="https://learnopengl.com/About">About </a></li>
+        </ol>
+        <div id="menu_book">
+          <a href="https://geni.us/learnopengl" target="_blank"><img src="LearnOpenGL%20-%20Colors_files/below_menu.png"
+              class="clean"></a>
+        </div>
+        <div id="donate">
+          <a href="https://www.paypal.me/learnopengl/" target="_blank">
+            <div id="donate_img"></div>
+            <img style="display: none" src="LearnOpenGL%20-%20Colors_files/donate_button_hover.png">
+            <!--<img id="donate_img" src="img/patreon.png"/>-->
+          </a>
+          <!--<div id="alipay">
+            <img style="width: 150px;" class="clean" src="/img/alipay_logo.png"/>
+            <img style="width: 150px; margin-top: 5px" src="/img/alipay.png"/>
+          </div>-->
+        </div>
+
+        <div class="btc">
+          <h3>BTC</h3>
+          <p>
+            1CLGKgmBSuYJ1nnvDGAepVTKNNDpUjfpRa
+          </p>
+          <img src="LearnOpenGL%20-%20Colors_files/btc_qr_new.png">
+        </div>
+        <div class="btc">
+          <h3>ETH/ERC20</h3>
+          <p>
+            0x1de59bd9e52521a46309474f8372531533bd7c43
+          </p>
+          <img src="LearnOpenGL%20-%20Colors_files/erc20_qr_new.png">
+        </div>
+
+        <div id="ad">
+          <!--<div id="waldo-tag-1684"></div>-->
+        </div>
+
+        <div id="lefttwothirdad" style="">
+          <div id="waldo-tag-2245" class="waldo-display-unit" style="min-width: 300px; min-height: 600px;"
+            data-processed="true" data-google-query-id="CMy42M67xvwCFQVslgodsvwLxg">
+            <div id="google_ads_iframe_/124067137,22550200400/learnopengl300x600FL_1_0__container__"
+              style="border: 0pt none;"><iframe id="google_ads_iframe_/124067137,22550200400/learnopengl300x600FL_1_0"
+                name="google_ads_iframe_/124067137,22550200400/learnopengl300x600FL_1_0" title="3rd party ad content"
+                scrolling="no" marginwidth="0" marginheight="0" style="border: 0px none; vertical-align: bottom;"
+                role="region" aria-label="Advertisement" tabindex="0" data-google-container-id="3"
+                data-load-complete="true" width="300" height="250" frameborder="0"></iframe></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="content">
+        <h1 id="content-title">Colors</h1>
+        <h1 id="content-url" style="display:none;">Lighting/Colors</h1>
+        <p>
+          We briefly used and manipulated colors in the previous chapters, but
+          never defined them properly. Here we'll discuss what colors are and
+          start building the scene for the upcoming Lighting chapters.
+        </p>
+<p>我们在前面的章节中简要地使用和操作了颜色，但从未正确定义它们。 在这里，我们将讨论什么是颜色，并开始为即将到来的光照章节构建场景。</p>
+        <p>
+          In the real world, colors can take any known color value with each
+          object having its own color(s). In the digital world we need to map the
+          (infinite) real colors to (limited) digital values and therefore not all
+          real-world colors can be represented digitally. Colors are digitally
+          represented using a <code>red</code>, <code>green</code> and <code>blue</code> component commonly abbreviated
+          as <code>RGB</code>. Using different combinations of just those 3 values, within a range of
+          <code>[0,1]</code>, we can represent almost any color there is. For example, to get a <em>coral</em> color, we
+          define a color vector as:
+        </p>
+        <p>在现实世界中，颜色可以采用任何已知的颜色值，每个对象都有自己的颜色。 在数字世界中，我们需要将（无限）真实颜色映射到（有限）数字值，因此并非所有真实世界的颜色都可以数字表示。 使用通常缩写为 RGB 的红色、绿色和蓝色分量以数字方式表示颜色。 使用这 3 个值的不同组合，在 [0,1] 范围内，我们几乎可以表示任何颜色。 例如，要获得珊瑚色，我们将颜色向量定义为：</p>
+
+        <pre><code class=" hljs cpp">
+glm::<span class="hljs-built_in">vec3</span> coral(<span class="hljs-number">1.0f</span>, <span class="hljs-number">0.5f</span>, <span class="hljs-number">0.31f</span>);   
+</code></pre>
+
+        <p>
+          The color of an object we see in real life is not the color it actually has, but is the color <def>reflected
+          </def>
+          from the object. The colors that aren't absorbed (rejected) by the
+          object is the color we perceive of it. As an example, the light of the
+          sun is perceived as a white light that is the combined sum of many
+          different colors (as you can see in the image). If we would shine this
+          white light on a blue toy, it would absorb all the white color's
+          sub-colors except the blue color. Since the toy does not absorb the blue
+          color part, it is reflected. This reflected light enters our eye,
+          making it look like the toy has a blue color. The following image shows
+          this for a coral colored toy where it reflects several colors with
+          varying intensity:
+        </p>
+        <p>我们在现实生活中看到的物体的颜色并不是它实际具有的颜色，而是物体反射出来的颜色。 未被物体吸收（拒绝）的颜色是我们感知到的颜色。 例如，太阳光被感知为白光，它是许多不同颜色的组合总和（如图所示）。 如果我们将这种白光照射在蓝色玩具上，它会吸收除蓝色以外的所有白色子颜色。 由于玩具不吸收蓝色部分，因此会被反射。 这种反射光进入我们的眼睛，使玩具看起来像是蓝色的。 下图显示了珊瑚色玩具的情况，它反射多种强度不同的颜色：</p>
+
+        <img src="LearnOpenGL%20-%20Colors_files/light_reflection.png" class="clean">
+
+        <p>
+          You can see that the white sunlight is a collection of all the visible
+          colors and the object absorbs a large portion of those colors. It only
+          reflects those colors that represent the object's color and the
+          combination of those is what we perceive (in this case a coral color).
+        </p>
+        <p>您可以看到白色阳光是所有可见颜色的集合，并且物体吸收了大部分这些颜色。 它仅反映代表物体颜色的那些颜色，而这些颜色的组合就是我们所感知的（在本例中为珊瑚色）。</p>
+
+        <note>
+          Technically it's a bit more complicated, but we'll get to that in the PBR chapters.
+          <br>
+          <br>
+          从技术上讲，它有点复杂，但我们将在 PBR 章节中介绍。
+        </note>
+
+        <p>
+          These rules of color reflection apply directly in graphics-land. When
+          we define a light source in OpenGL we want to give this light source a
+          color. In the previous paragraph we had a white color so we'll give the
+          light source a white color as well. If we would then multiply the light
+          source's color with an object's color value, the resulting color would
+          be the reflected color of the object (and thus its perceived color).
+          Let's revisit our toy (this time with a coral value) and see how we
+          would calculate its perceived color in graphics-land. We get the
+          resulting color vector by doing a component-wise multiplication between
+          the light and object color vectors:
+        </p>
+        <p>这些颜色反射规则直接适用于图形领域。 当我们在 OpenGL 中定义一个光源时，我们想要给这个光源一个颜色。 在上一段中我们有一个白色，所以我们也给光源一个白色。 如果我们随后将光源的颜色与对象的颜色值相乘，得到的颜色将是对象的反射颜色（因此是它的感知颜色）。 让我们重新审视我们的玩具（这次是珊瑚色值），看看我们如何计算它在图形领域的感知颜色。 我们通过在光和物体颜色向量之间进行分量乘法来得到结果颜色向量：</p>
+
+        <pre><code class=" hljs cpp">
+glm::<span class="hljs-built_in">vec3</span> lightColor(<span class="hljs-number">1.0f</span>, <span class="hljs-number">1.0f</span>, <span class="hljs-number">1.0f</span>);
+glm::<span class="hljs-built_in">vec3</span> toyColor(<span class="hljs-number">1.0f</span>, <span class="hljs-number">0.5f</span>, <span class="hljs-number">0.31f</span>);
+glm::<span class="hljs-built_in">vec3</span> result = lightColor * toyColor; <span class="hljs-comment">// = (1.0f, 0.5f, 0.31f);</span>
+</code></pre>
+
+        <p>
+          We can see that the toy's color <em>absorbs</em> a large portion of
+          the white light, but reflects several red, green and blue values based
+          on its own color value. This is a representation of how colors would
+          work in real life. We can thus define an object's color as <em>the amount of each color component it reflects
+            from a light source</em>. Now what would happen if we used a green light?
+        </p>
+
+        <p>
+          我们可以看到，玩具的颜色吸收了大部分白光，但根据自身的颜色值反射了几种红色、绿色和蓝色值。 这是颜色在现实生活中的表现。 因此，我们可以将物体的颜色定义为其从光源反射的每种颜色成分的数量。 现在如果我们使用绿灯会发生什么？
+        </p>
+
+        <pre><code class=" hljs cpp">
+glm::<span class="hljs-built_in">vec3</span> lightColor(<span class="hljs-number">0.0f</span>, <span class="hljs-number">1.0f</span>, <span class="hljs-number">0.0f</span>);
+glm::<span class="hljs-built_in">vec3</span> toyColor(<span class="hljs-number">1.0f</span>, <span class="hljs-number">0.5f</span>, <span class="hljs-number">0.31f</span>);
+glm::<span class="hljs-built_in">vec3</span> result = lightColor * toyColor; <span class="hljs-comment">// = (0.0f, 0.5f, 0.0f);</span>
+</code></pre>
+
+        <p>
+          As we can see, the toy has no red and blue light to absorb and/or
+          reflect. The toy also absorbs half of the light's green value, but also
+          reflects half of the light's green value. The toy's color we perceive
+          would then be a dark-greenish color. We can see that if we use a green
+          light, only the green color components can be reflected and thus
+          perceived; no red and blue colors are perceived. As a result the coral
+          object suddenly becomes a dark-greenish object. Let's try one more
+          example with a dark olive-green light:
+        </p>
+        <p>正如我们所见，玩具没有吸收和/或反射红光和蓝光。 玩具也吸收光的一半绿色值，但也反射光的一半绿色值。 我们感知到的玩具颜色将是深绿色。 我们可以看到，如果我们使用绿光，那么只有绿色的颜色成分可以被反射，从而被感知； 看不到红色和蓝色。 结果珊瑚物体突然变成深绿色物体。 让我们再尝试一个深橄榄绿光的例子：</p>
+
+        <pre><code class=" hljs cpp">
+glm::<span class="hljs-built_in">vec3</span> lightColor(<span class="hljs-number">0.33f</span>, <span class="hljs-number">0.42f</span>, <span class="hljs-number">0.18f</span>);
+glm::<span class="hljs-built_in">vec3</span> toyColor(<span class="hljs-number">1.0f</span>, <span class="hljs-number">0.5f</span>, <span class="hljs-number">0.31f</span>);
+glm::<span class="hljs-built_in">vec3</span> result = lightColor * toyColor; <span class="hljs-comment">// = (0.33f, 0.21f, 0.06f);</span>
+</code></pre>
+
+        <p>
+          As you can see, we can get interesting colors from objects using
+          different light colors. It's not hard to get creative with colors.
+        </p><p>如您所见，我们可以使用不同的光色从物体中获得有趣的颜色。 用颜色来发挥创意并不难。</p>
+
+        <p>
+          But enough about colors, let's start building a scene where we can experiment in.
+        </p>
+        <p>但是关于颜色已经足够了，让我们开始构建一个我们可以在其中进行试验的场景。</p>
+
+        <h1>A lighting scene <br>光照场景</h1>
+        <p>
+          In the upcoming chapters we'll be creating interesting visuals by
+          simulating real-world lighting making extensive use of colors. Since now
+          we'll be using light sources we want to display them as visual objects
+          in the scene and add at least one object to simulate the lighting from.
+        </p>
+<p>在接下来的章节中，我们将通过大量使用颜色模拟真实世界的光照来创建有趣的视觉效果。 由于现在我们将使用光源，我们希望将它们显示为场景中的视觉对象并添加至少一个对象来模拟来自的照明。</p>
+        <p>
+          The first thing we need is an object to cast the light on and we'll
+          use the infamous container cube from the previous chapters. We'll also
+          be needing a light object to show where the light source is located in
+          the 3D scene. For simplicity's sake we'll represent the light source
+          with a cube as well (we already have the <a
+            href="https://learnopengl.com/code_viewer.php?code=getting-started/cube_vertices_pos" target="_blank">vertex
+            data</a> right?).
+        </p>
+        <p>我们需要的第一件事是投射光线的对象，我们将使用前面章节中臭名昭著的容器立方体。 我们还需要一个灯光对象来显示光源在 3D 场景中的位置。 为了简单起见，我们也将用立方体表示光源（我们已经有了顶点数据吧？）。</p>
+
+        <p>
+          So, filling a vertex buffer object, setting vertex attribute pointers
+          and all that jazz should be familiar for you by now so we won't walk you
+          through those steps. If you still have no idea what's going on with
+          those I suggest you review the <a href="https://learnopengl.com/Getting-started/Hello-Triangle"
+            target="_blank">previous chapters</a>, and work through the exercises if possible, before continuing.
+        </p><p>因此，填充顶点缓冲区对象、设置顶点属性指针和所有爵士乐现在对您来说应该很熟悉，因此我们不会引导您完成这些步骤。 如果你仍然不知道这些是怎么回事，我建议你在继续之前回顾前面的章节，如果可能的话完成练习。</p>
+
+        <p>
+          So, the first thing we'll need is a vertex shader to draw the
+          container. The vertex positions of the container remain the same
+          (although we won't be needing texture coordinates this time) so the code
+          should be nothing new. We'll be using a stripped down version of the
+          vertex shader from the last chapters:
+        </p><p>所以，我们首先需要的是一个顶点着色器来绘制容器。 容器的顶点位置保持不变（尽管这次我们不需要纹理坐标）所以代码应该没什么新的。 我们将使用上一章中顶点着色器的简化版本：</p>
+
+        <pre><code class=" hljs cpp">
+<span class="hljs-preprocessor">#version 330 core</span>
+<span class="hljs-keyword">layout</span> (location = <span class="hljs-number">0</span>) <span class="hljs-keyword">in</span> <span class="hljs-built_in">vec3</span> aPos;
+
+<span class="hljs-keyword">uniform</span> <span class="hljs-built_in">mat4</span> model;
+<span class="hljs-keyword">uniform</span> <span class="hljs-built_in">mat4</span> view;
+<span class="hljs-keyword">uniform</span> <span class="hljs-built_in">mat4</span> projection;
+
+<span class="hljs-keyword">void</span> main()
+{
+    gl_Position = projection * view * model * <span class="hljs-built_in">vec4</span>(aPos, <span class="hljs-number">1.0</span>);
+} 
+</code></pre>
+
+        <p>
+          Make sure to update the vertex data and attribute pointers to match
+          the new vertex shader (if you want, you can actually keep the texture
+          data and attribute pointers active; we're just not using them right
+          now).
+        </p><p>确保更新顶点数据和属性指针以匹配新的顶点着色器（如果需要，您实际上可以保持纹理数据和属性指针处于活动状态；我们只是现在不使用它们）。</p>
+
+        <p>
+          Because we're also going to render a light source cube, we want to
+          generate a new VAO specifically for the light source. We could render
+          the light source with the same VAO and then do a few light position
+          transformations on the <var>model</var> matrix, but in the upcoming
+          chapters we'll be changing the vertex data and attribute pointers of the
+          container object quite often and we don't want these changes to
+          propagate to the light source object (we only care about the light
+          cube's vertex positions), so we'll create a new VAO:
+        </p><p>因为我们还要渲染一个光源立方体，所以我们想要专门为光源生成一个新的 VAO。 我们可以使用相同的 VAO 渲染光源，然后在模型矩阵上做一些光位置变换，但在接下来的章节中，我们将经常更改容器对象的顶点数据和属性指针，而我们不会 希望这些变化传播到光源对象（我们只关心光立方体的顶点位置），所以我们将创建一个新的 VAO：</p>
+
+        <pre><code class=" hljs cpp">
+<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> lightVAO;
+<function id="33">glGenVertexArrays</function>(<span class="hljs-number">1</span>, &amp;lightVAO);
+<function id="27">glBindVertexArray</function>(lightVAO);
+<span class="hljs-comment">// we only need to bind to the VBO, the container's VBO's data already contains the data.</span>
+<function id="32">glBindBuffer</function>(GL_ARRAY_BUFFER, VBO);
+<span class="hljs-comment">// set the vertex attribute </span>
+<function id="30">glVertexAttribPointer</function>(<span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-built_in">GL_FLOAT</span>, <span class="hljs-built_in">GL_FALSE</span>, <span class="hljs-number">3</span> * <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">float</span>), (<span class="hljs-keyword">void</span>*)<span class="hljs-number">0</span>);
+<function id="29"><function id="60">glEnable</function>VertexAttribArray</function>(<span class="hljs-number">0</span>);
+</code></pre>
+
+        <p>
+          The code should be relatively straightforward. Now that we created
+          both the container and the light source cube there is one thing left to
+          define and that is the fragment shader for both the container and the
+          light source:
+        </p><p>代码应该相对简单。 现在我们已经创建了容器和光源立方体，还剩下一件事需要定义，那就是容器和光源的片段着色器：</p>
+
+        <pre><code class=" hljs cpp">
+<span class="hljs-preprocessor">#version 330 core</span>
+<span class="hljs-keyword">out</span> <span class="hljs-built_in">vec4</span> FragColor;
+  
+<span class="hljs-keyword">uniform</span> <span class="hljs-built_in">vec3</span> objectColor;
+<span class="hljs-keyword">uniform</span> <span class="hljs-built_in">vec3</span> lightColor;
+
+<span class="hljs-keyword">void</span> main()
+{
+    FragColor = <span class="hljs-built_in">vec4</span>(lightColor * objectColor, <span class="hljs-number">1.0</span>);
+}
+</code></pre>
+
+        <p>
+          The fragment shader accepts both an object color and a light color
+          from a uniform variable. Here we multiply the light's color with the
+          object's (reflected) color like we discussed at the beginning of this
+          chapter. Again, this shader should be easy to understand. Let's set the
+          object's color to the last section's coral color with a white light:
+        </p><p>片段着色器接受来自统一变量的对象颜色和光颜色。 在这里，我们将光的颜色与物体（反射）的颜色相乘，就像我们在本章开头讨论的那样。 同样，这个着色器应该很容易理解。 让我们用白光将对象的颜色设置为最后一部分的珊瑚色：</p>
+
+        <pre><code class=" hljs cpp">
+<span class="hljs-comment">// don't forget to use the corresponding shader program first (to set the uniform)</span>
+lightingShader.use();
+lightingShader.setVec3(<span class="hljs-string">"objectColor"</span>, <span class="hljs-number">1.0f</span>, <span class="hljs-number">0.5f</span>, <span class="hljs-number">0.31f</span>);
+lightingShader.setVec3(<span class="hljs-string">"lightColor"</span>,  <span class="hljs-number">1.0f</span>, <span class="hljs-number">1.0f</span>, <span class="hljs-number">1.0f</span>);
+</code></pre>
+
+        <p>
+          One thing left to note is that when we start to update these <em>lighting shaders</em>
+          in the next chapters, the light source cube would also be affected and
+          this is not what we want. We don't want the light source object's color
+          to be affected the lighting calculations, but rather keep the light
+          source isolated from the rest. We want the light source to have a
+          constant bright color, unaffected by other color changes (this makes it
+          look like the light source cube really is the source of the light).
+        </p><p>需要注意的是，当我们在下一章开始更新这些光照着色器时，光源立方体也会受到影响，这不是我们想要的。 我们不希望光源对象的颜色影响光照计算，而是让光源与其他光源隔离。 我们希望光源具有恒定的明亮颜色，不受其他颜色变化的影响（这使得光源立方体看起来就像真的是光源）。</p>
+
+        <p>
+          To accomplish this we need to create a second set of shaders that
+          we'll use to draw the light source cube, thus being safe from any
+          changes to the lighting shaders. The vertex shader is the same as the
+          lighting vertex shader so you can simply copy the source code over. The
+          fragment shader of the light source cube ensures the cube's color
+          remains bright by defining a constant white color on the lamp:
+        </p><p>为实现这一点，我们需要创建第二组着色器，我们将使用它们来绘制光源立方体，从而避免对照明着色器进行任何更改。 顶点着色器与照明顶点着色器相同，因此您可以简单地复制源代码。 光源立方体的片段着色器通过在灯上定义恒定的白色来确保立方体的颜色保持明亮：</p>
+
+        <pre><code class=" hljs cpp">
+<span class="hljs-preprocessor">#version 330 core</span>
+<span class="hljs-keyword">out</span> <span class="hljs-built_in">vec4</span> FragColor;
+
+<span class="hljs-keyword">void</span> main()
+{
+    FragColor = <span class="hljs-built_in">vec4</span>(<span class="hljs-number">1.0</span>); <span class="hljs-comment">// set all 4 vector values to 1.0</span>
+}
+</code></pre>
+
+        <p>
+          When we want to render, we want to render the container object (or
+          possibly many other objects) using the lighting shader we just defined,
+          and when we want to draw the light source we use the light source's
+          shaders. During the Lighting chapters we'll gradually be updating the
+          lighting shaders to slowly achieve more realistic results.
+        </p><p>当我们想要渲染时，我们想要使用我们刚刚定义的光照着色器来渲染容器对象（或可能许多其他对象），当我们想要绘制光源时，我们使用光源的着色器。 在光照章节中，我们将逐步更新光照着色器以慢慢获得更逼真的效果。</p>
+
+        <p>
+          The main purpose of the light source cube is to show where the light
+          comes from. We usually define a light source's position somewhere in
+          the scene, but this is simply a position that has no visual meaning. To
+          show where the light source actually is we render a cube at the same
+          location of the light source. We render this cube with the light source
+          cube shader to make sure the cube always stays white, regardless of the
+          light conditions of the scene.
+        </p><p>光源立方体的主要用途是显示光从哪里来。 我们通常会在场景中的某处定义一个光源的位置，但这只是一个没有视觉意义的位置。 为了显示光源的实际位置，我们在光源的相同位置渲染一个立方体。 我们使用光源立方体着色器渲染这个立方体，以确保无论场景的光照条件如何，立方体始终保持白色。</p>
+
+        <p>
+          So let's declare a global <code>vec3</code> variable that represents the light source's location in
+          world-space coordinates:
+        </p><p>因此，让我们声明一个全局 vec3 变量，它表示光源在世界空间坐标中的位置：</p>
+
+        <pre><code class=" hljs cpp">
+glm::<span class="hljs-built_in">vec3</span> lightPos(<span class="hljs-number">1.2f</span>, <span class="hljs-number">1.0f</span>, <span class="hljs-number">2.0f</span>);
+</code></pre>
+
+        <p>
+          We then translate the light source cube to the light source's position and scale it down before rendering it:
+        </p><p>然后我们将光源立方体平移到光源的位置并在渲染之前缩小它：</p>
+
+        <pre><code class=" hljs cpp">
+model = glm::<span class="hljs-built_in">mat4</span>(<span class="hljs-number">1.0f</span>);
+model = <function id="55">glm::translate</function>(model, lightPos);
+model = <function id="56">glm::scale</function>(model, glm::<span class="hljs-built_in">vec3</span>(<span class="hljs-number">0.2f</span>)); 
+</code></pre>
+
+        <p>
+          The resulting render code for the light source cube should then look something like this:
+        </p><p>光源立方体的最终渲染代码应如下所示：</p>
+
+        <pre><code class=" hljs cpp">
+lightCubeShader.use();
+<span class="hljs-comment">// set the model, view and projection matrix uniforms</span>
+[...]
+<span class="hljs-comment">// draw the light cube object</span>
+<function id="27">glBindVertexArray</function>(lightCubeVAO);
+<function id="1">glDrawArrays</function>(GL_TRIANGLES, <span class="hljs-number">0</span>, <span class="hljs-number">36</span>);			
+</code></pre>
+
+        <p>
+          Injecting all the code fragments at their appropriate locations would
+          then result in a clean OpenGL application properly configured for
+          experimenting with lighting. If everything compiles it should look like
+          this:
+        </p><p>在适当的位置注入所有代码片段，然后将生成一个干净的 OpenGL 应用程序，该应用程序已正确配置以用于试验光照。 如果一切都编译它应该是这样的：</p>
+
+        <img src="LearnOpenGL%20-%20Colors_files/colors_scene.png" class="clean">
+
+        <p>
+          Not really much to look at right now, but I'll promise it'll get more interesting in the upcoming chapters.
+        </p>
+<p>
+
+  现在没什么可看的，但我保证在接下来的章节中它会变得更有趣。
+
+ 
+  
+  
+
+</p>
+        <p>
+          If you have difficulties finding out where all the code snippets fit
+          together in the application as a whole, check the source code <a
+            href="https://learnopengl.com/code_viewer_gh.php?code=src/2.lighting/1.colors/colors.cpp"
+            target="_blank">here</a> and carefully work your way through the code/comments.
+        </p>
+<p> 如果您难以找出所有代码片段在整个应用程序中的位置，请在此处查看源代码并仔细阅读代码/注释。</p>
+        <p>
+          Now that we have a fair bit of knowledge about colors and created a
+          basic scene for experimenting with lighting we can jump to the <a
+            href="https://learnopengl.com/Lighting/Basic-Lighting" target="_blank">next</a> chapter where the real magic
+          begins.
+        </p>
+<p>现在我们对颜色有了一定的了解并创建了一个基本场景来试验光照，我们可以跳到下一章，真正的魔法开始了。</p>
+
+      </div>
+
+      <div id="hover">
+        HI
+      </div>
+      <!-- 728x90/320x50 sticky footer -->
+      <div id="waldo-sticky-footer-wrapper"></div>
+
+      <div id="disqus_thread" style="display: block;"><iframe id="dsq-app3593" name="dsq-app3593"
+          allowtransparency="true" scrolling="no" tabindex="0" title="Disqus"
+          style="width: 1px !important; min-width: 100% !important; border: medium none !important; overflow: hidden !important; height: 10952px !important;"
+          src="LearnOpenGL%20-%20Colors_files/a_005.html" horizontalscrolling="no" verticalscrolling="no" width="100%"
+          frameborder="0"></iframe></div>
+
+
+
+
+    </div> <!-- container div -->
+
+
+  </div> <!-- super container div -->
+
+  <iframe src="LearnOpenGL%20-%20Colors_files/sync.html" style="display: none; visibility: hidden;"></iframe><iframe
+    style="display: none;"></iframe><img
+    style="display: none !important; width: 1px !important; height: 1px !important;"
+    src="LearnOpenGL%20-%20Colors_files/px_002.gif"><img
+    style="display: none !important; width: 1px !important; height: 1px !important;"
+    src="LearnOpenGL%20-%20Colors_files/favicon.ico"><img
+    style="display: none !important; width: 1px !important; height: 1px !important;"
+    src="LearnOpenGL%20-%20Colors_files/px.gif"><iframe style="display: none;" name="__tcfapiLocator"></iframe>
+  <div id="confiant_tag_holder" style="display:none"></div><iframe src="LearnOpenGL%20-%20Colors_files/aframe.html"
+    style="display: none;" width="0" height="0"></iframe>
+</body><iframe sandbox="allow-scripts allow-same-origin" id="44574888cce123c4" allowtransparency="true" marginheight="0"
+  marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="https://ap.lijit.com/beacon?us_privacy=1---&amp;informer=12352498" width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="446af66da076af78" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="LearnOpenGL%20-%20Colors_files/sync_002.html" width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="447d759394f55ba48" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="LearnOpenGL%20-%20Colors_files/ixmatch.html" width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="44820d2219b42a5a" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="LearnOpenGL%20-%20Colors_files/async_usersync.html" width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="44971224584afb078" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="LearnOpenGL%20-%20Colors_files/usync.html" width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="45079f03fd8cced68" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="LearnOpenGL%20-%20Colors_files/a_006.html" width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="4514533b864008e6" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="LearnOpenGL%20-%20Colors_files/apacdex.html" width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="4524f339c44a56c68" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="LearnOpenGL%20-%20Colors_files/index.html" width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="453367a52ff066aa8" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="LearnOpenGL%20-%20Colors_files/load-cookie.html" width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="454cb8085650a6e4" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="https://eb2.3lift.com/sync?us_privacy=1---&amp;" width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="45516396e9570eb1" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="https://u.openx.net/w/1.0/pd?gdpr=0&amp;gdpr_consent=&amp;us_privacy=1---" width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="456bdc6b8fffd819" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="LearnOpenGL%20-%20Colors_files/isyn.html" width="0" height="0" frameborder="0">
+</iframe>
+
+</html>

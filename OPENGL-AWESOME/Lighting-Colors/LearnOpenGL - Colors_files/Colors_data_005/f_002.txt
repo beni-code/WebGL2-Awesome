@@ -1,0 +1,1 @@
+_gfp_s_({"_cookies_":[{"_value_":"ID=01acb5aa2502555e-2227565273da0089:T=1673678856:RT=1673678865:S=ALNI_MZrnm3TTMvAZPtDpus1sXfvrVgbpA","_expires_":1707374856,"_path_":"/","_domain_":"learnopengl.com","_version_":1}]});
