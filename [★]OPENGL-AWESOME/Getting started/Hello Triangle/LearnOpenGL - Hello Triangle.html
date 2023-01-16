@@ -1416,6 +1416,8 @@
           second part transforms the 2D coordinates into actual colored pixels. In
           this chapter we'll briefly discuss the graphics pipeline and how we can
           use it to our advantage to create fancy pixels.
+        </p><p>
+          在 OpenGL 中，一切都在 3D 空间中，但屏幕或窗口是二维像素阵列，因此 OpenGL 的大部分工作是将所有 3D 坐标转换为适合屏幕的二维像素。 将 3D 坐标转换为 2D 像素的过程由 OpenGL 的图形管道管理。 图形管道可以分为两个大部分：第一部分将 3D 坐标转换为 2D 坐标，第二部分将 2D 坐标转换为实际的彩色像素。 在本章中，我们将简要讨论图形管道以及我们如何利用它来创建精美的像素。
         </p>
 
         <!--<note>
@@ -1432,7 +1434,7 @@
           have thousands of small processing cores to quickly process your data
           within the graphics pipeline. The processing cores run small programs on
           the GPU for each step of the pipeline. These small programs are called <def>shaders</def>.
-        </p>
+        </p><p>图形管道将一组 3D 坐标作为输入，并将它们转换为屏幕上的彩色 2D 像素。 图形流水线可以分为几个步骤，每个步骤都需要前一步的输出作为其输入。 所有这些步骤都是高度专业化的（它们具有一个特定的功能）并且可以很容易地并行执行。 由于它们的并行特性，当今的图形卡具有数千个小型处理核心，可以在图形管道内快速处理您的数据。 处理核心在 GPU 上为流水线的每个步骤运行小程序。 这些小程序称为着色器。</p>
 
         <p>
           Some of these shaders are configurable by the developer which allows
@@ -1441,13 +1443,13 @@
           pipeline and because they run on the GPU, they can also save us valuable
           CPU time. Shaders are written in the <def>OpenGL Shading Language</def> (<def>GLSL</def>) and we'll delve more
           into that in the next chapter.
-        </p>
+        </p><p>其中一些着色器可由开发人员配置，这允许我们编写自己的着色器来替换现有的默认着色器。 这使我们能够对管道的特定部分进行更细粒度的控制，并且由于它们在 GPU 上运行，它们还可以为我们节省宝贵的 CPU 时间。 着色器是用 OpenGL 着色语言 (GLSL) 编写的，我们将在下一章深入研究它。</p>
 
         <p>
           Below you'll find an abstract representation of all the stages of
           the graphics pipeline. Note that the blue sections represent sections
           where we can inject our own shaders.
-        </p>
+        </p><p>您将在下面找到图形管道所有阶段的抽象表示。 请注意，蓝色部分代表我们可以注入自己的着色器的部分。</p>
 
         <img src="LearnOpenGL%20-%20Hello%20Triangle_files/pipeline.png" class="clean"
           alt="The OpenGL graphics pipeline with shader stages">
@@ -1459,7 +1461,7 @@
           data to a fully rendered pixel. We will briefly explain each part of
           the pipeline in a simplified way to give you a good overview of how the
           pipeline operates.
-        </p>
+        </p><p>如您所见，图形管道包含大量部分，每个部分处理将顶点数据转换为完全渲染像素的特定部分。 我们将以简化的方式简要解释管道的每个部分，让您对管道的运行方式有一个很好的了解。</p>
 
         <p>
           As input to the graphics pipeline we pass in a list of three 3D
@@ -1469,7 +1471,7 @@
           that can contain any data we'd like, but for simplicity's sake let's
           assume that each vertex consists of just a 3D position and some color
           value.
-        </p>
+        </p><p>作为图形管道的输入，我们传入一个包含三个 3D 坐标的列表，这些坐标应在此处称为顶点数据的数组中形成一个三角形； 此顶点数据是顶点的集合。 顶点是每个 3D 坐标的数据集合。 这个顶点的数据使用可以包含我们想要的任何数据的顶点属性来表示，但是为了简单起见，我们假设每个顶点只包含一个 3D 位置和一些颜色值。</p>
 
         <note>
           In order for OpenGL to know what to make of your collection of
@@ -1479,6 +1481,10 @@
           just one long line? Those hints are called <def>primitives</def> and are given to OpenGL while calling any of
           the drawing commands. Some of these hints are <var>GL_POINTS</var>, <var>GL_TRIANGLES</var> and
           <var>GL_LINE_STRIP</var>.
+
+          <br><br>
+
+          为了让 OpenGL 知道如何处理你的坐标和颜色值集合，OpenGL 需要你暗示你想用数据形成什么样的渲染类型。 我们是否希望将数据呈现为点的集合、三角形的集合或可能只是一条长线？ 这些提示被称为基元，并在调用任何绘图命令时提供给 OpenGL。 其中一些提示是 GL_POINTS、GL_TRIANGLES 和 GL_LINE_STRIP。
         </note>
 
         <p>
@@ -1487,13 +1493,13 @@
           to transform 3D coordinates into different 3D coordinates (more on that
           later) and the vertex shader allows us to do some basic processing on
           the vertex attributes.
-        </p>
+        </p><p>管道的第一部分是顶点着色器，它将单个顶点作为输入。 顶点着色器的主要目的是将 3D 坐标转换为不同的 3D 坐标（稍后会详细介绍），顶点着色器允许我们对顶点属性进行一些基本处理。</p>
 
         <p>
           The <def>primitive assembly</def> stage takes as input all the vertices (or vertex if <var>GL_POINTS</var>
           is chosen) from the vertex shader that form a primitive and assembles
           all the point(s) in the primitive shape given; in this case a triangle.
-        </p>
+        </p><p>图元组装阶段将来自顶点着色器的所有顶点（或顶点，如果选择了 GL_POINTS）作为输入，形成一个图元，并在给定的图元形状中组装所有点； 在这种情况下是一个三角形。</p>
 
         <p>
           The output of the primitive assembly stage is passed to the <def>geometry shader</def>.
@@ -1501,7 +1507,7 @@
           primitive and has the ability to generate other shapes by emitting new
           vertices to form new (or other) primitive(s). In this example case, it
           generates a second triangle out of the given shape.
-        </p>
+        </p><p>图元组装阶段的输出被传递给几何着色器。 几何着色器将形成图元的顶点集合作为输入，并能够通过发射新顶点以形成新的（或其他）图元来生成其他形状。 在这个例子中，它根据给定的形状生成第二个三角形。</p>
 
         <p>
           The output of the geometry shader is then passed on to the <def>rasterization stage</def>
@@ -1509,10 +1515,13 @@
           the final screen, resulting in fragments for the fragment shader to
           use. Before the fragment shaders run, <def>clipping</def> is performed. Clipping discards all fragments that
           are outside your view, increasing performance.
-        </p>
+        </p><p>几何着色器的输出然后被传递到光栅化阶段，它将生成的图元映射到最终屏幕上的相应像素，从而产生供片段着色器使用的片段。 在片段着色器运行之前，会执行裁剪。 裁剪会丢弃您视野之外的所有片段，从而提高性能。</p>
 
         <note>
           A fragment in OpenGL is all the data required for OpenGL to render a single pixel.
+
+          <br><br>
+          OpenGL 中的片段是 OpenGL 渲染单个像素所需的所有数据。
         </note>
 
         <p>
@@ -1521,7 +1530,7 @@
           advanced OpenGL effects occur. Usually the fragment shader contains data
           about the 3D scene that it can use to calculate the final pixel color
           (like lights, shadows, color of the light and so on).
-        </p>
+        </p><p>片段着色器的主要目的是计算像素的最终颜色，这通常是所有高级 OpenGL 效果发生的阶段。 通常片段着色器包含有关 3D 场景的数据，可用于计算最终像素颜色（如灯光、阴影、灯光颜色等）。</p>
 
 
         <p>
@@ -1536,7 +1545,7 @@
           the objects accordingly. So even if a pixel output color is calculated
           in the fragment shader, the final pixel color could still be something
           entirely different when rendering multiple triangles.
-        </p>
+        </p><p>在确定了所有相应的颜色值之后，最终对象将再经过一个阶段，我们称之为 alpha 测试和混合阶段。 此阶段检查片段的相应深度（和模板）值（我们将在稍后讨论）并使用这些值来检查生成的片段是在其他对象的前面还是后面，并应相应地丢弃。 该舞台还检查 alpha 值（alpha 值定义对象的不透明度）并相应地混合对象。 因此，即使在片段着色器中计算了像素输出颜色，在渲染多个三角形时最终像素颜色仍然可能完全不同。</p>
 
         <p>
           As you can see, the graphics pipeline is quite a complex whole and
@@ -1545,7 +1554,7 @@
           shader is optional and usually left to its default shader. There is also
           the tessellation stage and transform feedback loop that we haven't
           depicted here, but that's something for later.
-        </p>
+        </p><p>如您所见，图形管道是一个相当复杂的整体，包含许多可配置的部分。 然而，对于几乎所有情况，我们只需要使用顶点和片段着色器。 几何着色器是可选的，通常留给它的默认着色器。 还有我们在这里没有描述的曲面细分阶段和变换反馈循环，但这是稍后的内容。</p>
 
         <p>
           In modern OpenGL we are <strong>required</strong> to define at least a
@@ -1555,7 +1564,7 @@
           knowledge is required before being able to render your first triangle.
           Once you do get to finally render your triangle at the end of this
           chapter you will end up knowing a lot more about graphics programming.
-        </p>
+        </p><p>在现代 OpenGL 中，我们需要至少定义一个我们自己的顶点和片段着色器（GPU 上没有默认的顶点/片段着色器）。 出于这个原因，开始学习现代 OpenGL 通常非常困难，因为在能够渲染您的第一个三角形之前需要大量的知识。 一旦你在本章结束时最终渲染了你的三角形，你将最终了解更多关于图形编程的知识。</p>
 
         <h2>Vertex input</h2>
         <p>
@@ -1567,13 +1576,13 @@
           (<code>x</code>, <code>y</code> and <code>z</code>). All coordinates within this so called <def>normalized
             device coordinates</def> range will end up visible on your screen (and all coordinates outside this region
           won't).
-        </p>
+        </p><p>要开始绘制某些东西，我们必须首先给 OpenGL 一些输入顶点数据。 OpenGL 是一个 3D 图形库，因此我们在 OpenGL 中指定的所有坐标都是 3D 坐标（x、y 和 z 坐标）。 OpenGL 不会简单地将所有 3D 坐标转换为屏幕上的 2D 像素； 当 3D 坐标在所有 3 个轴（x、y 和 z）上处于 -1.0 和 1.0 之间的特定范围时，OpenGL 才处理它们。 这个所谓的标准化设备坐标范围内的所有坐标最终都会在您的屏幕上可见（并且该区域之外的所有坐标都不会）。</p>
 
         <p>
           Because we want to render a single triangle we want to specify a total
           of three vertices with each vertex having a 3D position. We define them
           in normalized device coordinates (the visible region of OpenGL) in a <code>float</code> array:
-        </p>
+        </p><p>因为我们要渲染单个三角形，所以我们要指定总共三个顶点，每个顶点都有一个 3D 位置。 我们将它们定义在一个浮点数组中的规范化设备坐标（OpenGL 的可见区域）中：</p>
 
         <pre><code class=" hljs cpp">
 <span class="hljs-keyword">float</span> vertices[] = {
@@ -1586,7 +1595,7 @@
         <p>
           Because OpenGL works in 3D space we render a 2D triangle with each vertex having a <code>z</code> coordinate
           of <code>0.0</code>. This way the <em>depth</em> of the triangle remains the same making it look like it's 2D.
-        </p>
+        </p><p>因为 OpenGL 在 3D 空间中工作，我们渲染一个 2D 三角形，每个顶点的 z 坐标为 0.0。 这样三角形的深度保持不变，使其看起来像二维的。</p>
 
         <note>
           <strong>Normalized Device Coordinates (NDC)</strong><br>
@@ -1598,6 +1607,7 @@
             and won't be visible on your screen. Below you can see the triangle we
             specified within normalized device coordinates (ignoring the <code>z</code> axis):
           </p>
+          <p>一旦你的顶点坐标在顶点着色器中被处理，它们应该在规范化的设备坐标中，这是一个小空间，其中 x、y 和 z 值从 -1.0 到 1.0 不等。 超出此范围的任何坐标都将被丢弃/剪裁，并且不会在屏幕上显示。 下面你可以看到我们在规范化设备坐标中指定的三角形（忽略 z 轴）：</p>
           <img src="LearnOpenGL%20-%20Hello%20Triangle_files/ndc.png" class="clean"
             alt="2D Normalized Device Coordinates as shown in a graph">
           <p>
@@ -1605,14 +1615,14 @@
             coordinates are at the center of the graph, instead of top-left.
             Eventually you want all the (transformed) coordinates to end up in this
             coordinate space, otherwise they won't be visible.
-          </p>
+          </p><p>与通常的屏幕坐标不同，正 y 轴指向上方向，(0,0) 坐标位于图形的中心，而不是左上角。 最终您希望所有（转换后的）坐标都在此坐标空间中结束，否则它们将不可见。</p>
           <p>
             Your NDC coordinates will then be transformed to <def>screen-space coordinates</def> via the <def>viewport
               transform</def> using the data you provided with <fun>
               <function id="22">glViewport</function>
             </fun>. The resulting screen-space coordinates are then transformed to fragments as inputs to your fragment
             shader.
-          </p>
+          </p><p>然后，您的 NDC 坐标将使用您随 glViewport 提供的数据通过视口变换转换为屏幕空间坐标。 然后将生成的屏幕空间坐标转换为片段，作为片段着色器的输入。</p>
         </note>
 
         <p>
@@ -1622,7 +1632,7 @@
           how OpenGL should interpret the memory and specify how to send the data
           to the graphics card. The vertex shader then processes as much vertices
           as we tell it to from its memory.
-        </p>
+        </p><p>定义了顶点数据后，我们希望将其作为输入发送到图形管道的第一个进程：顶点着色器。 这是通过在我们存储顶点数据的 GPU 上创建内存、配置 OpenGL 应如何解释内存并指定如何将数据发送到显卡来完成的。 顶点着色器然后从它的内存中处理我们告诉它的尽可能多的顶点。</p>
 
         <p>
           We manage this memory via so called <def>vertex buffer objects</def> (<def>VBO</def>)
@@ -1635,6 +1645,7 @@
           Once the data is in the graphics card's memory the vertex shader has
           almost instant access to the vertices making it extremely fast
         </p>
+        <p>我们通过所谓的顶点缓冲对象 (VBO) 管理此内存，该对象可以在 GPU 的内存中存储大量顶点。 使用这些缓冲区对象的好处是我们可以一次将大量数据发送到显卡，如果有足够的内存就将其保留在那里，而不必一次发送一个顶点的数据。 从 CPU 向显卡发送数据的速度相对较慢，因此我们尽可能地一次性发送尽可能多的数据。 一旦数据在显卡的内存中，顶点着色器几乎可以立即访问顶点，从而使其速度非常快</p>
 
         <p>
           A vertex buffer object is our first occurrence of an OpenGL object as we've discussed in the <a
@@ -2538,41 +2549,6 @@ someOpenGLFunctionThatDrawsOurTriangle();
 
 
       </div>
-
-      <div id="hover">
-        HI
-      </div>
-      <!-- 728x90/320x50 sticky footer -->
-      <div id="waldo-sticky-footer-wrapper">
-        <div id="waldo-sticky-footer-inner">
-          <div id="waldo-close-button" style="margin-left: auto; margin-right: auto; text-align: right;"><a
-              style="text-decoration: none;" href="#">Close X</a></div>
-          <div id="waldo-tag-6196" data-google-query-id="CIS-_qmDy_wCFazIFgUde4AHbQ">
-            <div id="google_ads_iframe_/124067137,22550200400/learnopengl728x90FS_1_0__container__"
-              style="border: 0pt none; width: 728px; height: 90px;"><iframe
-                id="google_ads_iframe_/124067137,22550200400/learnopengl728x90FS_1_0"
-                name="google_ads_iframe_/124067137,22550200400/learnopengl728x90FS_1_0" title="3rd party ad content"
-                scrolling="no" marginwidth="0" marginheight="0" style="border: 0px none; vertical-align: bottom;"
-                role="region" aria-label="Advertisement" tabindex="0" data-google-container-id="7"
-                data-load-complete="true" width="728" height="90" frameborder="0"></iframe></div>
-          </div>
-        </div>
-      </div>
-
-      <div id="disqus_thread" style="display: block;"><iframe id="dsq-app2132" name="dsq-app2132"
-          allowtransparency="true" scrolling="no" tabindex="0" title="Disqus"
-          style="width: 1px !important; min-width: 100% !important; border: medium none !important; overflow: hidden !important; height: 11401px !important;"
-          src="LearnOpenGL%20-%20Hello%20Triangle_files/a_006.html" horizontalscrolling="no" verticalscrolling="no"
-          width="100%" frameborder="0"></iframe><iframe id="indicator-north" name="indicator-north"
-          allowtransparency="true" scrolling="no" tabindex="0" title="Disqus"
-          style="width: 650px !important; border: medium none !important; overflow: hidden !important; top: 0px !important; min-width: 650px !important; max-width: 650px !important; position: fixed !important; z-index: 2147483646 !important; height: 18px !important; min-height: 18px !important; max-height: 18px !important; display: none !important;"
-          frameborder="0"></iframe><iframe id="indicator-south" name="indicator-south" allowtransparency="true"
-          scrolling="no" tabindex="0" title="Disqus"
-          style="width: 650px !important; border: medium none !important; overflow: hidden !important; bottom: 0px !important; min-width: 650px !important; max-width: 650px !important; position: fixed !important; z-index: 2147483646 !important; height: 18px !important; min-height: 18px !important; max-height: 18px !important; display: none !important;"
-          frameborder="0"></iframe></div>
-
-
-
 
     </div> <!-- container div -->
 
