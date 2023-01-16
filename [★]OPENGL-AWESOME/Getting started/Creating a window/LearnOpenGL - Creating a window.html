@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <script src="LearnOpenGL%20-%20Creating%20a%20window_files/rules-p-fTfJtcPmQDwZG.js" async=""></script>
+  <script type="text/javascript" async="" src="LearnOpenGL%20-%20Creating%20a%20window_files/localstore.js"></script>
+  <meta charset="utf-8">
+  <title>LearnOpenGL - Creating a window</title>
+  <!--<title>Learn OpenGL, extensive tutorial resource for learning Modern OpenGL</title>-->
+  <link rel="shortcut icon" type="image/ico" href="https://learnopengl.com/favicon.ico">
+  <meta name="description"
+    content="Learn OpenGL . com provides good and clear modern 3.3+ OpenGL tutorials with clear examples. A great resource to learn modern OpenGL aimed at beginners.">
+  <meta name="fragment" content="!">
+  <script async="" src="LearnOpenGL%20-%20Creating%20a%20window_files/wrap.js"></script>
+  <script src="LearnOpenGL%20-%20Creating%20a%20window_files/quant.js" async="" type="text/javascript"></script>
+  <script async="" type="text/javascript" src="LearnOpenGL%20-%20Creating%20a%20window_files/cmp2.js"></script>
+  <script type="text/javascript" src="LearnOpenGL%20-%20Creating%20a%20window_files/config.js"></script>
+  <script async="" type="text/javascript" src="LearnOpenGL%20-%20Creating%20a%20window_files/gpt_002.js"></script>
+  <script async="" type="text/javascript" src="LearnOpenGL%20-%20Creating%20a%20window_files/pwt.js"></script>
+  <script async="" type="text/javascript" src="LearnOpenGL%20-%20Creating%20a%20window_files/choice.js"></script>
+  <script async="" src="LearnOpenGL%20-%20Creating%20a%20window_files/analytics.js"></script>
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-51879160-1', 'learnopengl.com');
+    ga('send', 'pageview');
+
+  </script>
+  <!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-7855791439695850",
+      enable_page_level_ads: true
+    });
+  </script>
+  <script async="async" src="LearnOpenGL%20-%20Creating%20a%20window_files/gpt.js"></script>
+  <script>
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+  </script>
+  <script>
+    googletag.cmd.push(function () {
+      googletag.defineSlot('/8491498/learnopengl_video', [300, 225], 'div-gpt-ad-1540574378241-0').addService(googletag.pubads());
+      googletag.pubads().enableSingleRequest();
+      googletag.pubads().collapseEmptyDivs();
+      googletag.enableServices();
+    });
+  </script>
+  <script type="text/javascript" src="LearnOpenGL%20-%20Creating%20a%20window_files/1681.js"></script>
+  <style type="text/css">
+    #waldo-sticky-footer-wrapper {
+      position: fixed;
+      width: 100%;
+      bottom: 0px;
+      left: 0px;
+      text-align: center;
+      z-index: 9999;
+      margin-bottom: 0 !important;
+    }
+
+    #waldo-sticky-footer-wrapper>div {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 0 !important;
+    }
+
+    #waldo-sticky-footer-wrapper iframe,
+    #waldo-sticky-footer-wrapper div {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .waldo-sticky-sidebar {
+      position: fixed;
+      top: 10px;
+      z-index: 90
+    }
+
+    .waldo-bfleft {
+      position: fixed;
+      left: 0;
+      top: 10px;
+      z-index: 101;
+    }
+
+    .waldo-bfright {
+      position: fixed;
+      right: 0;
+      top: 10px;
+      z-index: 101;
+    }
+
+    #nm-ccpa-widget {
+      width: 400px;
+    }
+
+    #nm-ccpa-widget {
+      position: fixed;
+      right: 20px;
+      z-index: 9999;
+      margin-bottom: 15px;
+      box-shadow: 0 3px 36px 0 rgba(0, 0, 0, 0.3);
+      background-color: #fff;
+      border-radius: 10px;
+      bottom: 20px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .nm-ccpa-widget-header {
+      background: #179f84;
+      color: #fff;
+      padding: 20px;
+    }
+
+    .nm-ccpa-widget-header .nm-ccpa-widget-main-title {
+      margin-bottom: 0;
+      margin-top: 0;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .nm-ccpa-widget-body {
+      padding: 20px;
+      background: #fff;
+    }
+
+    .nm-ccpa-widget-body label {
+      font-size: 16px;
+    }
+
+    .nm-ccpa-widget-submit-btn {
+      margin-top: 15px;
+      padding-left: 25px;
+    }
+
+    .nm-ccpa-widget-submit-btn input {
+      background: #179f84;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: 0;
+      outline: 0;
+    }
+
+    .nm-ccpa-widget-submit-btn input:hover,
+    .nm-ccpa-widget-submit-btn input:focus {
+      cursor: pointer;
+    }
+
+    .nm-ccpa-widget-checkbox-label {
+      font-size: 20px;
+    }
+
+    .nm-ccpa-widget-header {
+      position: relative;
+    }
+
+    .nm-ccpa-widget-close-btn {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
+
+    .nm-ccpa-widget-close-btn a {
+      color: #fff;
+      font-size: 20px;
+      text-decoration: none;
+    }
+
+    .nm-ccpa-widget-message {
+      padding-left: 25px;
+    }
+
+    #waldo-tag-6038 {
+      clear: both !important;
+    }
+
+    div[class^="app_gdpr-"] a {
+      color: #41afbb !important;
+      text-decoration: underline !important
+    }
+
+    #waldo-close-button {
+      position: absolute;
+      right: 0;
+      top: -24px;
+      line-height: normal !important;
+    }
+
+    #waldo-close-button a {
+      border: 1px solid rgba(0, 0, 0, .35) !important;
+      padding: 3px !important;
+      font-size: 12px !important;
+      color: #fff !important;
+      font-weight: bold !important;
+      background-color: #777 !important;
+      line-height: normal !important;
+    }
+
+    .waldo-display-unit {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      flex-wrap: wrap !important;
+    }
+  </style>
+  <script type="text/javascript" async="" src="LearnOpenGL%20-%20Creating%20a%20window_files/tag"></script>
+  <script type="text/javascript" async="" src="LearnOpenGL%20-%20Creating%20a%20window_files/tag.js"></script>
+  <script src="LearnOpenGL%20-%20Creating%20a%20window_files/jquery-1.11.0.min.js"></script>
+  <script src="LearnOpenGL%20-%20Creating%20a%20window_files/hoverintent.js"></script>
+  <link rel="stylesheet" type="text/css" href="LearnOpenGL%20-%20Creating%20a%20window_files/layout.css">
+  <link rel="stylesheet" type="text/css" href="LearnOpenGL%20-%20Creating%20a%20window_files/obsidian.css">
+  <script src="LearnOpenGL%20-%20Creating%20a%20window_files/highlight.pack.js"></script>
+  <style type="text/css">
+    .qc-cmp-button.qc-cmp-secondary-button:hover {
+      background-color: #368bd6 !important;
+      border-color: transparent !important;
+    }
+
+    .qc-cmp-button.qc-cmp-secondary-button:hover {
+      color: #ffffff !important;
+    }
+
+    .qc-cmp-button.qc-cmp-secondary-button {
+      color: #368bd6 !important;
+    }
+
+    .qc-cmp-button.qc-cmp-secondary-button {
+      background-color: #eee !important;
+      border-color: transparent !important;
+    }
+  </style>
+  <script src="LearnOpenGL%20-%20Creating%20a%20window_files/functions.js"></script>
+  <script type="text/javascript" src="LearnOpenGL%20-%20Creating%20a%20window_files/MathJax.js"></script>
+  <script>
+    // Has to be loaded last due to content bug 
+    MathJax.Hub.Config({
+      TeX: { equationNumbers: { autoNumber: "AMS" } }
+    });
+  </script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script>
+    $(document).ready(function () {
+      // check if user visited from the old # based urls, re-direct to ?p= form
+      if (window.location.hash) {
+        var name = window.location.hash.substring(2);
+        // name = name.replace(/-/g," ");
+        var index = name.indexOf('#'); // Remove any hash fragments from the url (Disquss adds hash fragments for comments, but results in 404 pages)
+        if (index >= 0)
+          name = name.substring(0, index);
+
+        window.location.href = "https://learnopengl.com/" + name;
+      } else {
+        // Check if data has been succesfully loaded, if so: change title bar as ajax hash fragment
+        var title = $('#content-url').text();
+
+        // Refresh syntax highlighting
+        // $('pre').each(function(i, e) {hljs.highlightBlock(e)});
+
+        // Reset DISQUS
+        // if(title == '/dev/')
+        // title = '';
+        // alert('hoi');
+
+        // place video tag 
+        if (title != '') {
+          //var videoad = "%3Cdiv id=\'waldo-tag-14070\'%3E %3Cscript%3Egoogletag.cmd.push(function() {googletag.display(\'waldo-tag-14070\'); }); %3C/script%3E%3C/div%3E";
+          //$('#content p:nth-of-type(3)').after(unescape(videoad));
+        }
+
+        // Adjust ads for correct bottom positioning based on content size
+        window.setTimeout(function () {
+          AdPositioning();
+        }, 3000);
+
+
+        // set API resets after time-out (once content is properly loaded)
+        window.setTimeout(function () {
+          MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+          // if (MathJax.InputJax.TeX.resetEquationNumbers)
+          // {						
+          // MathJax.Hub.Queue(["resetEquationNumbers", MathJax.InputJax.TeX]);
+          // }
+
+          var page_url = title == "" ? "http://www.learnopengl.com/" : "http://www.learnopengl.com/" + title;
+          if (typeof DISQUS !== 'undefined') {
+            DISQUS.reset({
+              reload: true,
+              config: function () {
+                this.page.identifier = title;
+                this.page.url = page_url;
+              }
+            });
+            $('#disqus_thread').show();
+          }
+          // Refresh callbacks on <function> tags
+          SetFunctionTagCallbacks();
+        }, 1000);
+
+        // Zet ook de juiste button op 'selected'
+        $('#nav li span, #nav li a').removeClass('selected');
+        if (title != '') {
+          $('#nav li[id=\'' + title + '\']').children('span, a').addClass('selected');
+        }
+        // En open menu waar nodig
+        var parents = $('#nav span.selected, #nav a.selected').parents('li').children('span.closed, a.closed');
+        var index = 0;
+        for (index = parents.length - 1; index >= 0; index--) {
+
+          var id = $(parents[index]).attr("id").replace(/^\D+/g, '');
+          MenuClick(id, false);
+        }
+
+      }
+    });
+    // var initialized = false;
+    // window.onpopstate = function() {
+    // if(initialized)
+    // LoadPage();
+    // else
+    // initialized = true;
+    // };
+
+    // Set up DISQUS
+    // $(document).ready(function() {
+    var disqus_shortname = 'learnopengl';
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+        // });
+  </script>
+  <script type="text/javascript" async="" src="LearnOpenGL%20-%20Creating%20a%20window_files/embed.js"></script>
+  <script
+    type="text/javascript">googletag.cmd.push(function () { googletag.pubads().addEventListener('slotRenderEnded', function (event) { waldoPassbackCheck(event); waldoAddCloseBtn(event); }); googletag.pubads().enableSingleRequest(); googletag.enableServices(); gptAdSlots[1715] = googletag.defineSlot('/124067137,22550200400/learnopengl300x250FL_1', [[300, 250], [300, 600], [160, 600]], 'waldo-tag-1715').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[300, 250], [300, 600], [160, 600]]).addSize([768, 0], [[300, 250], [300, 600], [160, 600]]).addSize([0, 0], [[300, 250], [300, 600], [160, 600]]).build()).addService(googletag.pubads()); googletag.display('waldo-tag-1715'); gptAdSlots[2245] = googletag.defineSlot('/124067137,22550200400/learnopengl300x600FL_1', [[300, 250], [300, 600]], 'waldo-tag-2245').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[300, 250], [300, 600]]).addSize([768, 0], [[300, 250], [300, 600]]).addSize([0, 0], [[300, 250], [300, 600]]).build()).addService(googletag.pubads()); googletag.display('waldo-tag-2245'); gptAdSlots[2246] = googletag.defineSlot('/124067137,22550200400/learnopengl300x600FL_2', [[300, 250], [300, 600]], 'waldo-tag-2246').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[300, 250], [300, 600]]).addSize([768, 0], [[300, 250], [300, 600]]).addSize([0, 0], [[300, 250], [300, 600]]).build()).addService(googletag.pubads()); googletag.display('waldo-tag-2246'); gptAdSlots[2247] = googletag.defineSlot('/124067137,22550200400/learnopengl300x600FL_3', [[300, 250], [300, 600]], 'waldo-tag-2247').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[300, 250], [300, 600]]).addSize([768, 0], [[300, 250], [300, 600]]).addSize([0, 0], [[300, 250], [300, 600]]).build()).addService(googletag.pubads()); googletag.display('waldo-tag-2247'); gptAdSlots[6194] = googletag.defineSlot('/124067137,22550200400/learnopengl728x90FS_2', [[728, 90], [320, 50]], 'waldo-tag-6194').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90]]).addSize([768, 0], [[320, 50]]).addSize([0, 0], [[320, 50]]).build()).addService(googletag.pubads()); googletag.display('waldo-tag-6194'); gptAdSlots[6196] = googletag.defineSlot('/124067137,22550200400/learnopengl728x90FS_1', [[728, 90], [320, 50]], 'waldo-tag-6196').defineSizeMapping(googletag.sizeMapping().addSize([1024, 0], [[728, 90]]).addSize([768, 0], [[320, 50]]).addSize([0, 0], [[320, 50]]).build()).addService(googletag.pubads()); googletag.display('waldo-tag-6196'); waldoVideoSlot = googletag.defineSlot('/124067137,22550200400/learnopengl_video_unit2', [1, 1], 'waldo-tag-14070').defineSizeMapping(googletag.sizeMapping().addSize([0, 0], [300, 235]).addSize([320, 700], [300, 235]).addSize([1050, 200], [566, 387]).build()).addService(googletag.pubads()); });</script>
+  <style type="text/css">
+    .MathJax_Hover_Frame {
+      border-radius: .25em;
+      -webkit-border-radius: .25em;
+      -moz-border-radius: .25em;
+      -khtml-border-radius: .25em;
+      box-shadow: 0px 0px 15px #83A;
+      -webkit-box-shadow: 0px 0px 15px #83A;
+      -moz-box-shadow: 0px 0px 15px #83A;
+      -khtml-box-shadow: 0px 0px 15px #83A;
+      border: 1px solid #A6D ! important;
+      display: inline-block;
+      position: absolute
+    }
+
+    .MathJax_Menu_Button .MathJax_Hover_Arrow {
+      position: absolute;
+      cursor: pointer;
+      display: inline-block;
+      border: 2px solid #AAA;
+      border-radius: 4px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -khtml-border-radius: 4px;
+      font-family: 'Courier New', Courier;
+      font-size: 9px;
+      color: #F0F0F0
+    }
+
+    .MathJax_Menu_Button .MathJax_Hover_Arrow span {
+      display: block;
+      background-color: #AAA;
+      border: 1px solid;
+      border-radius: 3px;
+      line-height: 0;
+      padding: 4px
+    }
+
+    .MathJax_Hover_Arrow:hover {
+      color: white !important;
+      border: 2px solid #CCC !important
+    }
+
+    .MathJax_Hover_Arrow:hover span {
+      background-color: #CCC !important
+    }
+  </style>
+  <style type="text/css">
+    #MathJax_About {
+      position: fixed;
+      left: 50%;
+      width: auto;
+      text-align: center;
+      border: 3px outset;
+      padding: 1em 2em;
+      background-color: #DDDDDD;
+      color: black;
+      cursor: default;
+      font-family: message-box;
+      font-size: 120%;
+      font-style: normal;
+      text-indent: 0;
+      text-transform: none;
+      line-height: normal;
+      letter-spacing: normal;
+      word-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      float: none;
+      z-index: 201;
+      border-radius: 15px;
+      -webkit-border-radius: 15px;
+      -moz-border-radius: 15px;
+      -khtml-border-radius: 15px;
+      box-shadow: 0px 10px 20px #808080;
+      -webkit-box-shadow: 0px 10px 20px #808080;
+      -moz-box-shadow: 0px 10px 20px #808080;
+      -khtml-box-shadow: 0px 10px 20px #808080;
+      filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')
+    }
+
+    #MathJax_About.MathJax_MousePost {
+      outline: none
+    }
+
+    .MathJax_Menu {
+      position: absolute;
+      background-color: white;
+      color: black;
+      width: auto;
+      padding: 2px;
+      border: 1px solid #CCCCCC;
+      margin: 0;
+      cursor: default;
+      font: menu;
+      text-align: left;
+      text-indent: 0;
+      text-transform: none;
+      line-height: normal;
+      letter-spacing: normal;
+      word-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      float: none;
+      z-index: 201;
+      box-shadow: 0px 10px 20px #808080;
+      -webkit-box-shadow: 0px 10px 20px #808080;
+      -moz-box-shadow: 0px 10px 20px #808080;
+      -khtml-box-shadow: 0px 10px 20px #808080;
+      filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')
+    }
+
+    .MathJax_MenuItem {
+      padding: 2px 2em;
+      background: transparent
+    }
+
+    .MathJax_MenuArrow {
+      position: absolute;
+      right: .5em;
+      padding-top: .25em;
+      color: #666666;
+      font-size: .75em
+    }
+
+    .MathJax_MenuActive .MathJax_MenuArrow {
+      color: white
+    }
+
+    .MathJax_MenuArrow.RTL {
+      left: .5em;
+      right: auto
+    }
+
+    .MathJax_MenuCheck {
+      position: absolute;
+      left: .7em
+    }
+
+    .MathJax_MenuCheck.RTL {
+      right: .7em;
+      left: auto
+    }
+
+    .MathJax_MenuRadioCheck {
+      position: absolute;
+      left: 1em
+    }
+
+    .MathJax_MenuRadioCheck.RTL {
+      right: 1em;
+      left: auto
+    }
+
+    .MathJax_MenuLabel {
+      padding: 2px 2em 4px 1.33em;
+      font-style: italic
+    }
+
+    .MathJax_MenuRule {
+      border-top: 1px solid #CCCCCC;
+      margin: 4px 1px 0px
+    }
+
+    .MathJax_MenuDisabled {
+      color: GrayText
+    }
+
+    .MathJax_MenuActive {
+      background-color: Highlight;
+      color: HighlightText
+    }
+
+    .MathJax_MenuDisabled:focus,
+    .MathJax_MenuLabel:focus {
+      background-color: #E8E8E8
+    }
+
+    .MathJax_ContextMenu:focus {
+      outline: none
+    }
+
+    .MathJax_ContextMenu .MathJax_MenuItem:focus {
+      outline: none
+    }
+
+    #MathJax_AboutClose {
+      top: .2em;
+      right: .2em
+    }
+
+    .MathJax_Menu .MathJax_MenuClose {
+      top: -10px;
+      left: -10px
+    }
+
+    .MathJax_MenuClose {
+      position: absolute;
+      cursor: pointer;
+      display: inline-block;
+      border: 2px solid #AAA;
+      border-radius: 18px;
+      -webkit-border-radius: 18px;
+      -moz-border-radius: 18px;
+      -khtml-border-radius: 18px;
+      font-family: 'Courier New', Courier;
+      font-size: 24px;
+      color: #F0F0F0
+    }
+
+    .MathJax_MenuClose span {
+      display: block;
+      background-color: #AAA;
+      border: 1.5px solid;
+      border-radius: 18px;
+      -webkit-border-radius: 18px;
+      -moz-border-radius: 18px;
+      -khtml-border-radius: 18px;
+      line-height: 0;
+      padding: 8px 0 6px
+    }
+
+    .MathJax_MenuClose:hover {
+      color: white !important;
+      border: 2px solid #CCC !important
+    }
+
+    .MathJax_MenuClose:hover span {
+      background-color: #CCC !important
+    }
+
+    .MathJax_MenuClose:hover:focus {
+      outline: none
+    }
+  </style>
+  <style type="text/css">
+    .MathJax_Preview .MJXf-math {
+      color: inherit !important
+    }
+  </style>
+  <style type="text/css">
+    .MJX_Assistive_MathML {
+      position: absolute !important;
+      top: 0;
+      left: 0;
+      clip: rect(1px, 1px, 1px, 1px);
+      padding: 1px 0 0 0 !important;
+      border: 0 !important;
+      height: 1px !important;
+      width: 1px !important;
+      overflow: hidden !important;
+      display: block !important;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none
+    }
+
+    .MJX_Assistive_MathML.MJX_Assistive_MathML_Block {
+      width: 100% !important
+    }
+  </style>
+  <style type="text/css">
+    #MathJax_Zoom {
+      position: absolute;
+      background-color: #F0F0F0;
+      overflow: auto;
+      display: block;
+      z-index: 301;
+      padding: .5em;
+      border: 1px solid black;
+      margin: 0;
+      font-weight: normal;
+      font-style: normal;
+      text-align: left;
+      text-indent: 0;
+      text-transform: none;
+      line-height: normal;
+      letter-spacing: normal;
+      word-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      float: none;
+      -webkit-box-sizing: content-box;
+      -moz-box-sizing: content-box;
+      box-sizing: content-box;
+      box-shadow: 5px 5px 15px #AAAAAA;
+      -webkit-box-shadow: 5px 5px 15px #AAAAAA;
+      -moz-box-shadow: 5px 5px 15px #AAAAAA;
+      -khtml-box-shadow: 5px 5px 15px #AAAAAA;
+      filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')
+    }
+
+    #MathJax_ZoomOverlay {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 300;
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      background-color: white;
+      opacity: 0;
+      filter: alpha(opacity=0)
+    }
+
+    #MathJax_ZoomFrame {
+      position: relative;
+      display: inline-block;
+      height: 0;
+      width: 0
+    }
+
+    #MathJax_ZoomEventTrap {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 302;
+      display: inline-block;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      background-color: white;
+      opacity: 0;
+      filter: alpha(opacity=0)
+    }
+  </style>
+  <style type="text/css">
+    .MathJax_Preview {
+      color: #888
+    }
+
+    #MathJax_Message {
+      position: fixed;
+      left: 1px;
+      bottom: 2px;
+      background-color: #E6E6E6;
+      border: 1px solid #959595;
+      margin: 0px;
+      padding: 2px 8px;
+      z-index: 102;
+      color: black;
+      font-size: 80%;
+      width: auto;
+      white-space: nowrap
+    }
+
+    #MathJax_MSIE_Frame {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0px;
+      z-index: 101;
+      border: 0px;
+      margin: 0px;
+      padding: 0px
+    }
+
+    .MathJax_Error {
+      color: #CC0000;
+      font-style: italic
+    }
+  </style><iframe style="display: none;" name="cnftComm"></iframe>
+  <style type="text/css">
+    .MJXp-script {
+      font-size: .8em
+    }
+
+    .MJXp-right {
+      -webkit-transform-origin: right;
+      -moz-transform-origin: right;
+      -ms-transform-origin: right;
+      -o-transform-origin: right;
+      transform-origin: right
+    }
+
+    .MJXp-bold {
+      font-weight: bold
+    }
+
+    .MJXp-italic {
+      font-style: italic
+    }
+
+    .MJXp-scr {
+      font-family: MathJax_Script, 'Times New Roman', Times, STIXGeneral, serif
+    }
+
+    .MJXp-frak {
+      font-family: MathJax_Fraktur, 'Times New Roman', Times, STIXGeneral, serif
+    }
+
+    .MJXp-sf {
+      font-family: MathJax_SansSerif, 'Times New Roman', Times, STIXGeneral, serif
+    }
+
+    .MJXp-cal {
+      font-family: MathJax_Caligraphic, 'Times New Roman', Times, STIXGeneral, serif
+    }
+
+    .MJXp-mono {
+      font-family: MathJax_Typewriter, 'Times New Roman', Times, STIXGeneral, serif
+    }
+
+    .MJXp-largeop {
+      font-size: 150%
+    }
+
+    .MJXp-largeop.MJXp-int {
+      vertical-align: -.2em
+    }
+
+    .MJXp-math {
+      display: inline-block;
+      line-height: 1.2;
+      text-indent: 0;
+      font-family: 'Times New Roman', Times, STIXGeneral, serif;
+      white-space: nowrap;
+      border-collapse: collapse
+    }
+
+    .MJXp-display {
+      display: block;
+      text-align: center;
+      margin: 1em 0
+    }
+
+    .MJXp-math span {
+      display: inline-block
+    }
+
+    .MJXp-box {
+      display: block !important;
+      text-align: center
+    }
+
+    .MJXp-box:after {
+      content: " "
+    }
+
+    .MJXp-rule {
+      display: block !important;
+      margin-top: .1em
+    }
+
+    .MJXp-char {
+      display: block !important
+    }
+
+    .MJXp-mo {
+      margin: 0 .15em
+    }
+
+    .MJXp-mfrac {
+      margin: 0 .125em;
+      vertical-align: .25em
+    }
+
+    .MJXp-denom {
+      display: inline-table !important;
+      width: 100%
+    }
+
+    .MJXp-denom>* {
+      display: table-row !important
+    }
+
+    .MJXp-surd {
+      vertical-align: top
+    }
+
+    .MJXp-surd>* {
+      display: block !important
+    }
+
+    .MJXp-script-box>* {
+      display: table !important;
+      height: 50%
+    }
+
+    .MJXp-script-box>*>* {
+      display: table-cell !important;
+      vertical-align: top
+    }
+
+    .MJXp-script-box>*:last-child>* {
+      vertical-align: bottom
+    }
+
+    .MJXp-script-box>*>*>* {
+      display: block !important
+    }
+
+    .MJXp-mphantom {
+      visibility: hidden
+    }
+
+    .MJXp-munderover {
+      display: inline-table !important
+    }
+
+    .MJXp-over {
+      display: inline-block !important;
+      text-align: center
+    }
+
+    .MJXp-over>* {
+      display: block !important
+    }
+
+    .MJXp-munderover>* {
+      display: table-row !important
+    }
+
+    .MJXp-mtable {
+      vertical-align: .25em;
+      margin: 0 .125em
+    }
+
+    .MJXp-mtable>* {
+      display: inline-table !important;
+      vertical-align: middle
+    }
+
+    .MJXp-mtr {
+      display: table-row !important
+    }
+
+    .MJXp-mtd {
+      display: table-cell !important;
+      text-align: center;
+      padding: .5em 0 0 .5em
+    }
+
+    .MJXp-mtr>.MJXp-mtd:first-child {
+      padding-left: 0
+    }
+
+    .MJXp-mtr:first-child>.MJXp-mtd {
+      padding-top: 0
+    }
+
+    .MJXp-mlabeledtr {
+      display: table-row !important
+    }
+
+    .MJXp-mlabeledtr>.MJXp-mtd:first-child {
+      padding-left: 0
+    }
+
+    .MJXp-mlabeledtr:first-child>.MJXp-mtd {
+      padding-top: 0
+    }
+
+    .MJXp-merror {
+      background-color: #FFFF88;
+      color: #CC0000;
+      border: 1px solid #CC0000;
+      padding: 1px 3px;
+      font-style: normal;
+      font-size: 90%
+    }
+
+    .MJXp-scale0 {
+      -webkit-transform: scaleX(.0);
+      -moz-transform: scaleX(.0);
+      -ms-transform: scaleX(.0);
+      -o-transform: scaleX(.0);
+      transform: scaleX(.0)
+    }
+
+    .MJXp-scale1 {
+      -webkit-transform: scaleX(.1);
+      -moz-transform: scaleX(.1);
+      -ms-transform: scaleX(.1);
+      -o-transform: scaleX(.1);
+      transform: scaleX(.1)
+    }
+
+    .MJXp-scale2 {
+      -webkit-transform: scaleX(.2);
+      -moz-transform: scaleX(.2);
+      -ms-transform: scaleX(.2);
+      -o-transform: scaleX(.2);
+      transform: scaleX(.2)
+    }
+
+    .MJXp-scale3 {
+      -webkit-transform: scaleX(.3);
+      -moz-transform: scaleX(.3);
+      -ms-transform: scaleX(.3);
+      -o-transform: scaleX(.3);
+      transform: scaleX(.3)
+    }
+
+    .MJXp-scale4 {
+      -webkit-transform: scaleX(.4);
+      -moz-transform: scaleX(.4);
+      -ms-transform: scaleX(.4);
+      -o-transform: scaleX(.4);
+      transform: scaleX(.4)
+    }
+
+    .MJXp-scale5 {
+      -webkit-transform: scaleX(.5);
+      -moz-transform: scaleX(.5);
+      -ms-transform: scaleX(.5);
+      -o-transform: scaleX(.5);
+      transform: scaleX(.5)
+    }
+
+    .MJXp-scale6 {
+      -webkit-transform: scaleX(.6);
+      -moz-transform: scaleX(.6);
+      -ms-transform: scaleX(.6);
+      -o-transform: scaleX(.6);
+      transform: scaleX(.6)
+    }
+
+    .MJXp-scale7 {
+      -webkit-transform: scaleX(.7);
+      -moz-transform: scaleX(.7);
+      -ms-transform: scaleX(.7);
+      -o-transform: scaleX(.7);
+      transform: scaleX(.7)
+    }
+
+    .MJXp-scale8 {
+      -webkit-transform: scaleX(.8);
+      -moz-transform: scaleX(.8);
+      -ms-transform: scaleX(.8);
+      -o-transform: scaleX(.8);
+      transform: scaleX(.8)
+    }
+
+    .MJXp-scale9 {
+      -webkit-transform: scaleX(.9);
+      -moz-transform: scaleX(.9);
+      -ms-transform: scaleX(.9);
+      -o-transform: scaleX(.9);
+      transform: scaleX(.9)
+    }
+
+    .MathJax_PHTML .noError {
+      vertical-align: ;
+      font-size: 90%;
+      text-align: left;
+      color: black;
+      padding: 1px 3px;
+      border: 1px solid
+    }
+  </style>
+  <meta http-equiv="origin-trial"
+    content="Az6AfRvI8mo7yiW5fLfj04W21t0ig6aMsGYpIqMTaX60H+b0DkO1uDr+7BrzMcimWzv/X7SXR8jI+uvbV0IJlwYAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ==">
+  <meta http-equiv="origin-trial"
+    content="A+USTya+tNvDPaxUgJooz+LaVk5hPoAxpLvSxjogX4Mk8awCTQ9iop6zJ9d5ldgU7WmHqBlnQB41LHHRFxoaBwoAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ==">
+  <meta http-equiv="origin-trial"
+    content="A7FovoGr67TUBYbnY+Z0IKoJbbmRmB8fCyirUGHavNDtD91CiGyHHSA2hDG9r9T3NjUKFi6egL3RbgTwhhcVDwUAAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ==">
+  <script src="LearnOpenGL%20-%20Creating%20a%20window_files/pubads_impl_2023011207.js" async=""></script>
+  <link rel="preload" href="LearnOpenGL%20-%20Creating%20a%20window_files/f.txt" as="script">
+  <script type="text/javascript" src="LearnOpenGL%20-%20Creating%20a%20window_files/f.txt"></script>
+</head>
+
+<body>
+  <div id="MathJax_Message" style="display: none;"></div>
+  <a href="https://learnopengl.com/">
+    <div id="header">
+    </div>
+  </a>
+
+  <div id="supercontainer">
+    <!-- 728x90/320x50 -->
+    <div id="header_ad">
+      <div id="waldo-tag-6194" class="waldo-display-unit" style="min-width: 728px; min-height: 90px;"
+        data-processed="true" data-google-query-id="CMX2mMr5yvwCFfjKFgUdRuYLEg">
+        <div id="google_ads_iframe_/124067137,22550200400/learnopengl728x90FS_2_0__container__"
+          style="border: 0pt none;"><iframe id="google_ads_iframe_/124067137,22550200400/learnopengl728x90FS_2_0"
+            name="google_ads_iframe_/124067137,22550200400/learnopengl728x90FS_2_0" title="3rd party ad content"
+            scrolling="no" marginwidth="0" marginheight="0" style="border: 0px none; vertical-align: bottom;"
+            role="region" aria-label="Advertisement" tabindex="0" data-google-container-id="6" data-load-complete="true"
+            width="728" height="90" frameborder="0"></iframe></div>
+      </div>
+    </div>
+    <div id="rightad_container" style="height: 6134px;">
+      <div id="rightad">
+        <div id="waldo-tag-1715" class="waldo-display-unit" style="min-width: 300px; min-height: 600px;"
+          data-processed="true" data-google-query-id="CIqgm8r5yvwCFfjKFgUdRuYLEg">
+          <div id="google_ads_iframe_/124067137,22550200400/learnopengl300x250FL_1_0__container__"
+            style="border: 0pt none;"><iframe id="google_ads_iframe_/124067137,22550200400/learnopengl300x250FL_1_0"
+              name="google_ads_iframe_/124067137,22550200400/learnopengl300x250FL_1_0" title="3rd party ad content"
+              scrolling="no" marginwidth="0" marginheight="0" style="border: 0px none; vertical-align: bottom;"
+              role="region" aria-label="Advertisement" tabindex="0"
+              sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
+              data-google-container-id="2" data-load-complete="true" width="300" height="600" frameborder="0"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div id="admessage">
+        If you're running AdBlock, please consider whitelisting this
+        site if you'd like to support LearnOpenGL; and no worries, I won't be
+        mad if you don't :)
+      </div>
+
+      <div id="rightonethirdad" style="">
+        <div id="waldo-tag-2246" class="waldo-display-unit" style="min-width: 300px; min-height: 600px;"
+          data-processed="true" data-google-query-id="CMP2mMr5yvwCFfjKFgUdRuYLEg">
+          <div id="google_ads_iframe_/124067137,22550200400/learnopengl300x600FL_2_0__container__"
+            style="border: 0pt none;"><iframe id="google_ads_iframe_/124067137,22550200400/learnopengl300x600FL_2_0"
+              name="google_ads_iframe_/124067137,22550200400/learnopengl300x600FL_2_0" title="3rd party ad content"
+              scrolling="no" marginwidth="0" marginheight="0" style="border: 0px none; vertical-align: bottom;"
+              role="region" aria-label="Advertisement" tabindex="0" data-google-container-id="4"
+              data-load-complete="true" width="300" height="600" frameborder="0"></iframe></div>
+        </div>
+      </div>
+
+      <div id="rightbottomad" style="display: block;">
+        <div id="waldo-tag-2247" class="waldo-display-unit" style="min-width: 300px; min-height: 600px;"
+          data-processed="true" data-google-query-id="CMT2mMr5yvwCFfjKFgUdRuYLEg">
+          <div id="google_ads_iframe_/124067137,22550200400/learnopengl300x600FL_3_0__container__"
+            style="border: 0pt none;"><iframe id="google_ads_iframe_/124067137,22550200400/learnopengl300x600FL_3_0"
+              name="google_ads_iframe_/124067137,22550200400/learnopengl300x600FL_3_0" title="3rd party ad content"
+              scrolling="no" marginwidth="0" marginheight="0" style="border: 0px none; vertical-align: bottom;"
+              role="region" aria-label="Advertisement" tabindex="0" data-google-container-id="5"
+              data-load-complete="true" width="300" height="250" frameborder="0"></iframe></div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div id="loading"></div>
+      <script>
+        $(document).ready(function () {
+          $('#menu-item4').mousedown(function () { MenuClick(4, true) });
+          $('#menu-item48').mousedown(function () { MenuClick(48, true) });
+          $('#menu-item56').mousedown(function () { MenuClick(56, true) });
+          $('#menu-item63').mousedown(function () { MenuClick(63, true) });
+          $('#menu-item100').mousedown(function () { MenuClick(100, true) });
+          $('#menu-item102').mousedown(function () { MenuClick(102, true) });
+          $('#menu-item113').mousedown(function () { MenuClick(113, true) });
+          $('#menu-item116').mousedown(function () { MenuClick(116, true) });
+          $('#menu-item78').mousedown(function () { MenuClick(78, true) });
+          $('#menu-item81').mousedown(function () { MenuClick(81, true) });
+          $('#menu-item85').mousedown(function () { MenuClick(85, true) });
+          $('#menu-item125').mousedown(function () { MenuClick(125, true) });
+          $('#menu-item128').mousedown(function () { MenuClick(128, true) });
+          $('#menu-item129').mousedown(function () { MenuClick(129, true) });
+          $('#menu-item133').mousedown(function () { MenuClick(133, true) });
+          $('#menu-item134').mousedown(function () { MenuClick(134, true) });
+          $('#menu-item138').mousedown(function () { MenuClick(138, true) });
+          $('#menu-item142').mousedown(function () { MenuClick(142, true) });
+          $('#menu-item143').mousedown(function () { MenuClick(143, true) });
+        }); 
+      </script><iframe src="LearnOpenGL%20-%20Creating%20a%20window_files/container.html"
+        style="visibility: hidden; display: none;"></iframe>
+      <div id="nav" style="height: 6134px;">
+        <div id="social">
+          <a href="https://github.com/JoeyDeVries/LearnOpenGL" target="_blank">
+            <img src="LearnOpenGL%20-%20Creating%20a%20window_files/github.png" class="social_ico">
+          </a>
+          <!-- <a href="https://www.facebook.com/Learnopengl-2199631333595544/" target="_blank">
+                <img src="/img/facebook.png" class="social_ico">
+            </a>-->
+          <a href="https://twitter.com/JoeyDeVriez" target="_blank">
+            <img src="LearnOpenGL%20-%20Creating%20a%20window_files/twitter.png" class="social_ico">
+          </a>
+
+        </div>
+        <img src="LearnOpenGL%20-%20Creating%20a%20window_files/nav-button_bottom-arrow.png" style="display: none">
+        <ol>
+          <li id="Introduction"><a id="menu-item1" href="https://learnopengl.com/Introduction">Introduction </a></li>
+          <li id="Getting-started"><span id="menu-item4" class="open">Getting started </span>
+            <ol id="menu-items-of4" style="">
+              <li id="Getting-started/OpenGL"><a id="menu-item49"
+                  href="https://learnopengl.com/Getting-started/OpenGL">OpenGL </a></li>
+              <li id="Getting-started/Creating-a-window"><a id="menu-item5"
+                  href="https://learnopengl.com/Getting-started/Creating-a-window" class="selected">Creating a window
+                </a></li>
+              <li id="Getting-started/Hello-Window"><a id="menu-item6"
+                  href="https://learnopengl.com/Getting-started/Hello-Window">Hello Window </a></li>
+              <li id="Getting-started/Hello-Triangle"><a id="menu-item38"
+                  href="https://learnopengl.com/Getting-started/Hello-Triangle">Hello Triangle </a></li>
+              <li id="Getting-started/Shaders"><a id="menu-item39"
+                  href="https://learnopengl.com/Getting-started/Shaders">Shaders </a></li>
+              <li id="Getting-started/Textures"><a id="menu-item40"
+                  href="https://learnopengl.com/Getting-started/Textures">Textures </a></li>
+              <li id="Getting-started/Transformations"><a id="menu-item43"
+                  href="https://learnopengl.com/Getting-started/Transformations">Transformations </a></li>
+              <li id="Getting-started/Coordinate-Systems"><a id="menu-item44"
+                  href="https://learnopengl.com/Getting-started/Coordinate-Systems">Coordinate Systems </a></li>
+              <li id="Getting-started/Camera"><a id="menu-item47"
+                  href="https://learnopengl.com/Getting-started/Camera">Camera </a></li>
+              <li id="Getting-started/Review"><a id="menu-item50"
+                  href="https://learnopengl.com/Getting-started/Review">Review </a></li>
+            </ol>
+          </li>
+          <li id="Lighting"><span id="menu-item48" class="closed">Lighting </span>
+            <ol id="menu-items-of48" style="display:none;">
+              <li id="Lighting/Colors"><a id="menu-item51" href="https://learnopengl.com/Lighting/Colors">Colors </a>
+              </li>
+              <li id="Lighting/Basic-Lighting"><a id="menu-item52"
+                  href="https://learnopengl.com/Lighting/Basic-Lighting">Basic Lighting </a></li>
+              <li id="Lighting/Materials"><a id="menu-item53"
+                  href="https://learnopengl.com/Lighting/Materials">Materials </a></li>
+              <li id="Lighting/Lighting-maps"><a id="menu-item54"
+                  href="https://learnopengl.com/Lighting/Lighting-maps">Lighting maps </a></li>
+              <li id="Lighting/Light-casters"><a id="menu-item55"
+                  href="https://learnopengl.com/Lighting/Light-casters">Light casters </a></li>
+              <li id="Lighting/Multiple-lights"><a id="menu-item58"
+                  href="https://learnopengl.com/Lighting/Multiple-lights">Multiple lights </a></li>
+              <li id="Lighting/Review"><a id="menu-item57" href="https://learnopengl.com/Lighting/Review">Review </a>
+              </li>
+            </ol>
+          </li>
+          <li id="Model-Loading"><span id="menu-item56" class="closed">Model Loading </span>
+            <ol id="menu-items-of56" style="display:none;">
+              <li id="Model-Loading/Assimp"><a id="menu-item59"
+                  href="https://learnopengl.com/Model-Loading/Assimp">Assimp </a></li>
+              <li id="Model-Loading/Mesh"><a id="menu-item60" href="https://learnopengl.com/Model-Loading/Mesh">Mesh
+                </a></li>
+              <li id="Model-Loading/Model"><a id="menu-item61" href="https://learnopengl.com/Model-Loading/Model">Model
+                </a></li>
+            </ol>
+          </li>
+          <li id="Advanced-OpenGL"><span id="menu-item63" class="closed">Advanced OpenGL </span>
+            <ol id="menu-items-of63" style="display:none;">
+              <li id="Advanced-OpenGL/Depth-testing"><a id="menu-item72"
+                  href="https://learnopengl.com/Advanced-OpenGL/Depth-testing">Depth testing </a></li>
+              <li id="Advanced-OpenGL/Stencil-testing"><a id="menu-item73"
+                  href="https://learnopengl.com/Advanced-OpenGL/Stencil-testing">Stencil testing </a></li>
+              <li id="Advanced-OpenGL/Blending"><a id="menu-item74"
+                  href="https://learnopengl.com/Advanced-OpenGL/Blending">Blending </a></li>
+              <li id="Advanced-OpenGL/Face-culling"><a id="menu-item77"
+                  href="https://learnopengl.com/Advanced-OpenGL/Face-culling">Face culling </a></li>
+              <li id="Advanced-OpenGL/Framebuffers"><a id="menu-item65"
+                  href="https://learnopengl.com/Advanced-OpenGL/Framebuffers">Framebuffers </a></li>
+              <li id="Advanced-OpenGL/Cubemaps"><a id="menu-item66"
+                  href="https://learnopengl.com/Advanced-OpenGL/Cubemaps">Cubemaps </a></li>
+              <li id="Advanced-OpenGL/Advanced-Data"><a id="menu-item69"
+                  href="https://learnopengl.com/Advanced-OpenGL/Advanced-Data">Advanced Data </a></li>
+              <li id="Advanced-OpenGL/Advanced-GLSL"><a id="menu-item67"
+                  href="https://learnopengl.com/Advanced-OpenGL/Advanced-GLSL">Advanced GLSL </a></li>
+              <li id="Advanced-OpenGL/Geometry-Shader"><a id="menu-item68"
+                  href="https://learnopengl.com/Advanced-OpenGL/Geometry-Shader">Geometry Shader </a></li>
+              <li id="Advanced-OpenGL/Instancing"><a id="menu-item70"
+                  href="https://learnopengl.com/Advanced-OpenGL/Instancing">Instancing </a></li>
+              <li id="Advanced-OpenGL/Anti-Aliasing"><a id="menu-item75"
+                  href="https://learnopengl.com/Advanced-OpenGL/Anti-Aliasing">Anti Aliasing </a></li>
+            </ol>
+          </li>
+          <li id="Advanced-Lighting"><span id="menu-item100" class="closed">Advanced Lighting </span>
+            <ol id="menu-items-of100" style="display:none;">
+              <li id="Advanced-Lighting/Advanced-Lighting"><a id="menu-item101"
+                  href="https://learnopengl.com/Advanced-Lighting/Advanced-Lighting">Advanced Lighting </a></li>
+              <li id="Advanced-Lighting/Gamma-Correction"><a id="menu-item110"
+                  href="https://learnopengl.com/Advanced-Lighting/Gamma-Correction">Gamma Correction </a></li>
+              <li id="Advanced-Lighting/Shadows"><span id="menu-item102" class="closed">Shadows </span>
+                <ol id="menu-items-of102" style="display:none;">
+                  <li id="Advanced-Lighting/Shadows/Shadow-Mapping"><a id="menu-item103"
+                      href="https://learnopengl.com/Advanced-Lighting/Shadows/Shadow-Mapping">Shadow Mapping </a></li>
+                  <li id="Advanced-Lighting/Shadows/Point-Shadows"><a id="menu-item104"
+                      href="https://learnopengl.com/Advanced-Lighting/Shadows/Point-Shadows">Point Shadows </a></li>
+                </ol>
+              </li>
+              <li id="Advanced-Lighting/Normal-Mapping"><a id="menu-item106"
+                  href="https://learnopengl.com/Advanced-Lighting/Normal-Mapping">Normal Mapping </a></li>
+              <li id="Advanced-Lighting/Parallax-Mapping"><a id="menu-item107"
+                  href="https://learnopengl.com/Advanced-Lighting/Parallax-Mapping">Parallax Mapping </a></li>
+              <li id="Advanced-Lighting/HDR"><a id="menu-item111"
+                  href="https://learnopengl.com/Advanced-Lighting/HDR">HDR </a></li>
+              <li id="Advanced-Lighting/Bloom"><a id="menu-item112"
+                  href="https://learnopengl.com/Advanced-Lighting/Bloom">Bloom </a></li>
+              <li id="Advanced-Lighting/Deferred-Shading"><a id="menu-item108"
+                  href="https://learnopengl.com/Advanced-Lighting/Deferred-Shading">Deferred Shading </a></li>
+              <li id="Advanced-Lighting/SSAO"><a id="menu-item109"
+                  href="https://learnopengl.com/Advanced-Lighting/SSAO">SSAO </a></li>
+            </ol>
+          </li>
+          <li id="PBR"><span id="menu-item113" class="closed">PBR </span>
+            <ol id="menu-items-of113" style="display:none;">
+              <li id="PBR/Theory"><a id="menu-item114" href="https://learnopengl.com/PBR/Theory">Theory </a></li>
+              <li id="PBR/Lighting"><a id="menu-item115" href="https://learnopengl.com/PBR/Lighting">Lighting </a></li>
+              <li id="PBR/IBL"><span id="menu-item116" class="closed">IBL </span>
+                <ol id="menu-items-of116" style="display:none;">
+                  <li id="PBR/IBL/Diffuse-irradiance"><a id="menu-item117"
+                      href="https://learnopengl.com/PBR/IBL/Diffuse-irradiance">Diffuse irradiance </a></li>
+                  <li id="PBR/IBL/Specular-IBL"><a id="menu-item118"
+                      href="https://learnopengl.com/PBR/IBL/Specular-IBL">Specular IBL </a></li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li id="In-Practice"><span id="menu-item78" class="closed">In Practice </span>
+            <ol id="menu-items-of78" style="display:none;">
+              <li id="In-Practice/Debugging"><a id="menu-item79"
+                  href="https://learnopengl.com/In-Practice/Debugging">Debugging </a></li>
+              <li id="In-Practice/Text-Rendering"><a id="menu-item80"
+                  href="https://learnopengl.com/In-Practice/Text-Rendering">Text Rendering </a></li>
+              <li id="In-Practice/2D-Game"><span id="menu-item81" class="closed">2D Game </span>
+                <ol id="menu-items-of81" style="display:none;">
+                  <li id="In-Practice/2D-Game/Breakout"><a id="menu-item82"
+                      href="https://learnopengl.com/In-Practice/2D-Game/Breakout">Breakout </a></li>
+                  <li id="In-Practice/2D-Game/Setting-up"><a id="menu-item88"
+                      href="https://learnopengl.com/In-Practice/2D-Game/Setting-up">Setting up </a></li>
+                  <li id="In-Practice/2D-Game/Rendering-Sprites"><a id="menu-item83"
+                      href="https://learnopengl.com/In-Practice/2D-Game/Rendering-Sprites">Rendering Sprites </a></li>
+                  <li id="In-Practice/2D-Game/Levels"><a id="menu-item84"
+                      href="https://learnopengl.com/In-Practice/2D-Game/Levels">Levels </a></li>
+                  <li id="In-Practice/2D-Game/Collisions"><span id="menu-item85" class="closed">Collisions </span>
+                    <ol id="menu-items-of85" style="display:none;">
+                      <li id="In-Practice/2D-Game/Collisions/Ball"><a id="menu-item95"
+                          href="https://learnopengl.com/In-Practice/2D-Game/Collisions/Ball">Ball </a></li>
+                      <li id="In-Practice/2D-Game/Collisions/Collision-detection"><a id="menu-item96"
+                          href="https://learnopengl.com/In-Practice/2D-Game/Collisions/Collision-detection">Collision
+                          detection </a></li>
+                      <li id="In-Practice/2D-Game/Collisions/Collision-resolution"><a id="menu-item97"
+                          href="https://learnopengl.com/In-Practice/2D-Game/Collisions/Collision-resolution">Collision
+                          resolution </a></li>
+                    </ol>
+                  </li>
+                  <li id="In-Practice/2D-Game/Particles"><a id="menu-item89"
+                      href="https://learnopengl.com/In-Practice/2D-Game/Particles">Particles </a></li>
+                  <li id="In-Practice/2D-Game/Postprocessing"><a id="menu-item90"
+                      href="https://learnopengl.com/In-Practice/2D-Game/Postprocessing">Postprocessing </a></li>
+                  <li id="In-Practice/2D-Game/Powerups"><a id="menu-item91"
+                      href="https://learnopengl.com/In-Practice/2D-Game/Powerups">Powerups </a></li>
+                  <li id="In-Practice/2D-Game/Audio"><a id="menu-item94"
+                      href="https://learnopengl.com/In-Practice/2D-Game/Audio">Audio </a></li>
+                  <li id="In-Practice/2D-Game/Render-text"><a id="menu-item92"
+                      href="https://learnopengl.com/In-Practice/2D-Game/Render-text">Render text </a></li>
+                  <li id="In-Practice/2D-Game/Final-thoughts"><a id="menu-item93"
+                      href="https://learnopengl.com/In-Practice/2D-Game/Final-thoughts">Final thoughts </a></li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li id="Guest-Articles"><span id="menu-item125" class="closed">Guest Articles </span>
+            <ol id="menu-items-of125" style="display:none;">
+              <li id="Guest-Articles/How-to-publish"><a id="menu-item126"
+                  href="https://learnopengl.com/Guest-Articles/How-to-publish">How to publish </a></li>
+              <li id="Guest-Articles/2020"><span id="menu-item128" class="closed">2020 </span>
+                <ol id="menu-items-of128" style="display:none;">
+                  <li id="Guest-Articles/2020/OIT"><span id="menu-item129" class="closed">OIT </span>
+                    <ol id="menu-items-of129" style="display:none;">
+                      <li id="Guest-Articles/2020/OIT/Introduction"><a id="menu-item130"
+                          href="https://learnopengl.com/Guest-Articles/2020/OIT/Introduction">Introduction </a></li>
+                      <li id="Guest-Articles/2020/OIT/Weighted-Blended"><a id="menu-item132"
+                          href="https://learnopengl.com/Guest-Articles/2020/OIT/Weighted-Blended">Weighted Blended </a>
+                      </li>
+                    </ol>
+                  </li>
+                  <li id="Guest-Articles/2020/Skeletal-Animation"><a id="menu-item131"
+                      href="https://learnopengl.com/Guest-Articles/2020/Skeletal-Animation">Skeletal Animation </a></li>
+                </ol>
+              </li>
+              <li id="Guest-Articles/2021"><span id="menu-item133" class="closed">2021 </span>
+                <ol id="menu-items-of133" style="display:none;">
+                  <li id="Guest-Articles/2021/CSM"><a id="menu-item137"
+                      href="https://learnopengl.com/Guest-Articles/2021/CSM">CSM </a></li>
+                  <li id="Guest-Articles/2021/Scene"><span id="menu-item134" class="closed">Scene </span>
+                    <ol id="menu-items-of134" style="display:none;">
+                      <li id="Guest-Articles/2021/Scene/Scene-Graph"><a id="menu-item135"
+                          href="https://learnopengl.com/Guest-Articles/2021/Scene/Scene-Graph">Scene Graph </a></li>
+                      <li id="Guest-Articles/2021/Scene/Frustum-Culling"><a id="menu-item136"
+                          href="https://learnopengl.com/Guest-Articles/2021/Scene/Frustum-Culling">Frustum Culling </a>
+                      </li>
+                    </ol>
+                  </li>
+                  <li id="Guest-Articles/2021/Tessellation"><span id="menu-item138" class="closed">Tessellation </span>
+                    <ol id="menu-items-of138" style="display:none;">
+                      <li id="Guest-Articles/2021/Tessellation/Height-map"><a id="menu-item139"
+                          href="https://learnopengl.com/Guest-Articles/2021/Tessellation/Height-map">Height map </a>
+                      </li>
+                      <li id="Guest-Articles/2021/Tessellation/Tessellation"><a id="menu-item140"
+                          href="https://learnopengl.com/Guest-Articles/2021/Tessellation/Tessellation">Tessellation </a>
+                      </li>
+                    </ol>
+                  </li>
+                  <li id="Guest-Articles/2021/DSA"><a id="menu-item141"
+                      href="https://learnopengl.com/Guest-Articles/2021/DSA">DSA </a></li>
+                </ol>
+              </li>
+              <li id="Guest-Articles/2022"><span id="menu-item142" class="closed">2022 </span>
+                <ol id="menu-items-of142" style="display:none;">
+                  <li id="Guest-Articles/2022/Compute-Shaders"><span id="menu-item143" class="closed">Compute Shaders
+                    </span>
+                    <ol id="menu-items-of143" style="display:none;">
+                      <li id="Guest-Articles/2022/Compute-Shaders/Introduction"><a id="menu-item144"
+                          href="https://learnopengl.com/Guest-Articles/2022/Compute-Shaders/Introduction">Introduction
+                        </a></li>
+                    </ol>
+                  </li>
+                  <li id="Guest-Articles/2022/Phys.-Based-Bloom"><a id="menu-item145"
+                      href="https://learnopengl.com/Guest-Articles/2022/Phys.-Based-Bloom">Phys. Based Bloom </a></li>
+                  <li id="Guest-Articles/2022/Area-Lights"><a id="menu-item146"
+                      href="https://learnopengl.com/Guest-Articles/2022/Area-Lights">Area Lights </a></li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li id="Code-repository"><a id="menu-item99" href="https://learnopengl.com/Code-repository">Code repository
+            </a></li>
+          <li id="Translations"><a id="menu-item119" href="https://learnopengl.com/Translations">Translations </a></li>
+          <li id="About"><a id="menu-item2" href="https://learnopengl.com/About">About </a></li>
+        </ol>
+        <div id="menu_book">
+          <a href="https://geni.us/learnopengl" target="_blank"><img
+              src="LearnOpenGL%20-%20Creating%20a%20window_files/below_menu.png" class="clean"></a>
+        </div>
+        <div id="donate">
+          <a href="https://www.paypal.me/learnopengl/" target="_blank">
+            <div id="donate_img"></div>
+            <img style="display: none" src="LearnOpenGL%20-%20Creating%20a%20window_files/donate_button_hover.png">
+            <!--<img id="donate_img" src="img/patreon.png"/>-->
+          </a>
+          <!--<div id="alipay">
+            <img style="width: 150px;" class="clean" src="/img/alipay_logo.png"/>
+            <img style="width: 150px; margin-top: 5px" src="/img/alipay.png"/>
+          </div>-->
+        </div>
+
+        <div class="btc">
+          <h3>BTC</h3>
+          <p>
+            1CLGKgmBSuYJ1nnvDGAepVTKNNDpUjfpRa
+          </p>
+          <img src="LearnOpenGL%20-%20Creating%20a%20window_files/btc_qr_new.png">
+        </div>
+        <div class="btc">
+          <h3>ETH/ERC20</h3>
+          <p>
+            0x1de59bd9e52521a46309474f8372531533bd7c43
+          </p>
+          <img src="LearnOpenGL%20-%20Creating%20a%20window_files/erc20_qr_new.png">
+        </div>
+
+        <div id="ad">
+          <!--<div id="waldo-tag-1684"></div>-->
+        </div>
+
+        <div id="lefttwothirdad" style="">
+          <div id="waldo-tag-2245" class="waldo-display-unit" style="min-width: 300px; min-height: 600px;"
+            data-processed="true" data-google-query-id="CML2mMr5yvwCFfjKFgUdRuYLEg">
+            <div id="google_ads_iframe_/124067137,22550200400/learnopengl300x600FL_1_0__container__"
+              style="border: 0pt none;"><iframe id="google_ads_iframe_/124067137,22550200400/learnopengl300x600FL_1_0"
+                name="google_ads_iframe_/124067137,22550200400/learnopengl300x600FL_1_0" title="3rd party ad content"
+                scrolling="no" marginwidth="0" marginheight="0" style="border: 0px none; vertical-align: bottom;"
+                role="region" aria-label="Advertisement" tabindex="0" data-google-container-id="3"
+                data-load-complete="true" width="300" height="600" frameborder="0"></iframe></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="content">
+        <h1 id="content-title">Creating a window</h1>
+        <h1 id="content-url" style="display:none;">Getting-started/Creating-a-window</h1>
+        <p>
+          The first thing we need to do before we start creating stunning
+          graphics is to create an OpenGL context and an application window to
+          draw in. However, those operations are specific per operating system and
+          OpenGL purposefully tries to abstract itself from these operations.
+          This means we have to create a window, define a context, and handle user
+          input all by ourselves.
+        </p>
+
+        <p>
+          Luckily, there are quite a few libraries out there that provide the
+          functionality we seek, some specifically aimed at OpenGL. Those
+          libraries save us all the operation-system specific work and give us a
+          window and an OpenGL context to render in. Some of the more popular
+          libraries are GLUT, SDL, SFML and GLFW. On LearnOpenGL we will be using <strong>GLFW</strong>. Feel free to
+          use any of the other libraries, the setup for most is similar to GLFW's setup.
+        </p>
+
+        <h2> GLFW </h2>
+        <p>
+          GLFW is a library, written in C, specifically targeted at OpenGL. GLFW
+          gives us the bare necessities required for rendering goodies to the
+          screen. It allows us to create an OpenGL context, define window
+          parameters, and handle user input, which is plenty enough for our
+          purposes.
+        </p>
+
+        <p>
+          The focus of this and the next chapter is to get GLFW up and running,
+          making sure it properly creates an OpenGL context and that it displays a
+          simple window for us to mess around in. This chapter takes a
+          step-by-step approach in retrieving, building and linking the GLFW
+          library. We'll use Microsoft Visual Studio 2019 IDE as of this writing
+          (note that the process is the same on the more recent visual studio
+          versions). If you're not using Visual Studio (or an older version) don't
+          worry, the process will be similar on most other IDEs.
+        </p>
+
+        <h2>Building GLFW</h2>
+        <p>
+          GLFW can be obtained from their webpage's <a href="http://www.glfw.org/download.html"
+            target="_blank">download</a>
+          page. GLFW already has pre-compiled binaries and header files for
+          Visual Studio 2012 up to 2019, but for completeness' sake we will
+          compile GLFW ourselves from the source code. This is to give you a feel
+          for the process of compiling open-source libraries yourself as not every
+          library will have pre-compiled binaries available. So let's download
+          the <em>Source package</em>.
+        </p>
+
+        <warning>
+          We'll be building all libraries as 64-bit binaries so make sure to get
+          the 64-bit binaries if you're using their pre-compiled binaries.
+        </warning>
+
+        <p>
+          Once you've downloaded the source package, extract it and open its content. We are only interested in a few
+          items:
+
+        </p>
+        <ul>
+          <li>The resulting library from compilation.</li>
+          <li>The <strong>include</strong> folder.</li>
+        </ul>
+
+        <p>
+          Compiling the library from the source code guarantees that the
+          resulting library is perfectly tailored for your CPU/OS, a luxury
+          pre-compiled binaries don't always provide (sometimes, pre-compiled
+          binaries are not available for your system). The problem with providing
+          source code to the open world however is that not everyone uses the same
+          IDE or build system for developing their application, which means the
+          project/solution files provided may not be compatible with other
+          people's setup.
+          So people then have to setup their own project/solution with the given
+          .c/.cpp and .h/.hpp files, which is cumbersome. Exactly for those
+          reasons there is a tool called CMake.
+        </p>
+
+        <h3>CMake</h3>
+        <p>
+          CMake is a tool that can generate project/solution files of the user's
+          choice (e.g. Visual Studio, Code::Blocks, Eclipse) from a collection of
+          source code files using pre-defined CMake scripts. This allows us to
+          generate a Visual Studio 2019 project file from GLFW's source package
+          which we can use to compile the library. First we need to download and
+          install CMake which can be downloaded on their <a href="http://www.cmake.org/cmake/resources/software.html"
+            target="_blank">download</a> page.
+        </p>
+
+        <p>
+          Once CMake is installed you can choose to run CMake from the command
+          line or through their GUI. Since we're not trying to overcomplicate
+          things we're going to use the GUI. CMake requires a source code folder
+          and a destination folder for the binaries. For the source code folder
+          we're going to choose the root folder of the downloaded GLFW source
+          package and for the build folder we're creating a new directory <em>build</em> and then select that directory.
+        </p>
+
+        <img src="LearnOpenGL%20-%20Creating%20a%20window_files/cmake.png" alt="Image of CMake's logo" width="800px">
+
+        <p>
+          Once the source and destination folders have been set, click the <code>Configure</code>
+          button so CMake can read the required settings and the source code. We
+          then have to choose the generator for the project and since we're using
+          Visual Studio 2019 we will choose the <code>Visual Studio 16</code>
+          option (Visual Studio 2019 is also known as Visual Studio 16). CMake
+          will then display the possible build options to configure the resulting
+          library. We can leave them to their default values and click <code>Configure</code> again to store the
+          settings. Once the settings have been set, we click <code>Generate</code> and the resulting project files will
+          be generated in your <code>build</code> folder.
+        </p>
+
+        <h3>Compilation</h3>
+        <p>
+          In the <code>build</code> folder a file named <code>GLFW.sln</code>
+          can now be found and we open it with Visual Studio 2019. Since CMake
+          generated a project file that already contains the proper configuration
+          settings we only have to build the solution. CMake should've
+          automatically configured the solution so it compiles to a 64-bit
+          library; now hit build solution. This will give us a compiled library
+          file that can be found in <code>build/src/Debug</code> named <code>glfw3.lib</code>.</p>
+
+        <p>
+          Once we generated the library we need to make sure the IDE knows where
+          to find the library and the include files for our OpenGL program. There
+          are two common approaches in doing this:
+        </p>
+        <ol>
+          <li> We find the <code>/lib</code> and <code>/include</code> folders of the IDE/compiler and add the content
+            of GLFW's <code>include</code> folder to the IDE's <code>/include</code> folder and similarly add
+            <code>glfw3.lib</code> to the IDE's <code>/lib</code>
+            folder. This works, but it's is not the recommended approach. It's hard
+            to keep track of your library and include files and a new installation
+            of your IDE/compiler results in you having to do this process all over
+            again. </li>
+          <li>
+            Another approach (and recommended) is to create a new set of
+            directories at a location of your choice that contains all the header
+            files/libraries from third party libraries to which you can refer to
+            from your IDE/compiler. You could, for instance, create a single folder
+            that contains a <code>Libs</code> and <code>Include</code> folder where
+            we store all our library and header files respectively for OpenGL
+            projects. Now all the third party libraries are organized within a
+            single location (that can be shared across multiple computers). The
+            requirement is, however, that each time we create a new project we have
+            to tell the IDE where to find those directories.
+          </li>
+        </ol>
+        Once the required files are stored at a location of your choice, we can start creating our first OpenGL GLFW
+        project.
+        <p></p>
+
+        <h2>Our first project</h2>
+        <p>
+          First, let's open up Visual Studio and create a new project. Choose C++ if multiple options are given and take
+          the <code>Empty Project</code>
+          (don't forget to give your project a suitable name). Since we're going
+          to be doing everything in 64-bit and the project defaults to 32-bit,
+          we'll need to change the dropdown at the top next to Debug from x86 to
+          x64:
+        </p>
+
+        <img src="LearnOpenGL%20-%20Creating%20a%20window_files/x64.png" alt="Image of how to switch from x86 to x64">
+
+        <p>
+          Once that's done, we now have a workspace to create our very first OpenGL application!
+        </p>
+
+        <h2>Linking</h2>
+        <p>
+          In order for the project to use GLFW we need to <def>link</def> the library with our project. This can be done
+          by specifying we want to use <code>glfw3.lib</code> in the linker settings, but our project does not yet know
+          where to find <code>glfw3.lib</code> since we store our third party libraries in a different directory. We
+          thus need to add this directory to the project first.
+        </p>
+
+        <p>
+          We can tell the IDE to take this directory into account when it needs
+          to look for library and include files. Right-click the project name in
+          the solution explorer and then go to <code>VC++ Directories</code> as seen in the image below:
+        </p>
+
+        <img src="LearnOpenGL%20-%20Creating%20a%20window_files/vc_directories.png"
+          alt="Image of Visual Studio's VC++ Directories configuration" width="600px">
+
+        <p>
+          From there on out you can add your own directories to let the project
+          know where to search. This can be done by manually inserting it into the
+          text or clicking the appropriate location string and selecting the <code>&lt;Edit..&gt;</code> option. Do this
+          for both the <code>Library Directories</code> and <code>Include Directories</code>:
+        </p>
+
+        <img src="LearnOpenGL%20-%20Creating%20a%20window_files/include_directories.png"
+          alt="Image of Visual Studio's Include Directories configuration" width="600px">
+
+        <p>
+          Here you can add as many extra directories as you'd like and from that
+          point on the IDE will also search those directorie when searching for
+          library and header files. As soon as your <code>Include</code> folder from GLFW is included, you will be able
+          to find all the header files for GLFW by including <code>&lt;GLFW/..&gt;</code>. The same applies for the
+          library directories.
+        </p>
+
+        <p>
+          Since VS can now find all the required files we can finally link GLFW to the project by going to the
+          <code>Linker</code> tab and <code>Input</code>:
+        </p>
+
+        <img src="LearnOpenGL%20-%20Creating%20a%20window_files/linker_input.png"
+          alt="Image of Visual Studio's link configuration" width="600px">
+
+        <p>
+          To then link to a library you'd have to specify the name of the library to the linker. Since the library name
+          is <code>glfw3.lib</code>, we add that to the <code>Additional Dependencies</code> field (either manually or
+          using the <code>&lt;Edit..&gt;</code>
+          option) and from that point on GLFW will be linked when we compile. In
+          addition to GLFW we should also add a link entry to the OpenGL library,
+          but this may differ per operating system:
+        </p>
+
+        <h3>OpenGL library on Windows</h3>
+        <p>
+          If you're on Windows the OpenGL library <code>opengl32.lib</code>
+          comes with the Microsoft SDK, which is installed by default when you
+          install Visual Studio. Since this chapter uses the VS compiler and is on
+          windows we add <code>opengl32.lib</code> to the linker settings. Note that the 64-bit equivalent of the OpenGL
+          library is called <code>opengl32.lib</code>, just like the 32-bit equivalent, which is a bit of an unfortunate
+          name.
+        </p>
+
+        <h3>OpenGL library on Linux</h3>
+        <p>
+          On Linux systems you need to link to the <code>libGL.so</code> library by adding <code>-lGL</code>
+          to your linker settings. If you can't find the library you probably
+          need to install any of the Mesa, NVidia or AMD dev packages.
+        </p>
+
+        <p>
+          Then, once you've added both the GLFW and OpenGL library to the linker
+          settings you can include the header files for GLFW as follows:
+        </p>
+
+        <pre><code class=" hljs cpp">
+<span class="hljs-preprocessor">#include &lt;GLFW/glfw3.h&gt;</span>
+</code></pre>
+
+        <note>
+          For Linux users compiling with GCC, the following command line options may help you compile the project:
+          <code>-lglfw3 -lGL -lX11 -lpthread -lXrandr -lXi -ldl</code>. Not correctly linking the corresponding
+          libraries will generate many <em>undefined reference</em> errors.
+        </note>
+
+        <p>
+          This concludes the setup and configuration of GLFW.
+        </p>
+
+        <h2>GLAD</h2>
+        <p>
+          We're still not quite there yet, since there is one other thing we
+          still need to do. Because OpenGL is only really a standard/specification
+          it is up to the driver manufacturer to implement the specification to a
+          driver that the specific graphics card supports. Since there are many
+          different versions of OpenGL drivers, the location of most of its
+          functions is not known at compile-time and needs to be queried at
+          run-time. It is then the task of the developer to retrieve the location
+          of the functions he/she needs and store them in function pointers for
+          later use. Retrieving those locations is <a href="https://www.khronos.org/opengl/wiki/Load_OpenGL_Functions"
+            target="_blank">OS-specific</a>. In Windows it looks something like this:
+        </p>
+
+        <pre><code class=" hljs cpp">
+<span class="hljs-comment">// define the function's prototype</span>
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">void</span> (*GL_GENBUFFERS) (<span class="hljs-keyword">GLsizei</span>, <span class="hljs-keyword">GLuint</span>*);
+<span class="hljs-comment">// find the function and assign it to a function pointer</span>
+GL_GENBUFFERS <function id="12">glGenBuffers</function>  = (GL_GENBUFFERS)wglGetProcAddress(<span class="hljs-string">"</span><function id="12"><span class="hljs-string">glGenBuffers</span></function><span class="hljs-string">"</span>);
+<span class="hljs-comment">// function can now be called as normal</span>
+<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> buffer;
+<function id="12">glGenBuffers</function>(<span class="hljs-number">1</span>, &amp;buffer);
+</code></pre>
+
+        <p>
+          As you can see the code looks complex and it's a cumbersome process
+          to do this for each function you may need that is not yet declared.
+          Thankfully, there are libraries for this purpose as well where <strong>GLAD</strong> is a popular and
+          up-to-date library.
+        </p>
+
+        <h3>Setting up GLAD</h3>
+        <p>
+          GLAD is an <a href="https://github.com/Dav1dde/glad" target="_blank">open source</a>
+          library that manages all that cumbersome work we talked about. GLAD has
+          a slightly different configuration setup than most common open source
+          libraries. GLAD uses a <a href="http://glad.dav1d.de/" target="_blank">web service</a>
+          where we can tell GLAD for which version of OpenGL we'd like to define
+          and load all relevant OpenGL functions according to that version.
+        </p>
+
+        <p>
+          Go to the GLAD <a href="http://glad.dav1d.de/" target="_blank">web service</a>,
+          make sure the language is set to C++, and in the API section select an
+          OpenGL version of at least 3.3 (which is what we'll be using; higher
+          versions are fine as well). Also make sure the profile is set to <em>Core</em> and that the <em>Generate a
+            loader</em> option is ticked. Ignore the extensions (for now) and click <em>Generate</em> to produce the
+          resulting library files.
+        </p>
+
+        <p>
+          GLAD by now should have provided you a zip file containing two include folders, and a single
+          <code>glad.c</code> file. Copy both include folders (<code>glad</code> and <code>KHR</code>) into your
+          include(s) directoy (or add an extra item pointing to these folders), and add the <code>glad.c</code> file to
+          your project.
+        </p>
+
+        <p>
+          After the previous steps, you should be able to add the following include directive above your file:
+        </p>
+
+        <pre><code class=" hljs cpp">
+<span class="hljs-preprocessor">#include &lt;glad/glad.h&gt; </span>
+</code></pre>
+
+        <p>
+          Hitting the compile button shouldn't give you any errors, at which point we're set to go for the <a
+            href="https://learnopengl.com/Getting-started/Hello-Window" target="_blank">next</a>
+          chapter where we'll discuss how we can actually use GLFW and GLAD to
+          configure an OpenGL context and spawn a window. Be sure to check that
+          all your include and library directories are correct and that the
+          library names in the linker settings match the corresponding libraries.
+        </p>
+
+        <h2>Additional resources</h2>
+        <ul>
+          <li><a href="http://www.glfw.org/docs/latest/window_guide.html" target="_blank">GLFW: Window Guide</a>:
+            official GLFW guide on setting up and configuring a GLFW window.</li>
+          <li><a href="http://www.opengl-tutorial.org/miscellaneous/building-your-own-c-application/"
+              target="_blank">Building applications</a>:
+            provides great info about the compilation/linking process of your
+            application and a large list of possible errors (plus solutions) that
+            may come up.</li>
+          <li><a href="http://wiki.codeblocks.org/index.php?title=Using_GLFW_with_Code::Blocks" target="_blank">GLFW
+              with Code::Blocks</a>: building GLFW in Code::Blocks IDE.</li>
+          <li><a href="http://www.cmake.org/runningcmake/" target="_blank">Running CMake</a>: short overview of how to
+            run CMake on both Windows and Linux.</li>
+          <li><a href="https://learnopengl.com/demo/autotools_tutorial.txt" target="_blank">Writing a build system under
+              Linux</a>: an autotools tutorial by Wouter Verholst on how to write a build system in Linux.</li>
+          <li><a href="https://github.com/Polytonic/Glitter" target="_blank">Polytonic/Glitter</a>:
+            a simple boilerplate project that comes pre-configured with all
+            relevant libraries; great for if you want a sample project without the
+            hassle of having to compile all the libraries yourself.</li>
+        </ul>
+
+
+      </div>
+
+      <div id="hover">
+        HI
+      </div>
+      <!-- 728x90/320x50 sticky footer -->
+      <div id="waldo-sticky-footer-wrapper">
+        <div id="waldo-sticky-footer-inner">
+          <div id="waldo-close-button" style="margin-left: auto; margin-right: auto; text-align: right;"><a
+              style="text-decoration: none;" href="#">Close X</a></div>
+          <div id="waldo-tag-6196" data-google-query-id="CI-gm8r5yvwCFfjKFgUdRuYLEg">
+            <div id="google_ads_iframe_/124067137,22550200400/learnopengl728x90FS_1_0__container__"
+              style="border: 0pt none; width: 728px; height: 90px;"><iframe
+                id="google_ads_iframe_/124067137,22550200400/learnopengl728x90FS_1_0"
+                name="google_ads_iframe_/124067137,22550200400/learnopengl728x90FS_1_0" title="3rd party ad content"
+                scrolling="no" marginwidth="0" marginheight="0" style="border: 0px none; vertical-align: bottom;"
+                role="region" aria-label="Advertisement" tabindex="0"
+                sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
+                data-google-container-id="7" data-load-complete="true" width="728" height="90" frameborder="0"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="disqus_thread"></div>
+
+
+
+
+    </div> <!-- container div -->
+
+
+  </div> <!-- super container div -->
+
+  <iframe src="LearnOpenGL%20-%20Creating%20a%20window_files/sync.html"
+    style="display: none; visibility: hidden;"></iframe><iframe style="display: none;"
+    name="__tcfapiLocator"></iframe><img
+    style="display: none !important; width: 1px !important; height: 1px !important;"
+    src="LearnOpenGL%20-%20Creating%20a%20window_files/px_002.gif"><img
+    style="display: none !important; width: 1px !important; height: 1px !important;"
+    src="LearnOpenGL%20-%20Creating%20a%20window_files/favicon.ico"><img
+    style="display: none !important; width: 1px !important; height: 1px !important;"
+    src="LearnOpenGL%20-%20Creating%20a%20window_files/px.gif">
+  <div id="confiant_tag_holder" style="display:none"></div><iframe src="https://www.google.com/recaptcha/api2/aframe"
+    style="display: none;" width="0" height="0"></iframe>
+</body><iframe sandbox="allow-scripts allow-same-origin" id="445d4a60c05f34c98" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="https://js-sec.indexww.com/um/ixmatch.html" width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="4460124da5c2ef1c" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="LearnOpenGL%20-%20Creating%20a%20window_files/sync_002.html" width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="4472a8527cdc956f" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="LearnOpenGL%20-%20Creating%20a%20window_files/usync.html" width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="4485a5d04d62014b" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="https://ups.analytics.yahoo.com/ups/58569/occ?https%3A%2F%2Fsync.adtelligent.com%2Fcsync%3Ft%3Da%26ep%3D545487%26extuid%3D%24UID"
+  width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="4493af1c06de14bc8" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="https://eb2.3lift.com/sync?us_privacy=1---&amp;" width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="45066b335004dc658" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="https://sync-tm.everesttech.net/upi/pid/URnmbSKM?redir=https%3A%2F%2Fusersync.gumgum.com%2Fusersync%3Fb%3Datm%26i%3D%24%7BTM_USER_ID%7D&amp;gdpr=0&amp;gdpr_consent="
+  width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="45163b17a9d8c835" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="https://match.adsrvr.org/track/cmf/generic?ttd_pid=gumgum&amp;ttd_tpi=1&amp;gdpr=0&amp;gdpr_consent=" width="0"
+  height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="4527f16a4342ed4f8" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="LearnOpenGL%20-%20Creating%20a%20window_files/user_sync.html" width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="453ce8b75ea3d301" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="LearnOpenGL%20-%20Creating%20a%20window_files/a_005.html" width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="454ab0478a4d61598" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="https://jp-u.openx.net/w/1.0/pd?plm=10&amp;ph=e34aac42-0d1e-4d32-9386-02b79d6d1152&amp;gdpr=0&amp;us_privacy=1---"
+  width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="455bae90d03bce4b" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="LearnOpenGL%20-%20Creating%20a%20window_files/sync_004.html" width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="45662a35e7ff72a" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="LearnOpenGL%20-%20Creating%20a%20window_files/a_006.html" width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="45727deb6de4cef8" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="//ic.tynt.com/r/d?m=xch&amp;rt=html&amp;gdpr=0gdpr_consent=&amp;us_privacy=1---&amp;ru=https%3A%2F%2Fsync.adtelligent.com%2Fcsync%3Ft%3Da%26ep%3D304056%26extuid%3D33XUSERID33X"
+  width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="458050c0c8c2dd3b8" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="https://sync.mathtag.com/sync/img?mt_exid=71&amp;gdpr=0&amp;gdpr_consent=&amp;redir=https%3a%2f%2fusersync.gumgum.com%2fusersync%3fb%3dmmh%26i%3d%5bMM_UUID%5d"
+  width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="4598f394dc87ad58" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="LearnOpenGL%20-%20Creating%20a%20window_files/apacdex.html" width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="46040451fa105c2f" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="LearnOpenGL%20-%20Creating%20a%20window_files/async_usersync.html" width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="461cd1cc467b2eed8" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="LearnOpenGL%20-%20Creating%20a%20window_files/load-cookie.html" width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="4625f29b46df90d88" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="LearnOpenGL%20-%20Creating%20a%20window_files/index.html" width="0" height="0" frameborder="0">
+</iframe><iframe sandbox="allow-scripts allow-same-origin" id="46397007a50d5e628" allowtransparency="true"
+  marginheight="0" marginwidth="0" hspace="0" vspace="0" style="height:0px;width:0px;display:none;" scrolling="no"
+  src="https://cm.g.doubleclick.net/pixel?google_nid=gumgum_dbm&amp;google_hm=YV8wYzc3MmZkMy1mNzVhLTQ4ZjMtODEzOS05Nzc2YWViZGJmZWM=&amp;gdpr=0&amp;gdpr_consent="
+  width="0" height="0" frameborder="0">
+</iframe>
+
+</html>
