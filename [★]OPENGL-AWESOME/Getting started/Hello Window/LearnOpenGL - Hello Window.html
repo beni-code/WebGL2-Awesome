@@ -1404,6 +1404,7 @@
           Let's see if we can get GLFW up and running. First, create a <code>.cpp</code> file and add the following
           includes to the top of your newly created file.
         </p>
+        <p>让我们看看能否启动并运行 GLFW。 首先，创建一个 .cpp 文件并将以下内容添加到新创建的文件的顶部。</p>
 
         <pre><code class=" hljs cpp">
 <span class="hljs-preprocessor">#include &lt;glad/glad.h&gt;</span>
@@ -1414,12 +1415,15 @@
           Be sure to include GLAD before GLFW. The include file for GLAD includes the required OpenGL headers behind the
           scenes (like <code>GL/gl.h</code>) so be sure to include GLAD before other header files that require OpenGL
           (like GLFW).
+
+          <br><br>
+          请务必在 GLFW 之前包含 GLAD。 GLAD 的包含文件在幕后包含所需的 OpenGL 头文件（如 GL/gl.h），因此请务必在其他需要 OpenGL 的头文件（如 GLFW）之前包含 GLAD。
         </warning>
 
         <p>
           Next, we create the <fun>main</fun> function where we will instantiate the GLFW window:
         </p>
-
+        <p>接下来，我们创建 main 函数，我们将在其中实例化 GLFW 窗口：</p>
         <pre><code class=" hljs cpp">
 <span class="hljs-keyword">int</span> main()
 {
@@ -1450,6 +1454,12 @@
         </p>
 
         <p>
+          在主函数中，我们首先使用 glfwInit 初始化 GLFW，之后我们可以使用 glfwWindowHint 配置 GLFW。 glfwWindowHint 的第一个参数告诉我们要配置什么选项，在这里我们可以从以
+          GLFW_ 为前缀的大量可能选项中选择选项。 第二个参数是一个整数，它设置我们选项的值。 可以在 GLFW 的窗口处理文档中找到所有可能选项及其对应值的列表。
+          如果您现在尝试运行该应用程序并且它给出了很多未定义的引用错误，这意味着您没有成功链接 GLFW 库。
+        </p>
+
+        <p>
           Since the focus of this book is on OpenGL version 3.3 we'd like to
           tell GLFW that 3.3 is the OpenGL version we want to use. This way GLFW
           can make the proper arrangements when creating the OpenGL context. This
@@ -1463,6 +1473,13 @@
           initialization code for it to work.
         </p>
 
+        <p>
+          由于本书的重点是 OpenGL 版本 3.3，我们想告诉 GLFW 3.3 是我们想要使用的 OpenGL 版本。 这样 GLFW 就可以在创建 OpenGL 上下文时做出适当的安排。 这确保当用户没有正确的
+          OpenGL 版本时，GLFW 无法运行。 我们将主要版本和次要版本都设置为 3。我们还告诉 GLFW 我们要明确使用核心配置文件。 告诉 GLFW 我们想要使用 core-profile 意味着我们可以访问更小的
+          OpenGL 功能子集，而无需向后兼容我们不再需要的功能。 请注意，在 Mac OS X 上，您需要添加 glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+          到您的初始化代码以使其工作。
+        </p>
+
         <note>
           Make sure you have OpenGL versions 3.3 or higher installed on your
           system/hardware otherwise the application will crash or display
@@ -1473,6 +1490,11 @@
           for Windows. If your supported version is lower try to check if your
           video card supports OpenGL 3.3+ (otherwise it's really old) and/or
           update your drivers.
+
+          <br>
+          <br>
+          确保您的系统/硬件上安装了 OpenGL 3.3 或更高版本，否则应用程序将崩溃或显示未定义的行为。 要在您的机器上查找 OpenGL 版本，请在 Linux 机器上调用 glxinfo 或使用适用于 Windows 的
+          OpenGL Extension Viewer 等实用程序。 如果您支持的版本较低，请尝试检查您的视频卡是否支持 OpenGL 3.3+（否则它真的很旧）和/或更新您的驱动程序。
         </note>
 
         <p>
@@ -1480,6 +1502,9 @@
           Next we're required to create a window object. This window object
           holds all the windowing data and is required by most of GLFW's other
           functions.
+        </p>
+        <p>
+          接下来我们需要创建一个窗口对象。 这个窗口对象包含所有的窗口数据，并且是大多数 GLFW 的其他函数所需要的。
         </p>
 
         <pre><code class=" hljs cpp">
@@ -1505,13 +1530,15 @@ GLFWwindow* window = <function id="20">glfwCreateWindow</function>(<span class="
           tell GLFW to make the context of our window the main context on the
           current thread.
         </p>
+        <p>glfwCreateWindow 函数需要窗口宽度和高度分别作为其前两个参数。 第三个参数允许我们为窗口创建一个名称； 现在我们称它为“LearnOpenGL”，但您可以随意命名。 我们可以忽略最后两个参数。
+          该函数返回一个 GLFWwindow 对象，我们稍后将需要它来进行其他 GLFW 操作。 之后我们告诉 GLFW 将我们窗口的上下文作为当前线程的主上下文。</p>
 
         <h2>GLAD</h2>
         <p>
           In the previous chapter we mentioned that GLAD manages function
           pointers for OpenGL so we want to initialize GLAD before we call any
           OpenGL function:
-        </p>
+        </p><p>在上一章中我们提到 GLAD 管理 OpenGL 的函数指针，因此我们希望在调用任何 OpenGL 函数之前初始化 GLAD：</p>
 
         <pre><code class=" hljs cpp">
 <span class="hljs-keyword">if</span> (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -1524,7 +1551,7 @@ GLFWwindow* window = <function id="20">glfwCreateWindow</function>(<span class="
         <p>
           We pass GLAD the function to load the address of the OpenGL function pointers which is OS-specific. GLFW gives
           us <fun>glfwGetProcAddress</fun> that defines the correct function based on which OS we're compiling for.
-        </p>
+        </p><p>我们传递 GLAD 函数来加载特定于操作系统的 OpenGL 函数指针的地址。 GLFW 为我们提供了 glfwGetProcAddress，它根据我们正在编译的操作系统定义了正确的函数。</p>
 
         <h2>Viewport</h2>
         <p>
@@ -1534,7 +1561,7 @@ GLFWwindow* window = <function id="20">glfwCreateWindow</function>(<span class="
           can set those <em>dimensions</em> via the <fun>
             <function id="22">glViewport</function>
           </fun> function:
-        </p>
+        </p><p>在我们开始渲染之前，我们必须做最后一件事。 我们必须告诉 OpenGL 渲染窗口的大小，以便 OpenGL 知道我们要如何显示数据和相对于窗口的坐标。 我们可以通过 glViewport 函数设置这些尺寸：</p>
 
         <pre class="cpp"><code class=" hljs ">
 <function id="22">glViewport</function>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">800</span>, <span class="hljs-number">600</span>);
@@ -1548,13 +1575,13 @@ GLFWwindow* window = <function id="20">glfwCreateWindow</function>(<span class="
           fourth parameter set the width and height of the rendering window in
           pixels, which we set equal to GLFW's window size.
         </p>
-
+<p>glViewport 的前两个参数设置了窗口左下角的位置。 第三个和第四个参数以像素为单位设置渲染窗口的宽度和高度，我们将其设置为等于 GLFW 的窗口大小。</p>
         <p>
           We could actually set the viewport dimensions at values smaller than
           GLFW's dimensions; then all the OpenGL rendering would be displayed in a
           smaller window and we could for example display other elements outside
           the OpenGL viewport.
-        </p>
+        </p><p>我们实际上可以将视口尺寸设置为小于 GLFW 尺寸的值； 那么所有的 OpenGL 渲染都将显示在一个较小的窗口中，例如，我们可以在 OpenGL 视口之外显示其他元素。</p>
 
         <note>
           Behind the scenes OpenGL uses the data specified via <fun>
@@ -1565,6 +1592,10 @@ GLFWwindow* window = <function id="20">glfwCreateWindow</function>(<span class="
           in screen coordinates. Note that processed coordinates in OpenGL are
           between -1 and 1 so we effectively map from the range (-1 to 1) to (0,
           800) and (0, 600).
+
+          <br>
+          <br>
+          在幕后，OpenGL 使用通过 glViewport 指定的数据将其处理的 2D 坐标转换为屏幕上的坐标。 例如，经过处理的位置点 (-0.5,0.5) 将（作为其最终转换）映射到屏幕坐标中的 (200,450)。 请注意，在 OpenGL 中处理的坐标在 -1 和 1 之间，因此我们有效地从范围 (-1 到 1) 映射到 (0, 800) 和 (0, 600)。
         </note>
 
         <p>
@@ -1572,7 +1603,7 @@ GLFWwindow* window = <function id="20">glfwCreateWindow</function>(<span class="
           adjusted as well. We can register a callback function on the window that
           gets called each time the window is resized. This resize callback
           function has the following prototype:
-        </p>
+        </p><p>然而，当用户调整窗口大小时，视口也应该调整。 我们可以在每次调整窗口大小时调用的窗口上注册一个回调函数。 此调整大小回调函数具有以下原型：</p>
 
         <pre><code class=" hljs cpp">
 <span class="hljs-keyword">void</span> framebuffer_size_callback(GLFWwindow* window, <span class="hljs-keyword">int</span> width, <span class="hljs-keyword">int</span> height);  
@@ -1583,7 +1614,7 @@ GLFWwindow* window = <function id="20">glfwCreateWindow</function>(<span class="
           first argument and two integers indicating the new window dimensions.
           Whenever the window changes in size, GLFW calls this function and fills
           in the proper arguments for you to process.
-        </p>
+        </p><p>framebuffer size 函数将 GLFWwindow 作为其第一个参数和两个表示新窗口尺寸的整数。 每当窗口大小发生变化时，GLFW 都会调用此函数并填写适当的参数供您处理。</p>
 
         <pre><code class=" hljs cpp">
 <span class="hljs-keyword">void</span> framebuffer_size_callback(GLFWwindow* window, <span class="hljs-keyword">int</span> width, <span class="hljs-keyword">int</span> height)
@@ -1594,7 +1625,7 @@ GLFWwindow* window = <function id="20">glfwCreateWindow</function>(<span class="
 
         <p>
           We do have to tell GLFW we want to call this function on every window resize by registering it:
-        </p>
+        </p><p>我们必须通过注册告诉 GLFW 我们想在每次调整窗口大小时调用这个函数：</p>
 
         <pre><code class=" hljs ">
 glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);  
@@ -1604,7 +1635,7 @@ glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
           When the window is first displayed <fun>framebuffer_size_callback</fun> gets called as well with the resulting
           window dimensions. For retina displays <var>width</var> and <var>height</var> will end up significantly higher
           than the original input values.
-        </p>
+        </p><p>当窗口首次显示时，framebuffer_size_callback 也会被调用，并产生窗口尺寸。 对于 Retina 显示器，宽度和高度最终会明显高于原始输入值。</p>
 
         <p>
           There are many callbacks functions we can set to register our own
@@ -1612,7 +1643,7 @@ glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
           joystick input changes, process error messages etc. We register the
           callback functions after we've created the window and before the render
           loop is initiated.
-        </p>
+        </p><p>我们可以设置很多回调函数来注册我们自己的函数。 例如，我们可以创建一个回调函数来处理操纵杆输入变化、处理错误消息等。我们在创建窗口之后和渲染循环启动之前注册回调函数。</p>
 
         <h1>Ready your engines</h1>
         <p>
@@ -1622,7 +1653,7 @@ glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
           explicitly told to stop. For this reason we have to create a while loop,
           that we now call the <def>render loop</def>, that keeps on running until we tell GLFW to stop. The following
           code shows a very simple render loop:
-        </p>
+        </p><p>我们不希望应用程序绘制单个图像然后立即退出并关闭窗口。 我们希望应用程序继续绘制图像并处理用户输入，直到程序被明确告知停止。 出于这个原因，我们必须创建一个 while 循环，我们现在称之为渲染循环，它一直运行直到我们告诉 GLFW 停止。 下面的代码展示了一个非常简单的渲染循环：</p>
 
         <pre><code class=" hljs cpp">
 <span class="hljs-keyword">while</span>(!<function id="14">glfwWindowShouldClose</function>(window))
@@ -1638,6 +1669,11 @@ glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
           </fun> function checks at the start of each loop iteration if GLFW has been instructed to close. If so, the
           function returns <code>true</code> and the render loop stops running, after which we can close the
           application.<br>
+
+          <p>
+            glfwWindowShouldClose 函数在每次循环迭代开始时检查 GLFW 是否已被指示关闭。 如果是这样，该函数返回 true 并且渲染循环停止运行，之后我们可以关闭应用程序。
+          </p>
+
           The <fun>
             <function id="23">glfwPollEvents</function>
           </fun> function
@@ -1650,7 +1686,13 @@ glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
           the color buffer (a large 2D buffer that contains color values for each
           pixel in GLFW's window) that is used to render to during this render
           iteration and show it as output to the screen.
+
+          <p>
+            glfwPollEvents 函数检查是否有任何事件被触发（如键盘输入或鼠标移动事件），更新窗口状态，并调用相应的函数（我们可以通过回调方法注册）。 glfwSwapBuffers 将交换在此渲染迭代期间用于渲染的颜色缓冲区（一个大型 2D 缓冲区，其中包含 GLFW 窗口中每个像素的颜色值）并将其显示为屏幕输出。
+          </p>
         </p>
+
+        
 
         <note>
           <strong>Double buffer</strong><br>
@@ -1666,6 +1708,9 @@ glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
           the back buffer to the front buffer so the image can be displayed
           without still being rendered to, removing all the aforementioned
           artifacts.
+
+          <br><br>
+          当应用程序在单个缓冲区中绘制时，生成的图像可能会显示闪烁问题。 这是因为生成的输出图像不是立即绘制的，而是逐个像素绘制的，通常是从左到右、从上到下。 由于此图像在呈现时不会立即显示给用户，因此结果可能包含伪像。 为了避免这些问题，窗口应用程序应用双缓冲区进行渲染。 前台缓冲区包含屏幕上显示的最终输出图像，而所有渲染命令都绘制到后台缓冲区。 一旦所有渲染命令完成，我们就将后台缓冲区交换到前台缓冲区，这样图像就可以在不渲染的情况下显示，从而消除所有上述伪影。
         </note>
 
         <h2>One last thing</h2>
@@ -1675,7 +1720,7 @@ glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
           via the <fun>
             <function id="25">glfwTerminate</function>
           </fun> function that we call at the end of the <fun>main</fun> function.
-        </p>
+        </p><p>一旦我们退出渲染循环，我们希望正确清理/删除所有分配的 GLFW 资源。 我们可以通过在主函数末尾调用的 glfwTerminate 函数来完成此操作。</p>
 
         <pre><code class=" hljs cpp">
 <function id="25">glfwTerminate</function>();
@@ -1686,7 +1731,7 @@ glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
           This will clean up all the resources and properly exit the
           application. Now try to compile your application and if everything went
           well you should see the following output:
-        </p>
+        </p><p>这将清理所有资源并正确退出应用程序。 现在尝试编译您的应用程序，如果一切顺利，您应该会看到以下输出：</p>
 
         <img src="LearnOpenGL%20-%20Hello%20Window_files/hellowindow.png" class="clean"
           alt="Image of GLFW window output as most basic example" width="600px">
@@ -1697,7 +1742,7 @@ glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
           fits together, check the full source code <a
             href="https://learnopengl.com/code_viewer_gh.php?code=src/1.getting_started/1.1.hello_window/hello_window.cpp"
             target="_blank">here</a> (and if it started flashing different colors, keep reading).
-        </p>
+        </p><p>如果它是一个非常沉闷无聊的黑色图像，那么你做对了！ 如果您没有得到正确的图像，或者您对如何将所有内容组合在一起感到困惑，请在此处查看完整的源代码（如果它开始闪烁不同的颜色，请继续阅读）。</p>
 
         <p>
           If you have issues compiling the application, first make sure all
@@ -1705,7 +1750,7 @@ glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
           right directories in your IDE (as explained in the previous chapter).
           Also make sure your code is correct; you can verify it by comparing it
           with the full source code.
-        </p>
+        </p><p>如果您在编译应用程序时遇到问题，请首先确保您的所有链接器选项都设置正确，并且您在 IDE 中正确地包含了正确的目录（如前一章所述）。 还要确保你的代码是正确的； 您可以通过将其与完整的源代码进行比较来验证它。</p>
 
         <h2>Input</h2>
         <p>
@@ -1714,7 +1759,7 @@ glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
           GLFW's <fun>glfwGetKey</fun> function that takes the window as input
           together with a key. The function returns whether this key is currently
           being pressed. We're creating a <fun>processInput</fun> function to keep all input code organized:
-        </p>
+        </p><p>我们还希望在 GLFW 中有某种形式的输入控制，我们可以使用 GLFW 的几个输入函数来实现这一点。 我们将使用 GLFW 的 glfwGetKey 函数，该函数将窗口作为输入，连同一个键。 该函数返回此键当前是否被按下。 我们正在创建一个 processInput 函数来组织所有输入代码：</p>
 
         <pre><code class=" hljs cpp">
 <span class="hljs-keyword">void</span> processInput(GLFWwindow *window)
@@ -1729,11 +1774,11 @@ glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
           <var>GLFW_RELEASE</var>). If the user did press the escape key, we close GLFW by setting its
           <var>WindowShouldClose</var> property to <code>true</code> using <fun>glfwSetwindowShouldClose</fun>. The next
           condition check of the main <code>while</code> loop will then fail and the application closes.
-        </p>
+        </p><p>这里我们检查用户是否按下了退出键（如果没有按下，glfwGetKey 返回 GLFW_RELEASE）。 如果用户确实按下了转义键，我们通过使用 glfwSetwindowShouldClose 将其 WindowShouldClose 属性设置为 true 来关闭 GLFW。 主 while 循环的下一个条件检查将失败，应用程序将关闭。</p>
 
         <p>
           We then call <fun>processInput</fun> every iteration of the render loop:
-        </p>
+        </p><p>然后我们在渲染循环的每次迭代中调用 processInput：</p>
 
         <pre><code class=" hljs cpp">
 <span class="hljs-keyword">while</span> (!<function id="14">glfwWindowShouldClose</function>(window))
@@ -1748,14 +1793,14 @@ glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
         <p>
           This gives us an easy way to check for specific key presses and react accordingly every <def>frame</def>. An
           iteration of the render loop is more commonly called a <def>frame</def>.
-        </p>
+        </p><p>这为我们提供了一种简单的方法来检查特定的按键并在每一帧做出相应的反应。 渲染循环的迭代通常称为帧。</p>
 
         <h2>Rendering</h2>
         <p>
           We want to place all the rendering commands in the render loop, since
           we want to execute all the rendering commands each iteration or frame of
           the loop. This would look a bit like this:
-        </p>
+        </p><p>我们希望将所有渲染命令放在渲染循环中，因为我们希望在循环的每个迭代或帧中执行所有渲染命令。 这看起来有点像这样：</p>
 
         <pre><code class=" hljs cpp">
 <span class="hljs-comment">// render loop</span>
@@ -1783,7 +1828,7 @@ glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
           </fun> where we pass in buffer bits to specify which buffer we would like to clear. The possible bits we can
           set are <var>GL_COLOR_BUFFER_BIT</var>, <var>GL_DEPTH_BUFFER_BIT</var> and <var>GL_STENCIL_BUFFER_BIT</var>.
           Right now we only care about the color values so we only clear the color buffer.
-        </p>
+        </p><p>只是为了测试事情是否真的有效，我们想用我们选择的颜色清除屏幕。 在帧的开始，我们想要清除屏幕。 否则我们仍然会看到前一帧的结果（这可能是您正在寻找的效果，但通常您不会）。 我们可以使用 glClear 清除屏幕的颜色缓冲区，其中我们传入缓冲区位以指定我们想要清除哪个缓冲区。 我们可以设置的可能位是 GL_COLOR_BUFFER_BIT、GL_DEPTH_BUFFER_BIT 和 GL_STENCIL_BUFFER_BIT。 现在我们只关心颜色值，所以我们只清除颜色缓冲区。</p>
 
         <pre><code class=" hljs cpp">
 <function id="13"><function id="10">glClear</function>Color</function>(<span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">1.0f</span>);
@@ -1804,7 +1849,7 @@ glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
             </function>
           </fun>. This will result in a dark green-blueish color.
         </p>
-
+<p>请注意，我们还使用 glClearColor 指定了清除屏幕的颜色。 每当我们调用 glClear 并清除颜色缓冲区时，整个颜色缓冲区将填充 glClearColor 配置的颜色。 这将导致深绿色-蓝色。</p>
         <note>
           As you may recall from the <em>OpenGL</em> chapter, the <fun>
             <function id="13">
@@ -1814,6 +1859,9 @@ glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
             <function id="10">glClear</function>
           </fun> is a <em>state-using</em> function in that it uses the current state to retrieve the clearing color
           from.
+
+          <br><br>
+          您可能还记得 OpenGL 章节中的内容，glClearColor 函数是一个状态设置函数，而 glClear 是一个状态使用函数，因为它使用当前状态从中检索清除颜色。
         </note>
 
         <img src="LearnOpenGL%20-%20Hello%20Window_files/hellowindow2.png" class="clean"
@@ -1825,12 +1873,12 @@ glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
             href="https://learnopengl.com/code_viewer_gh.php?code=src/1.getting_started/1.2.hello_window_clear/hello_window_clear.cpp"
             target="_blank">here</a>.
         </p>
-
+<p>可以在此处找到该应用程序的完整源代码。</p>
         <p>
           So right now we got everything ready to fill the render loop with lots of rendering calls, but that's for the
           <a href="https://learnopengl.com/Getting-started/Hello-Triangle" target="_blank">next</a> chapter. I think
           we've been rambling long enough here.
-        </p>
+        </p><p>所以现在我们已经准备好用大量渲染调用填充渲染循环，但那是下一章的内容。 我想我们在这里闲逛的时间已经够长了。</p>
 
       </div>
 
