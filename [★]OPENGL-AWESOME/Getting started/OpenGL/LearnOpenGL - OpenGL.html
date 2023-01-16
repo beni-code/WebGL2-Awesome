@@ -1443,12 +1443,21 @@
           library).
         </p>
 
+        <p>
+          开发实际 OpenGL 库的人通常是显卡制造商。 您购买的每张显卡都支持特定版本的 OpenGL，这些版本是专门为该卡（系列）开发的 OpenGL 版本。 当使用 Apple 系统时，OpenGL 库由 Apple
+          自己维护，而在 Linux 下，存在图形供应商版本和爱好者对这些库的改编版本的组合。 这也意味着每当 OpenGL 表现出它不应该出现的奇怪行为时，这很可能是显卡制造商（或开发/维护该库的人）的错误。
+        </p>
+
         <note>
           Since most implementations are built by graphics card manufacturers,
           whenever there is a bug in the implementation this is usually solved by
           updating your video card drivers; those drivers include the newest
           versions of OpenGL that your card supports. This is one of the reasons
           why it's always advised to occasionally update your graphic drivers.
+
+          <br>
+          <br>
+          由于大多数实现都是由显卡制造商构建的，因此只要在实现中出现错误，通常可以通过更新显卡驱动程序来解决； 这些驱动程序包括您的卡支持的最新版本的 OpenGL。 这就是为什么总是建议偶尔更新图形驱动程序的原因之一。
         </note>
 
         <p>
@@ -1460,6 +1469,11 @@
           (note how they mostly just describe results and not implementations).
           The specifications also provide a great reference for finding the <strong>exact</strong> workings of its
           functions.
+        </p>
+
+        <p>
+          Khronos 公开托管所有 OpenGL 版本的所有规范文档。 感兴趣的读者可以在此处找到 3.3 版的 OpenGL 规范（我们将使用该规范），如果您想深入了解 OpenGL
+          的细节（请注意它们大多只描述结果而不是实现），这是一本很好的读物。 这些规范还为查找其功能的确切工作方式提供了很好的参考。
         </p>
 
         <h2>Core-profile vs Immediate mode</h2>
@@ -1480,6 +1494,12 @@
         </p>
 
         <p>
+          在过去，使用 OpenGL 意味着以即时模式（通常称为固定功能管道）进行开发，这是一种易于使用的图形绘制方法。 OpenGL 的大部分功能都隐藏在库中，开发人员无法控制 OpenGL 如何进行计算。
+          开发人员最终渴望获得更大的灵活性，并且随着时间的推移，规范也因此变得更加灵活； 开发人员可以更好地控制他们的图形。 立即模式确实易于使用和理解，但效率也极低。 出于这个原因，规范从 3.2
+          版开始弃用即时模式功能，并开始激励开发人员在 OpenGL 的核心配置文件模式下进行开发，这是 OpenGL 规范的一个部分，删除了所有旧的弃用功能。
+        </p>
+
+        <p>
           When using OpenGL's core-profile, OpenGL forces us to use modern
           practices. Whenever we try to use one of OpenGL's deprecated functions,
           OpenGL raises an error and stops drawing. The advantage of learning the
@@ -1494,9 +1514,19 @@
         </p>
 
         <p>
+          在使用 OpenGL 的 core-profile 时，OpenGL 迫使我们使用现代实践。 每当我们尝试使用 OpenGL 已弃用的函数之一时，OpenGL 都会引发错误并停止绘制。
+          学习现代方法的优势在于它非常灵活和高效。 但是，它也更难学习。 即时模式从 OpenGL 执行的实际操作中抽象了很多，虽然它很容易学习，但很难掌握 OpenGL 的实际操作方式。 现代方法要求开发人员真正理解
+          OpenGL 和图形编程，虽然有点困难，但它提供了更大的灵活性、更高的效率，最重要的是：更好地理解图形编程。
+        </p>
+
+        <p>
           This is also the reason why this book is geared at core-profile OpenGL
           version 3.3. Although it is more difficult, it is greatly worth the
           effort.
+        </p>
+
+        <p>
+          这也是本书面向 core-profile OpenGL 3.3 版的原因。 虽然比较难，但是非常值得。
         </p>
 
         <p>
@@ -1513,15 +1543,28 @@
           more recent OpenGL versions.
         </p>
 
+        <p>
+          截至今天，更高版本的 OpenGL 可供选择（在编写 4.6 时），此时您可能会问：OpenGL 4.6 已经出来了，为什么我还要学习 OpenGL 3.3？ 这个问题的答案相对简单。 从 3.3 开始的所有未来版本的
+          OpenGL 都在不改变 OpenGL 核心机制的情况下为 OpenGL 添加了额外的有用功能； 较新的版本只是引入了稍微更有效或更有用的方法来完成相同的任务。 结果是所有概念和技术在现代 OpenGL
+          版本中保持不变，因此学习 OpenGL 3.3 是完全有效的。 当您准备好和/或更有经验时，您可以轻松地使用更新的 OpenGL 版本中的特定功能。
+        </p>
+
         <warning>
           When using functionality from the most recent version of OpenGL, only
           the most modern graphics cards will be able to run your application.
           This is often why most developers generally target lower versions of
           OpenGL and optionally enable higher version functionality.
+
+          <br>
+          <br>
+          使用最新版本 OpenGL 的功能时，只有最现代的显卡才能运行您的应用程序。 这通常是为什么大多数开发人员通常以较低版本的 OpenGL 为目标并可选择启用较高版本的功能。
         </warning>
 
         <p>
           In some chapters you'll find more modern features which are noted down as such.
+        </p>
+        <p>
+          在某些章节中，您会发现更多现代功能，这些功能也被记录下来。
         </p>
 
         <h2>Extensions</h2>
@@ -1538,12 +1581,19 @@
           graphics card. Often, when an extension is popular or very useful it
           eventually becomes part of future OpenGL versions.
         </p>
+        <p>OpenGL 的一个重要特性是它对扩展的支持。 每当图形公司提出新技术或新的大型渲染优化时，通常会在驱动程序中实现的扩展中找到。
+          如果应用程序运行的硬件支持这样的扩展，开发人员可以使用扩展提供的功能来获得更高级或更高效的图形。 这样，图形开发人员仍然可以使用这些新的渲染技术，而不必等待 OpenGL
+          在其未来版本中包含该功能，只需检查显卡是否支持该扩展即可。 通常，当扩展很流行或非常有用时，它最终会成为未来 OpenGL 版本的一部分。</p>
 
         <p>
           The developer has to query whether any of these extensions are
           available before using them (or use an OpenGL extension library). This
           allows the developer to do things better or more efficient, based on
           whether an extension is available:
+        </p>
+
+        <p>
+          开发人员必须在使用这些扩展之前查询它们是否可用（或使用 OpenGL 扩展库）。 这允许开发人员根据扩展是否可用来更好或更高效地做事：
         </p>
 
         <pre><code class=" hljs cpp">
@@ -1562,6 +1612,9 @@
           techniques, but wherever it is necessary proper instructions are
           provided.
         </p>
+        <p>
+          对于 OpenGL 3.3 版，我们很少需要对大多数技术进行扩展，但只要有必要，就会提供适当的说明。
+        </p>
 
         <h2>State machine</h2>
         <p>
@@ -1573,12 +1626,19 @@
         </p>
 
         <p>
+          OpenGL 本身就是一个大型状态机：定义 OpenGL 当前应如何运行的变量集合。 OpenGL 的状态通常称为 OpenGL 上下文。 在使用 OpenGL
+          时，我们经常通过设置一些选项、操作一些缓冲区然后使用当前上下文进行渲染来改变它的状态。
+        </p>
+
+        <p>
           Whenever we tell OpenGL that we now want to draw lines instead of
           triangles for example, we change the state of OpenGL by changing some
           context variable that sets how OpenGL should draw. As soon as we change
           the context by telling OpenGL it should draw lines, the next drawing
           commands will now draw lines instead of triangles.
         </p>
+        <p>例如，每当我们告诉 OpenGL 我们现在想要绘制直线而不是三角形时，我们都会通过更改一些设置 OpenGL 应如何绘制的上下文变量来更改 OpenGL 的状态。 一旦我们通过告诉 OpenGL
+          它应该绘制线条来更改上下文，下一个绘图命令现在将绘制线条而不是三角形。</p>
 
         <p>
           When working in OpenGL we will come across several <def>state-changing</def> functions that change the context
@@ -1587,6 +1647,7 @@
           OpenGL. As long as you keep in mind that OpenGL is basically one large
           state machine, most of its functionality will make more sense.
         </p>
+        <p>在 OpenGL 中工作时，我们会遇到几个改变上下文的状态更改函数和几个基于 OpenGL 当前状态执行某些操作的状态使用函数。 只要牢记 OpenGL 基本上是一个大型状态机，它的大部分功能就会更有意义。</p>
 
         <h2>Objects</h2>
         <p>
@@ -1596,6 +1657,8 @@
           higher-level languages, OpenGL was developed with several abstractions
           in mind. One of those abstractions are <def>objects</def> in OpenGL.
         </p>
+        <p>OpenGL 库是用 C 编写的，并允许使用其他语言进行许多派生，但其核心仍然是 C 库。 由于许多 C 的语言结构不能很好地转换为其他高级语言，因此在开发 OpenGL 时考虑了几个抽象概念。 这些抽象之一是
+          OpenGL 中的对象。</p>
 
         <p>
           An <def>object</def> in OpenGL is a collection of options that
@@ -1604,6 +1667,7 @@
           set its size, how many colors it supports and so on. One could
           visualize an object as a C-like struct:
         </p>
+        <p>OpenGL 中的对象是表示 OpenGL 状态子集的选项集合。 例如，我们可以有一个代表绘图窗口设置的对象； 然后我们可以设置它的大小，它支持多少种颜色等等。 可以将对象可视化为类似 C 的结构：</p>
 
         <pre><code class=" hljs cpp">
 <span class="hljs-keyword">struct</span> object_name {
@@ -1617,6 +1681,7 @@
           Whenever we want to use objects it generally looks something like this (with OpenGL's context visualized as a
           large struct):
         </p>
+        <p>每当我们想要使用对象时，它通常看起来像这样（OpenGL 的上下文可视化为一个大结构）：</p>
 
         <pre><code class=" hljs cpp">
 <span class="hljs-comment">// The State of OpenGL</span>
@@ -1650,11 +1715,17 @@ glBindObject(GL_WINDOW_TARGET, <span class="hljs-number">0</span>);
           <code>0</code>. The options we set are stored in the object referenced by <var>objectId</var> and restored as
           soon as we bind the object back to <var>GL_WINDOW_TARGET</var>.
         </p>
+        <p>这段代码是您在使用 OpenGL 时经常看到的工作流程。 我们首先创建一个对象并将对它的引用存储为 id（真实对象的数据存储在幕后）。 然后我们将对象（使用它的
+          id）绑定到上下文的目标位置（示例窗口对象目标的位置定义为 GL_WINDOW_TARGET）。 接下来我们设置窗口选项，最后我们通过将窗口目标的当前对象 ID 设置为 0 来取消绑定对象。我们设置的选项存储在
+          objectId 引用的对象中，并在我们将对象绑定回时立即恢复 GL_WINDOW_TARGET。</p>
 
         <warning>
           The code samples provided so far are only approximations of how OpenGL
           operates; throughout the book you will come across enough actual
           examples.
+          <br>
+          <br>
+          到目前为止提供的代码示例只是 OpenGL 运行方式的近似值； 在整本书中，你会遇到足够多的实际例子。
         </warning>
 
         <p>
@@ -1669,6 +1740,9 @@ glBindObject(GL_WINDOW_TARGET, <span class="hljs-number">0</span>);
           want to draw a specific model, we simply bind the corresponding object
           before drawing without setting all their options again.
         </p>
+        <p>使用这些对象的好处在于，我们可以在我们的应用程序中定义多个对象，设置它们的选项，并且每当我们启动一个使用 OpenGL 状态的操作时，我们就将对象与我们的首选设置绑定在一起。 例如，有些对象充当 3D
+          模型数据（房屋或角色）的容器对象，每当我们想要绘制其中一个时，我们绑定包含我们要绘制的模型数据的对象（我们首先创建并设置 这些对象的选项）。
+          拥有多个对象允许我们指定多个模型，每当我们想绘制特定模型时，我们只需在绘制前绑定相应的对象，而无需再次设置所有选项。</p>
 
         <h2>Let's get started</h2>
         <p>
@@ -1678,6 +1752,8 @@ glBindObject(GL_WINDOW_TARGET, <span class="hljs-number">0</span>);
           the book we'll walk through each step and you'll see enough examples to
           really get a grasp of OpenGL.
         </p>
+        <p>您现在了解了一些关于作为规范和库的 OpenGL、OpenGL 大致如何在引擎盖下运行以及 OpenGL 使用的一些自定义技巧。 如果您没有全部了解，请不要担心；
+          在整本书中，我们将逐步完成每个步骤，您将看到足够多的示例来真正掌握 OpenGL。</p>
 
         <h2>Additional resources</h2>
         <ul>
