@@ -1416,8 +1416,10 @@
           second part transforms the 2D coordinates into actual colored pixels. In
           this chapter we'll briefly discuss the graphics pipeline and how we can
           use it to our advantage to create fancy pixels.
-        </p><p>
-          在 OpenGL 中，一切都在 3D 空间中，但屏幕或窗口是二维像素阵列，因此 OpenGL 的大部分工作是将所有 3D 坐标转换为适合屏幕的二维像素。 将 3D 坐标转换为 2D 像素的过程由 OpenGL 的图形管道管理。 图形管道可以分为两个大部分：第一部分将 3D 坐标转换为 2D 坐标，第二部分将 2D 坐标转换为实际的彩色像素。 在本章中，我们将简要讨论图形管道以及我们如何利用它来创建精美的像素。
+        </p>
+        <p>
+          在 OpenGL 中，一切都在 3D 空间中，但屏幕或窗口是二维像素阵列，因此 OpenGL 的大部分工作是将所有 3D 坐标转换为适合屏幕的二维像素。 将 3D 坐标转换为 2D 像素的过程由 OpenGL
+          的图形管道管理。 图形管道可以分为两个大部分：第一部分将 3D 坐标转换为 2D 坐标，第二部分将 2D 坐标转换为实际的彩色像素。 在本章中，我们将简要讨论图形管道以及我们如何利用它来创建精美的像素。
         </p>
 
         <!--<note>
@@ -1434,7 +1436,10 @@
           have thousands of small processing cores to quickly process your data
           within the graphics pipeline. The processing cores run small programs on
           the GPU for each step of the pipeline. These small programs are called <def>shaders</def>.
-        </p><p>图形管道将一组 3D 坐标作为输入，并将它们转换为屏幕上的彩色 2D 像素。 图形流水线可以分为几个步骤，每个步骤都需要前一步的输出作为其输入。 所有这些步骤都是高度专业化的（它们具有一个特定的功能）并且可以很容易地并行执行。 由于它们的并行特性，当今的图形卡具有数千个小型处理核心，可以在图形管道内快速处理您的数据。 处理核心在 GPU 上为流水线的每个步骤运行小程序。 这些小程序称为着色器。</p>
+        </p>
+        <p>图形管道将一组 3D 坐标作为输入，并将它们转换为屏幕上的彩色 2D 像素。 图形流水线可以分为几个步骤，每个步骤都需要前一步的输出作为其输入。
+          所有这些步骤都是高度专业化的（它们具有一个特定的功能）并且可以很容易地并行执行。 由于它们的并行特性，当今的图形卡具有数千个小型处理核心，可以在图形管道内快速处理您的数据。 处理核心在 GPU
+          上为流水线的每个步骤运行小程序。 这些小程序称为着色器。</p>
 
         <p>
           Some of these shaders are configurable by the developer which allows
@@ -1443,13 +1448,16 @@
           pipeline and because they run on the GPU, they can also save us valuable
           CPU time. Shaders are written in the <def>OpenGL Shading Language</def> (<def>GLSL</def>) and we'll delve more
           into that in the next chapter.
-        </p><p>其中一些着色器可由开发人员配置，这允许我们编写自己的着色器来替换现有的默认着色器。 这使我们能够对管道的特定部分进行更细粒度的控制，并且由于它们在 GPU 上运行，它们还可以为我们节省宝贵的 CPU 时间。 着色器是用 OpenGL 着色语言 (GLSL) 编写的，我们将在下一章深入研究它。</p>
+        </p>
+        <p>其中一些着色器可由开发人员配置，这允许我们编写自己的着色器来替换现有的默认着色器。 这使我们能够对管道的特定部分进行更细粒度的控制，并且由于它们在 GPU 上运行，它们还可以为我们节省宝贵的 CPU 时间。 着色器是用
+          OpenGL 着色语言 (GLSL) 编写的，我们将在下一章深入研究它。</p>
 
         <p>
           Below you'll find an abstract representation of all the stages of
           the graphics pipeline. Note that the blue sections represent sections
           where we can inject our own shaders.
-        </p><p>您将在下面找到图形管道所有阶段的抽象表示。 请注意，蓝色部分代表我们可以注入自己的着色器的部分。</p>
+        </p>
+        <p>您将在下面找到图形管道所有阶段的抽象表示。 请注意，蓝色部分代表我们可以注入自己的着色器的部分。</p>
 
         <img src="LearnOpenGL%20-%20Hello%20Triangle_files/pipeline.png" class="clean"
           alt="The OpenGL graphics pipeline with shader stages">
@@ -1461,7 +1469,8 @@
           data to a fully rendered pixel. We will briefly explain each part of
           the pipeline in a simplified way to give you a good overview of how the
           pipeline operates.
-        </p><p>如您所见，图形管道包含大量部分，每个部分处理将顶点数据转换为完全渲染像素的特定部分。 我们将以简化的方式简要解释管道的每个部分，让您对管道的运行方式有一个很好的了解。</p>
+        </p>
+        <p>如您所见，图形管道包含大量部分，每个部分处理将顶点数据转换为完全渲染像素的特定部分。 我们将以简化的方式简要解释管道的每个部分，让您对管道的运行方式有一个很好的了解。</p>
 
         <p>
           As input to the graphics pipeline we pass in a list of three 3D
@@ -1471,7 +1480,9 @@
           that can contain any data we'd like, but for simplicity's sake let's
           assume that each vertex consists of just a 3D position and some color
           value.
-        </p><p>作为图形管道的输入，我们传入一个包含三个 3D 坐标的列表，这些坐标应在此处称为顶点数据的数组中形成一个三角形； 此顶点数据是顶点的集合。 顶点是每个 3D 坐标的数据集合。 这个顶点的数据使用可以包含我们想要的任何数据的顶点属性来表示，但是为了简单起见，我们假设每个顶点只包含一个 3D 位置和一些颜色值。</p>
+        </p>
+        <p>作为图形管道的输入，我们传入一个包含三个 3D 坐标的列表，这些坐标应在此处称为顶点数据的数组中形成一个三角形； 此顶点数据是顶点的集合。 顶点是每个 3D 坐标的数据集合。
+          这个顶点的数据使用可以包含我们想要的任何数据的顶点属性来表示，但是为了简单起见，我们假设每个顶点只包含一个 3D 位置和一些颜色值。</p>
 
         <note>
           In order for OpenGL to know what to make of your collection of
@@ -1484,7 +1495,8 @@
 
           <br><br>
 
-          为了让 OpenGL 知道如何处理你的坐标和颜色值集合，OpenGL 需要你暗示你想用数据形成什么样的渲染类型。 我们是否希望将数据呈现为点的集合、三角形的集合或可能只是一条长线？ 这些提示被称为基元，并在调用任何绘图命令时提供给 OpenGL。 其中一些提示是 GL_POINTS、GL_TRIANGLES 和 GL_LINE_STRIP。
+          为了让 OpenGL 知道如何处理你的坐标和颜色值集合，OpenGL 需要你暗示你想用数据形成什么样的渲染类型。 我们是否希望将数据呈现为点的集合、三角形的集合或可能只是一条长线？
+          这些提示被称为基元，并在调用任何绘图命令时提供给 OpenGL。 其中一些提示是 GL_POINTS、GL_TRIANGLES 和 GL_LINE_STRIP。
         </note>
 
         <p>
@@ -1493,13 +1505,15 @@
           to transform 3D coordinates into different 3D coordinates (more on that
           later) and the vertex shader allows us to do some basic processing on
           the vertex attributes.
-        </p><p>管道的第一部分是顶点着色器，它将单个顶点作为输入。 顶点着色器的主要目的是将 3D 坐标转换为不同的 3D 坐标（稍后会详细介绍），顶点着色器允许我们对顶点属性进行一些基本处理。</p>
+        </p>
+        <p>管道的第一部分是顶点着色器，它将单个顶点作为输入。 顶点着色器的主要目的是将 3D 坐标转换为不同的 3D 坐标（稍后会详细介绍），顶点着色器允许我们对顶点属性进行一些基本处理。</p>
 
         <p>
           The <def>primitive assembly</def> stage takes as input all the vertices (or vertex if <var>GL_POINTS</var>
           is chosen) from the vertex shader that form a primitive and assembles
           all the point(s) in the primitive shape given; in this case a triangle.
-        </p><p>图元组装阶段将来自顶点着色器的所有顶点（或顶点，如果选择了 GL_POINTS）作为输入，形成一个图元，并在给定的图元形状中组装所有点； 在这种情况下是一个三角形。</p>
+        </p>
+        <p>图元组装阶段将来自顶点着色器的所有顶点（或顶点，如果选择了 GL_POINTS）作为输入，形成一个图元，并在给定的图元形状中组装所有点； 在这种情况下是一个三角形。</p>
 
         <p>
           The output of the primitive assembly stage is passed to the <def>geometry shader</def>.
@@ -1507,7 +1521,8 @@
           primitive and has the ability to generate other shapes by emitting new
           vertices to form new (or other) primitive(s). In this example case, it
           generates a second triangle out of the given shape.
-        </p><p>图元组装阶段的输出被传递给几何着色器。 几何着色器将形成图元的顶点集合作为输入，并能够通过发射新顶点以形成新的（或其他）图元来生成其他形状。 在这个例子中，它根据给定的形状生成第二个三角形。</p>
+        </p>
+        <p>图元组装阶段的输出被传递给几何着色器。 几何着色器将形成图元的顶点集合作为输入，并能够通过发射新顶点以形成新的（或其他）图元来生成其他形状。 在这个例子中，它根据给定的形状生成第二个三角形。</p>
 
         <p>
           The output of the geometry shader is then passed on to the <def>rasterization stage</def>
@@ -1515,7 +1530,8 @@
           the final screen, resulting in fragments for the fragment shader to
           use. Before the fragment shaders run, <def>clipping</def> is performed. Clipping discards all fragments that
           are outside your view, increasing performance.
-        </p><p>几何着色器的输出然后被传递到光栅化阶段，它将生成的图元映射到最终屏幕上的相应像素，从而产生供片段着色器使用的片段。 在片段着色器运行之前，会执行裁剪。 裁剪会丢弃您视野之外的所有片段，从而提高性能。</p>
+        </p>
+        <p>几何着色器的输出然后被传递到光栅化阶段，它将生成的图元映射到最终屏幕上的相应像素，从而产生供片段着色器使用的片段。 在片段着色器运行之前，会执行裁剪。 裁剪会丢弃您视野之外的所有片段，从而提高性能。</p>
 
         <note>
           A fragment in OpenGL is all the data required for OpenGL to render a single pixel.
@@ -1530,7 +1546,8 @@
           advanced OpenGL effects occur. Usually the fragment shader contains data
           about the 3D scene that it can use to calculate the final pixel color
           (like lights, shadows, color of the light and so on).
-        </p><p>片段着色器的主要目的是计算像素的最终颜色，这通常是所有高级 OpenGL 效果发生的阶段。 通常片段着色器包含有关 3D 场景的数据，可用于计算最终像素颜色（如灯光、阴影、灯光颜色等）。</p>
+        </p>
+        <p>片段着色器的主要目的是计算像素的最终颜色，这通常是所有高级 OpenGL 效果发生的阶段。 通常片段着色器包含有关 3D 场景的数据，可用于计算最终像素颜色（如灯光、阴影、灯光颜色等）。</p>
 
 
         <p>
@@ -1545,7 +1562,10 @@
           the objects accordingly. So even if a pixel output color is calculated
           in the fragment shader, the final pixel color could still be something
           entirely different when rendering multiple triangles.
-        </p><p>在确定了所有相应的颜色值之后，最终对象将再经过一个阶段，我们称之为 alpha 测试和混合阶段。 此阶段检查片段的相应深度（和模板）值（我们将在稍后讨论）并使用这些值来检查生成的片段是在其他对象的前面还是后面，并应相应地丢弃。 该舞台还检查 alpha 值（alpha 值定义对象的不透明度）并相应地混合对象。 因此，即使在片段着色器中计算了像素输出颜色，在渲染多个三角形时最终像素颜色仍然可能完全不同。</p>
+        </p>
+        <p>在确定了所有相应的颜色值之后，最终对象将再经过一个阶段，我们称之为 alpha 测试和混合阶段。
+          此阶段检查片段的相应深度（和模板）值（我们将在稍后讨论）并使用这些值来检查生成的片段是在其他对象的前面还是后面，并应相应地丢弃。 该舞台还检查 alpha 值（alpha 值定义对象的不透明度）并相应地混合对象。
+          因此，即使在片段着色器中计算了像素输出颜色，在渲染多个三角形时最终像素颜色仍然可能完全不同。</p>
 
         <p>
           As you can see, the graphics pipeline is quite a complex whole and
@@ -1554,7 +1574,9 @@
           shader is optional and usually left to its default shader. There is also
           the tessellation stage and transform feedback loop that we haven't
           depicted here, but that's something for later.
-        </p><p>如您所见，图形管道是一个相当复杂的整体，包含许多可配置的部分。 然而，对于几乎所有情况，我们只需要使用顶点和片段着色器。 几何着色器是可选的，通常留给它的默认着色器。 还有我们在这里没有描述的曲面细分阶段和变换反馈循环，但这是稍后的内容。</p>
+        </p>
+        <p>如您所见，图形管道是一个相当复杂的整体，包含许多可配置的部分。 然而，对于几乎所有情况，我们只需要使用顶点和片段着色器。 几何着色器是可选的，通常留给它的默认着色器。
+          还有我们在这里没有描述的曲面细分阶段和变换反馈循环，但这是稍后的内容。</p>
 
         <p>
           In modern OpenGL we are <strong>required</strong> to define at least a
@@ -1564,7 +1586,9 @@
           knowledge is required before being able to render your first triangle.
           Once you do get to finally render your triangle at the end of this
           chapter you will end up knowing a lot more about graphics programming.
-        </p><p>在现代 OpenGL 中，我们需要至少定义一个我们自己的顶点和片段着色器（GPU 上没有默认的顶点/片段着色器）。 出于这个原因，开始学习现代 OpenGL 通常非常困难，因为在能够渲染您的第一个三角形之前需要大量的知识。 一旦你在本章结束时最终渲染了你的三角形，你将最终了解更多关于图形编程的知识。</p>
+        </p>
+        <p>在现代 OpenGL 中，我们需要至少定义一个我们自己的顶点和片段着色器（GPU 上没有默认的顶点/片段着色器）。 出于这个原因，开始学习现代 OpenGL
+          通常非常困难，因为在能够渲染您的第一个三角形之前需要大量的知识。 一旦你在本章结束时最终渲染了你的三角形，你将最终了解更多关于图形编程的知识。</p>
 
         <h2>Vertex input</h2>
         <p>
@@ -1576,13 +1600,17 @@
           (<code>x</code>, <code>y</code> and <code>z</code>). All coordinates within this so called <def>normalized
             device coordinates</def> range will end up visible on your screen (and all coordinates outside this region
           won't).
-        </p><p>要开始绘制某些东西，我们必须首先给 OpenGL 一些输入顶点数据。 OpenGL 是一个 3D 图形库，因此我们在 OpenGL 中指定的所有坐标都是 3D 坐标（x、y 和 z 坐标）。 OpenGL 不会简单地将所有 3D 坐标转换为屏幕上的 2D 像素； 当 3D 坐标在所有 3 个轴（x、y 和 z）上处于 -1.0 和 1.0 之间的特定范围时，OpenGL 才处理它们。 这个所谓的标准化设备坐标范围内的所有坐标最终都会在您的屏幕上可见（并且该区域之外的所有坐标都不会）。</p>
+        </p>
+        <p>要开始绘制某些东西，我们必须首先给 OpenGL 一些输入顶点数据。 OpenGL 是一个 3D 图形库，因此我们在 OpenGL 中指定的所有坐标都是 3D 坐标（x、y 和 z 坐标）。 OpenGL
+          不会简单地将所有 3D 坐标转换为屏幕上的 2D 像素； 当 3D 坐标在所有 3 个轴（x、y 和 z）上处于 -1.0 和 1.0 之间的特定范围时，OpenGL 才处理它们。
+          这个所谓的标准化设备坐标范围内的所有坐标最终都会在您的屏幕上可见（并且该区域之外的所有坐标都不会）。</p>
 
         <p>
           Because we want to render a single triangle we want to specify a total
           of three vertices with each vertex having a 3D position. We define them
           in normalized device coordinates (the visible region of OpenGL) in a <code>float</code> array:
-        </p><p>因为我们要渲染单个三角形，所以我们要指定总共三个顶点，每个顶点都有一个 3D 位置。 我们将它们定义在一个浮点数组中的规范化设备坐标（OpenGL 的可见区域）中：</p>
+        </p>
+        <p>因为我们要渲染单个三角形，所以我们要指定总共三个顶点，每个顶点都有一个 3D 位置。 我们将它们定义在一个浮点数组中的规范化设备坐标（OpenGL 的可见区域）中：</p>
 
         <pre><code class=" hljs cpp">
 <span class="hljs-keyword">float</span> vertices[] = {
@@ -1595,7 +1623,8 @@
         <p>
           Because OpenGL works in 3D space we render a 2D triangle with each vertex having a <code>z</code> coordinate
           of <code>0.0</code>. This way the <em>depth</em> of the triangle remains the same making it look like it's 2D.
-        </p><p>因为 OpenGL 在 3D 空间中工作，我们渲染一个 2D 三角形，每个顶点的 z 坐标为 0.0。 这样三角形的深度保持不变，使其看起来像二维的。</p>
+        </p>
+        <p>因为 OpenGL 在 3D 空间中工作，我们渲染一个 2D 三角形，每个顶点的 z 坐标为 0.0。 这样三角形的深度保持不变，使其看起来像二维的。</p>
 
         <note>
           <strong>Normalized Device Coordinates (NDC)</strong><br>
@@ -1607,7 +1636,8 @@
             and won't be visible on your screen. Below you can see the triangle we
             specified within normalized device coordinates (ignoring the <code>z</code> axis):
           </p>
-          <p>一旦你的顶点坐标在顶点着色器中被处理，它们应该在规范化的设备坐标中，这是一个小空间，其中 x、y 和 z 值从 -1.0 到 1.0 不等。 超出此范围的任何坐标都将被丢弃/剪裁，并且不会在屏幕上显示。 下面你可以看到我们在规范化设备坐标中指定的三角形（忽略 z 轴）：</p>
+          <p>一旦你的顶点坐标在顶点着色器中被处理，它们应该在规范化的设备坐标中，这是一个小空间，其中 x、y 和 z 值从 -1.0 到 1.0 不等。 超出此范围的任何坐标都将被丢弃/剪裁，并且不会在屏幕上显示。
+            下面你可以看到我们在规范化设备坐标中指定的三角形（忽略 z 轴）：</p>
           <img src="LearnOpenGL%20-%20Hello%20Triangle_files/ndc.png" class="clean"
             alt="2D Normalized Device Coordinates as shown in a graph">
           <p>
@@ -1615,14 +1645,16 @@
             coordinates are at the center of the graph, instead of top-left.
             Eventually you want all the (transformed) coordinates to end up in this
             coordinate space, otherwise they won't be visible.
-          </p><p>与通常的屏幕坐标不同，正 y 轴指向上方向，(0,0) 坐标位于图形的中心，而不是左上角。 最终您希望所有（转换后的）坐标都在此坐标空间中结束，否则它们将不可见。</p>
+          </p>
+          <p>与通常的屏幕坐标不同，正 y 轴指向上方向，(0,0) 坐标位于图形的中心，而不是左上角。 最终您希望所有（转换后的）坐标都在此坐标空间中结束，否则它们将不可见。</p>
           <p>
             Your NDC coordinates will then be transformed to <def>screen-space coordinates</def> via the <def>viewport
               transform</def> using the data you provided with <fun>
               <function id="22">glViewport</function>
             </fun>. The resulting screen-space coordinates are then transformed to fragments as inputs to your fragment
             shader.
-          </p><p>然后，您的 NDC 坐标将使用您随 glViewport 提供的数据通过视口变换转换为屏幕空间坐标。 然后将生成的屏幕空间坐标转换为片段，作为片段着色器的输入。</p>
+          </p>
+          <p>然后，您的 NDC 坐标将使用您随 glViewport 提供的数据通过视口变换转换为屏幕空间坐标。 然后将生成的屏幕空间坐标转换为片段，作为片段着色器的输入。</p>
         </note>
 
         <p>
@@ -1632,7 +1664,9 @@
           how OpenGL should interpret the memory and specify how to send the data
           to the graphics card. The vertex shader then processes as much vertices
           as we tell it to from its memory.
-        </p><p>定义了顶点数据后，我们希望将其作为输入发送到图形管道的第一个进程：顶点着色器。 这是通过在我们存储顶点数据的 GPU 上创建内存、配置 OpenGL 应如何解释内存并指定如何将数据发送到显卡来完成的。 顶点着色器然后从它的内存中处理我们告诉它的尽可能多的顶点。</p>
+        </p>
+        <p>定义了顶点数据后，我们希望将其作为输入发送到图形管道的第一个进程：顶点着色器。 这是通过在我们存储顶点数据的 GPU 上创建内存、配置 OpenGL 应如何解释内存并指定如何将数据发送到显卡来完成的。
+          顶点着色器然后从它的内存中处理我们告诉它的尽可能多的顶点。</p>
 
         <p>
           We manage this memory via so called <def>vertex buffer objects</def> (<def>VBO</def>)
@@ -1645,7 +1679,9 @@
           Once the data is in the graphics card's memory the vertex shader has
           almost instant access to the vertices making it extremely fast
         </p>
-        <p>我们通过所谓的顶点缓冲对象 (VBO) 管理此内存，该对象可以在 GPU 的内存中存储大量顶点。 使用这些缓冲区对象的好处是我们可以一次将大量数据发送到显卡，如果有足够的内存就将其保留在那里，而不必一次发送一个顶点的数据。 从 CPU 向显卡发送数据的速度相对较慢，因此我们尽可能地一次性发送尽可能多的数据。 一旦数据在显卡的内存中，顶点着色器几乎可以立即访问顶点，从而使其速度非常快</p>
+        <p>我们通过所谓的顶点缓冲对象 (VBO) 管理此内存，该对象可以在 GPU 的内存中存储大量顶点。
+          使用这些缓冲区对象的好处是我们可以一次将大量数据发送到显卡，如果有足够的内存就将其保留在那里，而不必一次发送一个顶点的数据。 从 CPU 向显卡发送数据的速度相对较慢，因此我们尽可能地一次性发送尽可能多的数据。
+          一旦数据在显卡的内存中，顶点着色器几乎可以立即访问顶点，从而使其速度非常快</p>
 
         <p>
           A vertex buffer object is our first occurrence of an OpenGL object as we've discussed in the <a
@@ -1656,6 +1692,8 @@
             <function id="12">glGenBuffers</function>
           </fun> function:
         </p>
+        <p>正如我们在 OpenGL 章节中讨论的那样，顶点缓冲对象是我们第一次出现的 OpenGL 对象。 就像 OpenGL 中的任何对象一样，此缓冲区具有与该缓冲区对应的唯一 ID，因此我们可以使用 glGenBuffers
+          函数生成具有缓冲区 ID 的对象：</p>
 
         <pre class="cpp"><code class=" hljs ">
 <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> VBO;
@@ -1671,6 +1709,8 @@
             <function id="32">glBindBuffer</function>
           </fun> function:
         </p>
+        <p>OpenGL有多种类型的缓冲对象，顶点缓冲对象的缓冲类型是GL_ARRAY_BUFFER。 OpenGL 允许我们同时绑定多个缓冲区，只要它们具有不同的缓冲区类型即可。 我们可以使用 glBindBuffer
+          函数将新创建的缓冲区绑定到 GL_ARRAY_BUFFER 目标：</p>
 
         <pre><code class=" hljs ">
 <function id="32">glBindBuffer</function>(GL_ARRAY_BUFFER, VBO);  
@@ -1682,6 +1722,8 @@
           <fun>
             <function id="31">glBufferData</function>
           </fun> function that copies the previously defined vertex data into the buffer's memory:
+        </p>
+        <p>从那时起，我们（在 GL_ARRAY_BUFFER 目标上）进行的任何缓冲区调用都将用于配置当前绑定的缓冲区，即 VBO。 然后我们可以调用 glBufferData 函数，将之前定义的顶点数据复制到缓冲区的内存中：
         </p>
 
         <pre><code class=" hljs cpp">
@@ -1698,15 +1740,24 @@
           argument specifies the size of the data (in bytes) we want to pass to the buffer; a simple <code>sizeof</code>
           of the vertex data suffices. The third parameter is the actual data we want to send.
         </p>
+        <p>glBufferData 是一个专门用于将用户定义的数据复制到当前绑定的缓冲区中的函数。 它的第一个参数是我们要将数据复制到的缓冲区的类型：当前绑定到 GL_ARRAY_BUFFER 目标的顶点缓冲区对象。
+          第二个参数指定我们要传递给缓冲区的数据的大小（以字节为单位）； 顶点数据的简单 sizeof 就足够了。 第三个参数是我们要发送的实际数据。</p>
 
         <p>
           The fourth parameter specifies how we want the graphics card to manage the given data. This can take 3 forms:
         </p>
+        <p>第四个参数指定我们希望显卡如何管理给定的数据。 这可以采取 3 种形式：</p>
 
         <ul>
-          <li><var>GL_STREAM_DRAW</var>: the data is set only once and used by the GPU at most a few times.</li>
-          <li><var>GL_STATIC_DRAW</var>: the data is set only once and used many times.</li>
-          <li><var>GL_DYNAMIC_DRAW</var>: the data is changed a lot and used many times.</li>
+          <li><var>GL_STREAM_DRAW</var>: the data is set only once and used by the GPU at most a few times.
+            <br>数据只设置一次，GPU 最多使用几次。
+          </li>
+          <li><var>GL_STATIC_DRAW</var>: the data is set only once and used many times.
+            <br>数据只设置一次，多次使用。
+          </li>
+          <li><var>GL_DYNAMIC_DRAW</var>: the data is changed a lot and used many times.
+            <br>数据变化很大，使用了很多次。
+          </li>
 
         </ul>
 
@@ -1717,13 +1768,18 @@
           <var>GL_DYNAMIC_DRAW</var> ensures the graphics card will place the data in memory that allows for faster
           writes.
         </p>
-
+        <p>
+          三角形的位置数据不会改变，被大量使用，并且每次渲染调用都保持不变，所以它的使用类型最好是 GL_STATIC_DRAW。 例如，如果缓冲区中的数据可能会频繁更改，则 GL_DYNAMIC_DRAW
+          的使用类型可确保显卡将数据放入内存中，从而实现更快的写入速度。
+        </p>
         <p>
           As of now we stored the vertex data within memory on the graphics card as managed by a vertex buffer object
           named <var>VBO</var>. Next we want to create a vertex and fragment shader that actually processes this data,
           so let's start building those.
         </p>
-
+        <p>
+          截至目前，我们将顶点数据存储在显卡的内存中，由名为 VBO 的顶点缓冲区对象管理。 接下来我们要创建一个真正处理这些数据的顶点和片段着色器，所以让我们开始构建它们。
+        </p>
         <h2>Vertex shader</h2>
         <p>
           The vertex shader is one of the shaders that are programmable by
@@ -1733,6 +1789,8 @@
           first triangle. In the next chapter we'll discuss shaders in more
           detail.
         </p>
+        <p>顶点着色器是像我们这样的人可以编程的着色器之一。 如果我们想要进行一些渲染，现代 OpenGL 要求我们至少设置一个顶点和片段着色器，因此我们将简要介绍着色器并配置两个非常简单的着色器来绘制我们的第一个三角形。
+          在下一章中，我们将更详细地讨论着色器。</p>
 
         <p>
           The first thing we need to do is write the vertex shader in the shader
@@ -1740,6 +1798,7 @@
           we can use it in our application. Below you'll find the source code of a
           very basic vertex shader in GLSL:
         </p>
+        <p>我们需要做的第一件事是用着色器语言 GLSL（OpenGL 着色语言）编写顶点着色器，然后编译这个着色器，以便我们可以在我们的应用程序中使用它。 下面您将找到 GLSL 中一个非常基本的顶点着色器的源代码：</p>
 
         <pre><code class=" hljs cpp">
 <span class="hljs-preprocessor">#version 330 core</span>
@@ -1758,6 +1817,8 @@
           corresponds to OpenGL version 4.2 for example). We also explicitly
           mention we're using core profile functionality.
         </p>
+        <p>如您所见，GLSL 看起来类似于 C。每个着色器都以其版本声明开始。 由于 OpenGL 3.3 及更高版本，GLSL 的版本号与 OpenGL 的版本匹配（例如，GLSL 版本 420 对应于 OpenGL 版本
+          4.2）。 我们还明确提到我们正在使用核心配置文件功能。</p>
 
         <p>
           Next we declare all the input vertex attributes in the vertex shader with the <code>in</code>
@@ -1768,6 +1829,8 @@
           set the location of the input variable via <code>layout (location = 0)</code> and you'll later see that why
           we're going to need that location.
         </p>
+        <p>接下来，我们使用 in 关键字在顶点着色器中声明所有输入顶点属性。 现在我们只关心位置数据，所以我们只需要一个顶点属性。 GLSL 有一个矢量数据类型，它包含 1 到 4 个基于其后缀数字的浮点数。
+          由于每个顶点都有一个 3D 坐标，我们创建一个名为 aPos 的 vec3 输入变量。 我们还通过布局 (location = 0) 专门设置了输入变量的位置，您稍后会看到为什么我们需要该位置。</p>
 
         <note>
           <strong>Vector</strong><br>
@@ -1779,6 +1842,10 @@
           Note that the <code>vec.w</code> component is not used as a position in space (we're dealing with 3D, not 4D)
           but is used for something called <def>perspective division</def>. We'll discuss vectors in much greater depth
           in a later chapter.
+
+          <br><br>
+          在图形编程中，我们经常使用矢量的数学概念，因为它巧妙地表示任何空间中的位置/方向，并且具有有用的数学属性。 GLSL 中的向量最大大小为 4，它的每个值都可以分别通过 vec.x、vec.y、vec.z 和 vec.w
+          检索，其中每个值代表空间中的一个坐标。 请注意，vec.w 组件不用作空间中的位置（我们处理的是 3D，而不是 4D），而是用于称为透视分割的东西。 我们将在后面的章节中更深入地讨论向量。
         </note>
 
         <p>
@@ -1790,6 +1857,8 @@
           do this by inserting the <code>vec3</code> values inside the constructor of <code>vec4</code> and set its
           <code>w</code> component to <code>1.0f</code> (we will explain why in a later chapter).
         </p>
+        <p>要设置顶点着色器的输出，我们必须将位置数据分配给预定义的 gl_Position 变量，它是幕后的 vec4。 在 main 函数的最后，无论我们将 gl_Position 设置为什么，都将用作顶点着色器的输出。
+          由于我们的输入是一个大小为 3 的向量，我们必须将其转换为大小为 4 的向量。我们可以通过将 vec3 值插入 vec4 的构造函数并将其 w 分量设置为 1.0f 来做到这一点（我们将在 后面的章节）。</p>
 
         <p>
           The current vertex shader is probably the most simple vertex shader we
@@ -1799,12 +1868,15 @@
           we first have to transform the input data to coordinates that fall
           within OpenGL's visible region.
         </p>
+        <p>当前的顶点着色器可能是我们能想象到的最简单的顶点着色器，因为我们没有对输入数据进行任何处理，只是将其转发到着色器的输出。 在实际应用中，输入数据通常不在规范化的设备坐标中，因此我们首先必须将输入数据转换为落在
+          OpenGL 可见区域内的坐标。</p>
 
         <h2>Compiling a shader</h2>
         <p>
           We take the source code for the vertex shader and store it in a const C string at the top of the code file for
           now:
         </p>
+        <p>我们获取顶点着色器的源代码并将其存储在代码文件顶部的常量 C 字符串中：</p>
 
         <pre><code class=" hljs cpp">
 <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *vertexShaderSource = <span class="hljs-string">"#version 330 core\n"</span>
@@ -1823,6 +1895,8 @@
             <function id="37">glCreateShader</function>
           </fun>:
         </p>
+        <p>为了让 OpenGL 使用着色器，它必须在运行时从其源代码动态编译它。 我们需要做的第一件事是创建一个着色器对象，同样由一个 ID 引用。 所以我们将顶点着色器存储为一个无符号整数并使用 glCreateShader
+          创建着色器：</p>
 
         <pre><code class=" hljs cpp">
 <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> vertexShader;
@@ -1834,10 +1908,12 @@ vertexShader = <function id="37">glCreateShader</function>(GL_VERTEX_SHADER);
             <function id="37">glCreateShader</function>
           </fun>. Since we're creating a vertex shader we pass in <var>GL_VERTEX_SHADER</var>.
         </p>
+        <p>我们提供我们想要创建的着色器类型作为 glCreateShader 的参数。 因为我们正在创建一个顶点着色器，所以我们传入 GL_VERTEX_SHADER。</p>
 
         <p>
           Next we attach the shader source code to the shader object and compile the shader:
         </p>
+        <p>接下来我们将着色器源代码附加到着色器对象并编译着色器：</p>
 
         <pre class="cpp"><code class=" hljs ">
 <function id="42">glShaderSource</function>(vertexShader, <span class="hljs-number">1</span>, &amp;vertexShaderSource, NULL);
@@ -1853,6 +1929,7 @@ vertexShader = <function id="37">glCreateShader</function>(GL_VERTEX_SHADER);
           is only one. The third parameter is the actual source code of the vertex
           shader and we can leave the 4th parameter to <code>NULL</code>.
         </p>
+        <p>glShaderSource 函数将要编译的着色器对象作为其第一个参数。 第二个参数指定我们将多少个字符串作为源代码传递，这只是一个。 第三个参数是顶点着色器的实际源代码，我们可以将第四个参数保留为 NULL。</p>
 
         <note>
           <p>
@@ -1861,6 +1938,7 @@ vertexShader = <function id="37">glCreateShader</function>(GL_VERTEX_SHADER);
             </fun> and if not, what errors were found so you can fix those. Checking for compile-time errors is
             accomplished as follows:
           </p>
+          <p>您可能想在调用 glCompileShader 后检查编译是否成功，如果没有，发现了哪些错误以便您可以修复这些错误。 检查编译时错误是按如下方式完成的：</p>
 
           <pre class="cpp"><code class=" hljs ">
 <span class="hljs-keyword">int</span>  success;
@@ -1877,6 +1955,8 @@ vertexShader = <function id="37">glCreateShader</function>(GL_VERTEX_SHADER);
               <function id="40">glGetShaderInfoLog</function>
             </fun> and print the error message.
           </p>
+          <p>首先，我们定义一个整数来指示成功和错误消息（如果有）的存储容器。 然后我们使用 glGetShaderiv 检查编译是否成功。 如果编译失败，我们应该使用 glGetShaderInfoLog
+            检索错误消息并打印错误消息。</p>
 
           <pre><code class=" hljs cpp">
 <span class="hljs-keyword">if</span>(!success)
@@ -1890,6 +1970,7 @@ vertexShader = <function id="37">glCreateShader</function>(GL_VERTEX_SHADER);
         <p>
           If no errors were detected while compiling the vertex shader it is now compiled.
         </p>
+        <p>如果在编译顶点着色器时未检测到错误，则现在已编译。</p>
 
         <h2>Fragment shader</h2>
         <p>
@@ -1898,6 +1979,7 @@ vertexShader = <function id="37">glCreateShader</function>(GL_VERTEX_SHADER);
           calculating the color output of your pixels. To keep things simple the
           fragment shader will always output an orange-ish color.
         </p>
+        <p>片段着色器是我们要创建的用于渲染三角形的第二个也是最后一个着色器。 片段着色器就是计算像素的颜色输出。 为了简单起见，片段着色器将始终输出橙色。</p>
 
         <note>
           Colors in computer graphics are represented as an array of 4 values:
@@ -1908,6 +1990,9 @@ vertexShader = <function id="37">glCreateShader</function>(GL_VERTEX_SHADER);
           we would get a mixture of both colors and get the color yellow. Given
           those 3 color components we can generate over 16 million different
           colors!
+          <br><br>
+          计算机图形中的颜色表示为 4 个值的数组：红色、绿色、蓝色和 alpha（不透明度）分量，通常缩写为 RGBA。 在 OpenGL 或 GLSL 中定义颜色时，我们将每个组件的强度设置为 0.0 到 1.0 之间的值。
+          例如，如果我们将红色设置为 1.0，将绿色设置为 1.0，我们将得到两种颜色的混合并得到黄色。 鉴于这 3 个颜色分量，我们可以生成超过 1600 万种不同的颜色！
         </note>
 
         <pre><code class=" hljs cpp">
@@ -1927,11 +2012,14 @@ vertexShader = <function id="37">glCreateShader</function>(GL_VERTEX_SHADER);
           named <var>FragColor</var>. Next we simply assign a <code>vec4</code> to the color output as an orange color
           with an alpha value of <code>1.0</code> (<code>1.0</code> being completely opaque).
         </p>
+        <p>片段着色器只需要一个输出变量，它是一个大小为 4 的向量，它定义了我们应该自己计算的最终颜色输出。 我们可以使用 out 关键字声明输出值，我们在此将其命名为 FragColor。 接下来，我们简单地将 vec4
+          分配给颜色输出，作为橙色，alpha 值为 1.0（1.0 是完全不透明的）。</p>
 
         <p>
           The process for compiling a fragment shader is similar to the vertex shader, although this time we use the
           <var>GL_FRAGMENT_SHADER</var> constant as the shader type:
         </p>
+        <p>编译片段着色器的过程类似于顶点着色器，尽管这次我们使用 GL_FRAGMENT_SHADER 常量作为着色器类型：</p>
 
         <pre class="cpp"><code class=" hljs ">
 <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> fragmentShader;
@@ -1944,6 +2032,7 @@ fragmentShader = <function id="37">glCreateShader</function>(GL_FRAGMENT_SHADER)
           Both the shaders are now compiled and the only thing left to do is link both shader objects into a <def>shader
             program</def> that we can use for rendering. Make sure to check for compile errors here as well!
         </p>
+        <p>两个着色器现在都已编译，唯一剩下要做的就是将两个着色器对象链接到我们可用于渲染的着色器程序中。 确保也在这里检查编译错误！</p>
 
         <h3>Shader program</h3>
         <p>
@@ -1953,11 +2042,13 @@ fragmentShader = <function id="37">glCreateShader</function>(GL_FRAGMENT_SHADER)
           when rendering objects. The activated shader program's shaders will be
           used when we issue render calls.
         </p>
+        <p>着色器程序对象是多个着色器组合的最终链接版本。 要使用最近编译的着色器，我们必须将它们链接到一个着色器程序对象，然后在渲染对象时激活这个着色器程序。 当我们发出渲染调用时，将使用激活的着色器程序的着色器。</p>
 
         <p>
           When linking the shaders into a program it links the outputs of each
           shader to the inputs of the next shader. This is also where you'll get
           linking errors if your outputs and inputs do not match. </p>
+        <p>将着色器链接到程序中时，它将每个着色器的输出链接到下一个着色器的输入。 如果您的输出和输入不匹配，这也是您会遇到链接错误的地方。</p>
 
         <p>
           Creating a program object is easy:
@@ -1978,6 +2069,7 @@ shaderProgram = <function id="36">glCreateProgram</function>();
             <function id="35">glLinkProgram</function>
           </fun>:
         </p>
+        <p>glCreateProgram 函数创建一个程序并将 ID 引用返回给新创建的程序对象。 现在我们需要将先前编译的着色器附加到程序对象，然后将它们与 glLinkProgram 链接：</p>
 
         <pre><code class=" hljs ">
 <function id="34">glAttachShader</function>(shaderProgram, vertexShader);
@@ -1990,6 +2082,7 @@ shaderProgram = <function id="36">glCreateProgram</function>();
             <function id="35">glLinkProgram</function>
           </fun>.
         </p>
+        <p>代码应该是不言自明的，我们将着色器附加到程序并通过 glLinkProgram 链接它们。</p>
 
         <note>
           Just like shader compilation we can also check if linking a shader
@@ -1999,6 +2092,9 @@ shaderProgram = <function id="36">glCreateProgram</function>();
           </fun> and <fun>
             <function id="40">glGetShaderInfoLog</function>
           </fun> we now use:
+
+          <br><br>
+          就像着色器编译一样，我们也可以检查链接着色器程序是否失败并检索相应的日志。 然而，我们现在使用的不是 glGetShaderiv 和 glGetShaderInfoLog：
 
           <pre class="cpp"><code class=" hljs ">
 <function id="41">glGetProgramiv</function>(shaderProgram, GL_LINK_STATUS, &amp;success);
@@ -2014,6 +2110,7 @@ shaderProgram = <function id="36">glCreateProgram</function>();
             <function id="28">glUseProgram</function>
           </fun> with the newly created program object as its argument:
         </p>
+        <p>结果是一个程序对象，我们可以通过使用新创建的程序对象作为参数调用 glUseProgram 来激活它：</p>
 
         <pre><code class=" hljs ">
 <function id="28">glUseProgram</function>(shaderProgram);
@@ -2024,11 +2121,13 @@ shaderProgram = <function id="36">glCreateProgram</function>();
             <function id="28">glUseProgram</function>
           </fun> will now use this program object (and thus the shaders).
         </p>
+        <p>glUseProgram 之后的每个着色器和渲染调用现在都将使用此程序对象（以及着色器）。</p>
 
         <p>
           Oh yeah, and don't forget to delete the shader objects once we've
           linked them into the program object; we no longer need them anymore:
         </p>
+        <p>哦，是的，一旦我们将它们链接到程序对象中，不要忘记删除着色器对象； 我们不再需要它们了：</p>
 
         <pre><code class=" hljs ">
 <function id="46">glDeleteShader</function>(vertexShader);
@@ -2043,6 +2142,8 @@ shaderProgram = <function id="36">glCreateProgram</function>();
           connect the vertex data to the vertex shader's attributes. We'll be nice
           and tell OpenGL how to do that.
         </p>
+        <p>现在我们将输入的顶点数据发送到 GPU，并指示 GPU 如何在顶点和片段着色器中处理顶点数据。 我们快到了，但还不完全是。 OpenGL
+          还不知道它应该如何解释内存中的顶点数据以及它应该如何将顶点数据连接到顶点着色器的属性。 我们会很友好地告诉 OpenGL 如何去做。</p>
 
         <h2>Linking Vertex Attributes</h2>
         <p>
@@ -2052,6 +2153,8 @@ shaderProgram = <function id="36">glCreateProgram</function>();
           to which vertex attribute in the vertex shader. This means we have to
           specify how OpenGL should interpret the vertex data before rendering.
         </p>
+        <p>顶点着色器允许我们以顶点属性的形式指定我们想要的任何输入，虽然这具有很大的灵活性，但这确实意味着我们必须手动指定输入数据的哪一部分进入顶点着色器中的哪个顶点属性。 这意味着我们必须在渲染之前指定 OpenGL
+          应该如何解释顶点数据。</p>
 
         <p>
           Our vertex buffer data is formatted as follows:
@@ -2061,11 +2164,24 @@ shaderProgram = <function id="36">glCreateProgram</function>();
           alt="Vertex attribte pointer setup of OpenGL VBO">
 
         <ul>
-          <li>The position data is stored as 32-bit (4 byte) floating point values.</li>
-          <li>Each position is composed of 3 of those values.</li>
+          <li>The position data is stored as 32-bit (4 byte) floating point values.
+            <br>
+            位置数据存储为 32 位（4 字节）浮点值。
+          </li>
+          <li>Each position is composed of 3 of those values.
+            <br>
+            每个位置由其中 3 个值组成。
+
+          </li>
           <li>There is no space (or other values) between each set of 3 values. The values are <def>tightly packed</def>
-            in the array.</li>
-          <li>The first value in the data is at the beginning of the buffer.</li>
+            in the array.
+            <br>
+            每组 3 个值之间没有空格（或其他值）。 这些值紧密地打包在数组中。
+          </li>
+          <li>The first value in the data is at the beginning of the buffer.
+<br>数据中的第一个值位于缓冲区的开头。
+
+          </li>
         </ul>
 
         <p>
@@ -2073,6 +2189,9 @@ shaderProgram = <function id="36">glCreateProgram</function>();
           <fun>
             <function id="30">glVertexAttribPointer</function>
           </fun>:
+        </p>
+        <p>
+          有了这些知识，我们可以告诉 OpenGL 它应该如何使用 glVertexAttribPointer 解释顶点数据（每个顶点属性）：
         </p>
 
         <pre class="cpp"><code class=" hljs ">
@@ -2084,25 +2203,35 @@ shaderProgram = <function id="36">glCreateProgram</function>();
           The function <fun>
             <function id="30">glVertexAttribPointer</function>
           </fun> has quite a few parameters so let's carefully walk through them:
-        </p>
+        </p><p>函数 glVertexAttribPointer 有很多参数，所以让我们仔细看一下它们：</p>
 
         <ul>
           <li>The first parameter specifies which vertex attribute we want to configure. Remember that we specified the
             location of the <var>position</var> vertex attribute in the vertex shader with
             <code>layout (location = 0)</code>. This sets the location of the vertex attribute to <code>0</code> and
-            since we want to pass data to this vertex attribute, we pass in <code>0</code>.</li>
+            since we want to pass data to this vertex attribute, we pass in <code>0</code>.
+            <br>
+            第一个参数指定我们要配置的顶点属性。 请记住，我们在带有布局的顶点着色器中指定了位置顶点属性的位置（location = 0）。 这会将顶点属性的位置设置为 0，因为我们要将数据传递给该顶点属性，所以我们传入 0。
+          </li>
 
           <li>The next argument specifies the size of the vertex attribute. The vertex attribute is a <code>vec3</code>
-            so it is composed of <code>3</code> values.</li>
+            so it is composed of <code>3</code> values.
+          <br>
+          下一个参数指定顶点属性的大小。 顶点属性是一个 vec3，所以它由 3 个值组成。
+          </li>
 
           <li>The third argument specifies the type of the data which is <var>GL_FLOAT</var> (a <code>vec*</code> in
-            GLSL consists of floating point values).</li>
+            GLSL consists of floating point values).
+          <br>第三个参数指定数据类型，它是 GL_FLOAT（GLSL 中的 vec* 由浮点值组成）。
+          </li>
 
           <li>The next argument specifies if we want the data to be
             normalized. If we're inputting integer data types (int, byte) and we've
             set this to <var>GL_TRUE</var>, the integer data is normalized to <code>0</code> (or <code>-1</code> for
             signed data) and <code>1</code> when converted to float. This is not relevant for us so we'll leave this at
-            <var>GL_FALSE</var>.</li>
+            <var>GL_FALSE</var>.
+            <br>下一个参数指定我们是否要对数据进行规范化。 如果我们正在输入整数数据类型（int、byte）并将其设置为 GL_TRUE，则整数数据被规范化为 0（或 -1 对于有符号数据）和 1 转换为 float 时。 这与我们无关，所以我们将其保留在 GL_FALSE。
+          </li>
 
           <li>The fifth argument is known as the <def>stride</def> and tells
             us the space between consecutive vertex attributes. Since the next set
@@ -2113,11 +2242,17 @@ shaderProgram = <function id="36">glCreateProgram</function>();
             to let OpenGL determine the stride (this only works when values are
             tightly packed). Whenever we have more vertex attributes we have to
             carefully define the spacing between each vertex attribute but we'll get
-            to see more examples of that later on.</li>
+            to see more examples of that later on.
+          <br>
+          第五个参数称为步幅，它告诉我们连续顶点属性之间的空间。 由于下一组位置数据恰好位于浮动距离大小的 3 倍，我们将该值指定为步幅。 请注意，由于我们知道数组是紧密打包的（下一个顶点属性值之间没有空格），我们还可以将步幅指定为 0 以让 OpenGL 确定步幅（这仅在值紧密打包时有效）。 每当我们有更多的顶点属性时，我们必须仔细定义每个顶点属性之间的间距，但我们稍后会看到更多这样的例子。
+          </li>
 
           <li>The last parameter is of type <code>void*</code> and thus requires that weird cast. This is the <def>
               offset</def> of where the position data begins in the buffer. Since the position data is at the start of
             the data array this value is just <code>0</code>. We will explore this parameter in more detail later on
+
+            <br>
+            最后一个参数的类型为 void* ，因此需要进行奇怪的转换。 这是缓冲区中位置数据开始位置的偏移量。 由于位置数据位于数据数组的开头，因此该值仅为 0。稍后我们将更详细地探讨该参数
           </li>
         </ul>
 
@@ -2129,6 +2264,9 @@ shaderProgram = <function id="36">glCreateProgram</function>();
           </fun>. Since the previously defined <var>VBO</var> is still bound before calling <fun>
             <function id="30">glVertexAttribPointer</function>
           </fun> vertex attribute <code>0</code> is now associated with its vertex data.
+
+          <br><br>
+          每个顶点属性从 VBO 管理的内存中获取数据，从哪个 VBO（您可以有多个 VBO）获取数据由调用 glVertexAttribPointer 时当前绑定到 GL_ARRAY_BUFFER 的 VBO 确定。 由于先前定义的 VBO 在调用 glVertexAttribPointer 之前仍然绑定，因此顶点属性 0 现在与其顶点数据相关联。
         </note>
 
 
@@ -2145,7 +2283,7 @@ shaderProgram = <function id="36">glCreateProgram</function>();
           set up a vertex and fragment shader and told OpenGL how to link the
           vertex data to the vertex shader's vertex attributes. Drawing an object
           in OpenGL would now look something like this:
-        </p>
+        </p><p>现在我们指定了 OpenGL 应该如何解释顶点数据，我们还应该使用 glEnableVertexAttribArray 启用顶点属性，并将顶点属性位置作为其参数； 默认情况下禁用顶点属性。 从那时起，我们已经设置好了一切：我们使用顶点缓冲区对象初始化缓冲区中的顶点数据，设置顶点和片段着色器，并告诉 OpenGL 如何将顶点数据链接到顶点着色器的顶点属性。 在 OpenGL 中绘制对象现在看起来像这样：</p>
 
         <pre><code class=" hljs cpp">
 <span class="hljs-comment">// 0. copy our vertices array in a buffer for OpenGL to use</span>
@@ -2169,7 +2307,7 @@ someOpenGLFunctionThatDrawsOurTriangle();
           process. What if there was some way we could store all these state
           configurations into an object and simply bind this object to restore its
           state?
-        </p>
+        </p><p>每次我们要绘制一个对象时，我们都必须重复这个过程。 它可能看起来没有那么多，但想象一下，如果我们有超过 5 个顶点属性和可能有 100 个不同的对象（这并不罕见）。 绑定适当的缓冲区对象并为每个对象配置所有顶点属性很快就会成为一个繁琐的过程。 如果有某种方法可以将所有这些状态配置存储到一个对象中并简单地绑定该对象以恢复其状态会怎样？</p>
 
         <h3>Vertex Array Object</h3>
         <p>
@@ -2183,15 +2321,22 @@ someOpenGLFunctionThatDrawsOurTriangle();
           binding a different VAO. All the state we just set is stored inside the
           VAO.
         </p>
+        <p>顶点数组对象（也称为 VAO）可以像顶点缓冲区对象一样绑定，并且从该点开始的任何后续顶点属性调用都将存储在 VAO 中。 这样做的好处是，在配置顶点属性指针时，您只需调用一次，每当我们想要绘制对象时，我们只需绑定相应的 VAO 即可。 这使得在不同的顶点数据和属性配置之间切换就像绑定不同的 VAO 一样容易。 我们刚刚设置的所有状态都存储在 VAO 中。</p>
 
         <warning>
           Core OpenGL <strong>requires</strong> that we use a VAO so it knows
           what to do with our vertex inputs. If we fail to bind a VAO, OpenGL will
           most likely refuse to draw anything.
+
+          <br><br>
+          Core OpenGL 要求我们使用 VAO，以便它知道如何处理我们的顶点输入。 如果我们未能绑定 VAO，OpenGL 很可能会拒绝绘制任何东西。
         </warning>
 
         <p>
           A vertex array object stores the following:
+        </p>
+        <p>
+          顶点数组对象存储以下内容：
         </p>
 
         <ul>
@@ -2199,13 +2344,22 @@ someOpenGLFunctionThatDrawsOurTriangle();
               <function id="29">
                 <function id="60">glEnable</function>VertexAttribArray
               </function>
-            </fun> or <fun>glDisableVertexAttribArray</fun>.</li>
+            </fun> or <fun>glDisableVertexAttribArray</fun>.
+          <br>
+          调用 glEnableVertexAttribArray 或 glDisableVertexAttribArray。
+          </li>
           <li>Vertex attribute configurations via <fun>
               <function id="30">glVertexAttribPointer</function>
-            </fun>.</li>
+            </fun>.
+          <br>
+          通过 glVertexAttribPointer 进行顶点属性配置。
+          </li>
           <li>Vertex buffer objects associated with vertex attributes by calls to <fun>
               <function id="30">glVertexAttribPointer</function>
-            </fun>.</li>
+            </fun>.
+          <br>
+          通过调用 glVertexAttribPointer 与顶点属性关联的顶点缓冲区对象。
+          </li>
         </ul>
 
         <img src="LearnOpenGL%20-%20Hello%20Triangle_files/vertex_array_objects.png" class="clean"
@@ -2213,6 +2367,8 @@ someOpenGLFunctionThatDrawsOurTriangle();
 
         <p>
           The process to generate a VAO looks similar to that of a VBO:
+        </p><p>
+          生成 VAO 的过程与生成 VBO 的过程类似：
         </p>
 
         <pre class="cpp"><code class=" hljs ">
@@ -2229,7 +2385,7 @@ someOpenGLFunctionThatDrawsOurTriangle();
           as we want to draw an object, we simply bind the VAO with the preferred
           settings before drawing the object and that is it. In code this would
           look a bit like this:
-        </p>
+        </p><p>要使用 VAO，您所要做的就是使用 glBindVertexArray 绑定 VAO。 从那时起，我们应该绑定/配置相应的 VBO(s) 和属性指针，然后取消绑定 VAO 以备后用。 一旦我们想要绘制一个对象，我们只需在绘制对象之前将 VAO 与首选设置绑定即可。 在代码中，这看起来有点像这样：</p>
 
         <pre><code class=" hljs cpp">
 <span class="hljs-comment">// ..:: Initialization code (done once (unless your object frequently changes)) :: ..</span>
@@ -2260,7 +2416,7 @@ someOpenGLFunctionThatDrawsOurTriangle();
           VBO and attribute pointers) and store those for later use. The moment we
           want to draw one of our objects, we take the corresponding VAO, bind
           it, then draw the object and unbind the VAO again.
-        </p>
+        </p><p>就是这样！ 我们在最后几百万页所做的一切都导致了这一刻，一个 VAO 存储了我们的顶点属性配置和要使用的 VBO。 通常当你有多个你想要绘制的对象时，你首先生成/配置所有的 VAO（以及因此所需的 VBO 和属性指针）并存储它们以备后用。 当我们想要绘制一个对象时，我们获取相应的 VAO，绑定它，然后绘制对象并再次取消绑定 VAO。</p>
 
         <h3>The triangle we've all been waiting for</h3>
         <p>
@@ -2270,7 +2426,7 @@ someOpenGLFunctionThatDrawsOurTriangle();
           function that draws primitives using the currently active shader, the
           previously defined vertex attribute configuration and with the VBO's
           vertex data (indirectly bound via the VAO).
-        </p>
+        </p><p>为了绘制我们选择的对象，OpenGL 为我们提供了 glDrawArrays 函数，该函数使用当前活动的着色器、先前定义的顶点属性配置和 VBO 的顶点数据（通过 VAO 间接绑定）绘制图元。</p>
 
         <pre class="cpp"><code class=" hljs ">
 <function id="28">glUseProgram</function>(shaderProgram);
@@ -2288,13 +2444,13 @@ someOpenGLFunctionThatDrawsOurTriangle();
           vertex array we'd like to draw; we just leave this at <code>0</code>. The last argument specifies how many
           vertices we want to draw, which is <code>3</code> (we only render 1 triangle from our data, which is exactly 3
           vertices long).
-        </p>
+        </p><p>glDrawArrays 函数将我们想要绘制的 OpenGL 基元类型作为它的第一个参数。 因为我一开始就说我们要画一个三角形，我不想骗你，所以我们传入 GL_TRIANGLES。 第二个参数指定我们要绘制的顶点数组的起始索引； 我们只是将其保留为 0。最后一个参数指定我们要绘制多少个顶点，即 3（我们只从数据中渲染 1 个三角形，正好是 3 个顶点长）。</p>
 
         <p>
           Now try to compile the code and work your way backwards if any errors
           popped up. As soon as your application compiles, you should see the
           following result:
-        </p>
+        </p><p>现在尝试编译代码并在出现任何错误时向后工作。 一旦您的应用程序编译完成，您应该会看到以下结果：</p>
 
         <img src="LearnOpenGL%20-%20Hello%20Triangle_files/hellotriangle.png" class="clean"
           alt="An image of a basic triangle rendered in modern OpenGL" width="600px">
@@ -2309,7 +2465,7 @@ someOpenGLFunctionThatDrawsOurTriangle();
           If your output does not look the same you probably did something wrong
           along the way so check the complete source code and see if you missed
           anything.
-        </p>
+        </p><p>如果你的输出看起来不一样，你可能在这个过程中做错了什么，所以检查完整的源代码，看看你是否遗漏了什么。</p>
 
         <h2> Element Buffer Objects </h2>
         <p>
